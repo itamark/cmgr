@@ -28,7 +28,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('harpoon');
+		echo $this->Html->css('bootstrap');
+		echo $this->Html->script('jquery.min');
+		echo $this->Html->script('bootstrap');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
