@@ -8,6 +8,12 @@ App::uses('AppModel', 'Model');
  */
 class Item extends AppModel {
 
+
+	public function beforeSave($options = array())
+  {
+  	$this->data['Item']['user_id'] = AuthComponent::user('id');
+  }
+
 /**
  * Validation rules
  *
