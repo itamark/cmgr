@@ -71,5 +71,40 @@ class User extends AppModel
     }
     return $username['User']['username'];
   }
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+  public $hasMany = array(
+    'Item' => array(
+      'className' => 'Item',
+      'foreignKey' => 'user_id',
+      'dependent' => false,
+      'conditions' => '',
+      'fields' => '',
+      'order' => '',
+      'limit' => '',
+      'offset' => '',
+      'exclusive' => '',
+      'finderQuery' => '',
+      'counterQuery' => ''
+    ),
+    'Comment' => array(
+      'className' => 'Comment',
+      'foreignKey' => 'user_id',
+      'dependent' => false,
+      'conditions' => '',
+      'fields' => '',
+      'order' => '',
+      'limit' => '',
+      'offset' => '',
+      'exclusive' => '',
+      'finderQuery' => '',
+      'counterQuery' => ''
+    )
+  );
+
 }
 ?>
