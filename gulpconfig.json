@@ -1,0 +1,39 @@
+{
+    "build_path" : "./",
+    "scripts": {
+        "scripts.js" : {
+            "output_path": "app/webroot/js",
+            "files": [
+                "app/webroot/src/js/config.js",
+                "app/webroot/src/js/app.Utils.js",
+                "app/webroot/src/js/components/*.js",
+                "app/webroot/src/js/controllers/*.js",
+                "app/webroot/src/js/main.js"
+            ],
+            "watch": [
+                "app/webroot/src/js/components/*",
+                "app/webroot/src/js/controllers/*",
+                "app/webroot/src/js/main.js"
+            ]
+        }
+    },
+    "stylesheets": {
+        "main.css" : {
+            "output_path": "app/webroot/css",
+            "files": [
+                "app/webroot/src/less/main.less"
+            ],
+            "watch": [
+                "app/webroot/src/less/main.less"
+            ]
+        }
+    },
+    "images": {
+        "app/webroot/img" : {
+            "options": {"optimizationLevel": 3},
+            "files": [
+                "app/webroot/src/img/*"
+            ]
+        }
+    }
+}

@@ -1,12 +1,12 @@
 
-<div class="list-group">
+<ul class="list-group">
 	<?php foreach ($items as $item): ?>
-  <a href="<?php echo h($item['Item']['url']); ?>" class="list-group-item">
- <?php echo h($item['Item']['title']); ?>  </a>
+  <li class="list-group-item item-listing" id="<?php echo h($item['Item']['title']); ?>">
+ <h4><a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a></h4><small><a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>">Comments</a></small>  </li>
   <?php endforeach; ?>
 
-</div>
-
+</ul>
+<!-- 
 <div class="items index">
 	<h2><?php echo __('Items'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -65,3 +65,4 @@
 		<li><?php echo $this->Html->link(__('New Comment'), array('controller' => 'comments', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
+ -->
