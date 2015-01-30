@@ -1,3 +1,12 @@
+
+<div class="list-group">
+	<?php foreach ($items as $item): ?>
+  <a href="<?php echo h($item['Item']['url']); ?>" class="list-group-item">
+ <?php echo h($item['Item']['title']); ?>  </a>
+  <?php endforeach; ?>
+
+</div>
+
 <div class="items index">
 	<h2><?php echo __('Items'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
