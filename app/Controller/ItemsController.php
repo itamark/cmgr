@@ -38,6 +38,7 @@ class ItemsController extends AppController {
 		}
 		$options = array('conditions' => array('Item.' . $this->Item->primaryKey => $id));
 		$this->set('item', $this->Item->find('first', $options));
+		$this->layout = false;
 	}
 
 /**

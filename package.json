@@ -1,0 +1,18 @@
+{
+    "dependencies": {
+        "gulp": "*",
+        "yargs": "*",
+        "gulp-load-plugins": "*",
+        "gulp-util": "latest",
+        "gulp-bower": "*",
+        "gulp-concat": "*",
+        "gulp-uglify": "*",
+        "gulp-jshint": "*",
+        "gulp-less": "*",
+        "gulp-imagemin": "*",
+        "gulp-connect": "*",
+        "gulp-notify": "*",
+        "gulp-shell": "*",
+        "gulp-cached": "*"
+    }
+}

@@ -29,8 +29,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('bootstrap');
+    echo $this->Html->css('main');
 		echo $this->Html->script('jquery.min');
 		echo $this->Html->script('bootstrap');
+    echo $this->Html->script('scripts');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -64,6 +66,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <li><a href="/logout">Logout</a></li>
               </ul>
             </li>
+            <li><a href="#" title="New Item" class="additem"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
         <?php else: ?>
         <li><a href="/users/login">Login</a></li>
     <?php endif; ?>
@@ -71,6 +74,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    <div class="overlaybackground"><div id="commentcontainer"></div></div>
+    <div id="slideout">
+    </div>
 	<div id="container">
 		<!-- <div id="header">
 			<h1><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
