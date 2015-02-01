@@ -45,6 +45,7 @@ body nav.navbar-fixed-top a.additem:hover {
   top: 0px;
 }
 .overlaybackground.open #commentcontainer {
+  overflow-y: scroll;
   width: 60%;
   position: absolute;
   right: 0;
@@ -56,6 +57,9 @@ body nav.navbar-fixed-top a.additem:hover {
   height: 100px;
   padding: 20px;
   background: #663300;
+}
+.overlaybackground.open #commentcontainer header h2 {
+  color: white;
 }
 .overlaybackground.open #commentcontainer header h2 a {
   color: white;

@@ -8,6 +8,13 @@ App::uses('AppController', 'Controller');
  */
 class ItemsController extends AppController {
 
+
+public $paginate = array(
+        'limit' => 25,
+        'order' => array(
+            'Item.created' => 'desc'
+        )
+    );
 /**
  * Components
  *
@@ -22,7 +29,7 @@ class ItemsController extends AppController {
  */
 	public function index() {
 		$this->Item->recursive = 0;
-		$this->set('items', $this->Paginator->paginate());
+		$this->set('items', $this->paginate());
 	}
 
 /**
@@ -33,6 +40,16 @@ class ItemsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+		if (!$this->Item->exists($id)) {
+			throw new NotFoundException(__('Invalid item'));
+		}
+		$options = array('conditions' => array('Item.' . $this->Item->primaryKey => $id));
+		$this->set('item', $this->Item->find('first', $options));
+		$this->layout = false;
+	}
+
+
+	public function view_comments($id = null){
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));
 		}
@@ -58,6 +75,7 @@ class ItemsController extends AppController {
 		}
 		$users = $this->Item->User->find('list');
 		$this->set(compact('users'));
+		$this->layout = false;
 	}
 
 /**

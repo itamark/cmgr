@@ -20,7 +20,7 @@
 			<?php echo $this->Html->link($comment['Item']['title'], array('controller' => 'items', 'action' => 'view', $comment['Item']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($comment['User']['name'], array('controller' => 'users', 'action' => 'view', $comment['User']['id'])); ?>
+			<?php echo $this->Html->link($comment['User']['username'], array('controller' => 'users', 'action' => 'view', $comment['User']['id'])); ?>
 		</td>
 		<td><?php echo h($comment['Comment']['comment_txt']); ?>&nbsp;</td>
 		<td><?php echo h($comment['Comment']['created']); ?>&nbsp;</td>

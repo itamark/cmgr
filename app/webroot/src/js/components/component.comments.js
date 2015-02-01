@@ -13,7 +13,9 @@ Component.Comments = function($) {
             e.preventDefault();
             // $('.overlaybackground').addClass('open');
             Component.Overlay.toggleOverlay();
-            $('#commentcontainer').load($(this).attr('href'));
+            $('#commentcontainer').load($(this).attr('href'), function(){
+                Component.Forms.init(page, {});
+            });
         });
 
         $('.overlaybackground').click(function(e){
