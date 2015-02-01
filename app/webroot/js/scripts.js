@@ -204,13 +204,12 @@ Component.Comments = function($) {
         });
 
         $('.overlaybackground').click(function(e){
-            e.preventDefault();
             if(e.target.className == 'overlaybackground open'){
+                 e.preventDefault();
                 Component.Overlay.toggleOverlay();
             // $('.overlaybackground').remove('*:not(#commentcontainer)');
             document.getElementById('commentcontainer').innerHTML = '';
         }
-            
         });
 
     };

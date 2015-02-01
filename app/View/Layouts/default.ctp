@@ -66,7 +66,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <li><a href="/logout">Logout</a></li>
               </ul>
             </li>
-            <li><a href="#" title="New Item" class="additem"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+            <li><a href="/items/add" title="New Item" class="additem"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
         <?php else: ?>
         <li><a href="/users/login">Login</a></li>
     <?php endif; ?>

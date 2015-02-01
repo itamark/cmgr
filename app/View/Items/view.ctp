@@ -1,3 +1,8 @@
+<header>
+	<h2><a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a></h2>
+</header>
+
+
 <div class="items view">
 <h2><?php echo __('Item'); ?></h2>
 	<dl>
