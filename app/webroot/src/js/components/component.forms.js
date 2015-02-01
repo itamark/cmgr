@@ -6,22 +6,19 @@ Component.Forms = function($) {
 
     // PUBLIC..................................................................
     var init = function(page, options) {
-        
         config.page = page;
         config = App.Utils.extend(options, config);
         config.form = config.page.find('form');
 
-
-        config.form.each(function () {
-    var $this = $(this);
-    var $parent = $this.parent();
-     $this.submit(function(e){
-            e.preventDefault();
+$(document).on('submit', 'form', function(e){
+     e.preventDefault();
+     var $this = $(this);
             $.ajax({
                     type: $this.attr('method'),
                     url: $this.attr('action'),
                     data: $this.serialize(),
                     success: function(response, textStatus, jqXHR) {
+
                         console.log('success');
                         switch ($this.attr('id')) {
                             case 'ItemIndexForm':
@@ -30,7 +27,7 @@ Component.Forms = function($) {
                             case 'UserLoginForm':
                                 loginForm();
                                 break;
-                            case 'CommentAddForm':
+                            case 'CommentViewForm':
                                 postComment(response);
                                 break;
                         }
@@ -39,8 +36,39 @@ Component.Forms = function($) {
                         console.log(jqXHR);
                     }
                 });
-        });
+       
 });
+
+// config.form.each(function () {
+//     var $this = $(this);
+//     var $parent = $this.parent();
+
+//      $this.submit(function(e){
+//             e.preventDefault();
+//             $.ajax({
+//                     type: $this.attr('method'),
+//                     url: $this.attr('action'),
+//                     data: $this.serialize(),
+//                     success: function(response, textStatus, jqXHR) {
+//                         console.log('success');
+//                         switch ($this.attr('id')) {
+//                             case 'ItemIndexForm':
+//                                 postItem(response);
+//                                 break;
+//                             case 'UserLoginForm':
+//                                 loginForm();
+//                                 break;
+//                             case 'CommentViewForm':
+//                                 postComment(response);
+//                                 break;
+//                         }
+//                     },
+//                     error: function(jqXHR, data, errorThrown) {
+//                         console.log(jqXHR);
+//                     }
+//                 });
+//         });
+// });
         
 
     };
@@ -56,7 +84,7 @@ Component.Forms = function($) {
 
     var postComment = function(response){
         $('textarea').val('');
-        $('#collectionitem'+response[0].Comment.item_id).load('/comments/newcomments/'+response[0].Comment.item_id);  
+        $('#commentsview').load('/items/view_comments/'+response.Comment.item_id);  
     }
 
 

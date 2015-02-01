@@ -8,6 +8,13 @@ App::uses('AppController', 'Controller');
  */
 class CommentsController extends AppController {
 
+	public $paginate = array(
+        'limit' => 25,
+        'order' => array(
+            'Item.created' => 'desc'
+        )
+    );
+
 /**
  * Components
  *
@@ -22,7 +29,7 @@ class CommentsController extends AppController {
  */
 	public function index() {
 		$this->Comment->recursive = 0;
-		$this->set('comments', $this->Paginator->paginate());
+		$this->set('comments', $this->paginate());
 	}
 
 /**
@@ -50,7 +57,8 @@ class CommentsController extends AppController {
 			$this->Comment->create();
 			if ($this->Comment->save($this->request->data)) {
 				$this->Session->setFlash(__('The comment has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				header('Content-type: application/json');
+				die(json_encode($this->request->data));
 			} else {
 				$this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
 			}

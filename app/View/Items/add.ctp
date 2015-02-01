@@ -1,3 +1,6 @@
+<header>
+	<h2>New Item</h2>
+</header>
 <div class="items form">
 <?php echo $this->Form->create('Item'); ?>
 	<fieldset>

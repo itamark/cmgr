@@ -2,6 +2,45 @@
 	<h2><a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a></h2>
 </header>
 
+<?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'))); ?>
+	<fieldset>
+		<legend><?php echo __('Add Comment'); ?></legend>
+	<?php
+		echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
+		echo $this->Form->input('user_id', array('default' => h($item['User']['id']), 'type' => 'hidden'));
+		echo $this->Form->input('comment_txt');
+	?>
+	</fieldset>
+<?php echo $this->Form->end(__('Submit')); ?>
+<div id="commentsview">
+	<table cellpadding = "0" cellspacing = "0">
+	<tr>
+		<th><?php echo __('Id'); ?></th>
+		<th><?php echo __('Item Id'); ?></th>
+		<th><?php echo __('User Id'); ?></th>
+		<th><?php echo __('Comment Txt'); ?></th>
+		<th><?php echo __('Created'); ?></th>
+		<th><?php echo __('Modified'); ?></th>
+		<th class="actions"><?php echo __('Actions'); ?></th>
+	</tr>
+	<?php foreach ($item['Comment'] as $comment): ?>
+		<tr>
+			<td><?php echo $comment['id']; ?></td>
+			<td><?php echo $comment['item_id']; ?></td>
+			<td><?php echo $comment['user_id']; ?></td>
+			<td><?php echo $comment['comment_txt']; ?></td>
+			<td><?php echo $comment['created']; ?></td>
+			<td><?php echo $comment['modified']; ?></td>
+			<td class="actions">
+				<?php echo $this->Html->link(__('View'), array('controller' => 'comments', 'action' => 'view', $comment['id'])); ?>
+				<?php echo $this->Html->link(__('Edit'), array('controller' => 'comments', 'action' => 'edit', $comment['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'comments', 'action' => 'delete', $comment['id']), array(), __('Are you sure you want to delete # %s?', $comment['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+</div>
+<!-- 
 
 <div class="items view">
 <h2><?php echo __('Item'); ?></h2>
@@ -88,3 +127,4 @@
 		</ul>
 	</div>
 </div>
+ -->

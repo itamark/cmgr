@@ -49,7 +49,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="/">Project name</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -66,7 +66,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <li><a href="/logout">Logout</a></li>
               </ul>
             </li>
-            <li><a href="/items/add" title="New Item" class="additem"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+            <li><a href="/items/add" title="New Item" class="additem comments"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
         <?php else: ?>
         <li><a href="/users/login">Login</a></li>
     <?php endif; ?>
