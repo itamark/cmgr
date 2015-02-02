@@ -23,15 +23,19 @@ body #content .list-group-item .comments:hover {
 body nav.navbar-fixed-top {
   z-index: 3;
 }
-body nav.navbar-fixed-top a.additem {
+body nav.navbar-fixed-top .container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+body nav.navbar-fixed-top .container a.additem {
   background-color: #d9230f;
   display: block;
   border-radius: 50%;
 }
-body nav.navbar-fixed-top a.additem span.glyphicon-plus {
+body nav.navbar-fixed-top .container a.additem span.glyphicon-plus {
   color: white;
 }
-body nav.navbar-fixed-top a.additem:hover {
+body nav.navbar-fixed-top .container a.additem:hover {
   background-color: #d9230f;
 }
 .overlaybackground {
