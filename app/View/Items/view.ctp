@@ -1,6 +1,10 @@
 <header>
 	<h2><a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a></h2>
+	
 </header>
+<div id="postcomment">
+<p><?php echo h($item['Item']['post_comment']); ?></p>
+</div>
 
 <?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'))); ?>
 	<fieldset>

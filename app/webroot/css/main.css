@@ -20,6 +20,16 @@ body #content .list-group-item {
 body #content .list-group-item .comments:hover {
   cursor: pointer;
 }
+body #content .list-group-item .upvote {
+  display: block;
+  min-width: 32px;
+  font-size: 20px;
+  height: 100%;
+}
+body #content .list-group-item .content {
+  display: block;
+  width: auto;
+}
 body nav.navbar-fixed-top {
   z-index: 3;
 }
@@ -33,7 +43,7 @@ body nav.navbar-fixed-top .container a.additem {
   border-radius: 50%;
 }
 body nav.navbar-fixed-top .container a.additem span.glyphicon-plus {
-  color: white;
+  color: #FAF8F8;
 }
 body nav.navbar-fixed-top .container a.additem:hover {
   background-color: #d9230f;
@@ -54,21 +64,28 @@ body nav.navbar-fixed-top .container a.additem:hover {
   position: absolute;
   right: 0;
   height: 100%;
-  background: white;
+  background: #FAF8F8;
 }
 .overlaybackground.open #commentcontainer header {
   width: 100%;
   height: 100px;
   padding: 20px;
-  background: #663300;
+  background: #181830;
 }
 .overlaybackground.open #commentcontainer header h2 {
-  color: white;
+  color: #FAF8F8;
 }
 .overlaybackground.open #commentcontainer header h2 a {
-  color: white;
+  color: #FAF8F8;
   text-decoration: none;
 }
 .overlaybackground.open #commentcontainer header h2 a:hover {
   text-decoration: none;
+}
+.overlaybackground.open #commentcontainer div#postcomment {
+  background: #183078;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  color: #FAF8F8;
 }

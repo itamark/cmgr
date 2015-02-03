@@ -31,6 +31,6 @@
  </li>
   <?php endforeach; ?>
 
-	<pre>
+	<!-- <pre>
 		<?php print_r($comments); ?>
-	</pre>
+	</pre> -->
