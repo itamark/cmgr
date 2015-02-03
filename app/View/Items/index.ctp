@@ -1,9 +1,24 @@
-
+<!-- 
+<pre>
+<?php print_r($items); ?>
+</pre> -->
 <ul class="list-group">
-	<?php foreach ($items as $item): ?>
-  <li class="list-group-item item-listing" id="<?php echo h($item['Item']['title']); ?>">
- <h4><a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a></h4><small><a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>">Comments</a></small>  </li>
-  <?php endforeach; ?>
+    <?php foreach ($items as $item): ?>
+    <?php $comments = count(h($item['Comment'])); ?>
+    <li class="list-group-item item-listing clearfix" id="<?php echo h($item['Item']['title']); ?>">
+    	<div class="upvote pull-left">
+    		<span class="glyphicon glyphicon-arrow-up pull-left" hidden-aria="true"></span>
+    	</div>
+<div class="content  pull-left"><h4>
+ 	<a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a>
+ </h4>
+        <small>
+ 	<a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?>
+ 	</a>
+ </small></div>
+    
+    </li>
+    <?php endforeach; ?>
 
 </ul>
 <!-- 

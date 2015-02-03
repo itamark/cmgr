@@ -28,7 +28,7 @@ public $paginate = array(
  * @return void
  */
 	public function index() {
-		$this->Item->recursive = 0;
+		$this->Item->recursive = 1;
 		$this->set('items', $this->paginate());
 	}
 
