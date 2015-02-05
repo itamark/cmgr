@@ -12,6 +12,7 @@ class Item extends AppModel {
 	public function beforeSave($options = array())
   {
   	$this->data['Item']['user_id'] = AuthComponent::user('id');
+  	// if the article url doesn't have a host - give it one.
   	if($this->data['Item']['type'] == 'article' && mb_substr($this->data['Item']['url'], 0, 4) !== 'http') $this->data['Item']['url'] = 'http://' . $this->data['Item']['url'];
   }
 
