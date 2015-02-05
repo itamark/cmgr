@@ -5,12 +5,17 @@
 <ul class="list-group">
     <?php foreach ($items as $item): ?>
     <?php $comments = count(h($item['Comment'])); ?>
-    <li class="list-group-item item-listing clearfix" id="<?php echo h($item['Item']['title']); ?>">
+    <li class="list-group-item item-listing clearfix" id="item-<?php echo h($item['Item']['id']); ?>">
     	<div class="upvote pull-left">
     		<span class="glyphicon glyphicon-arrow-up pull-left" hidden-aria="true"></span>
     	</div>
 <div class="content  pull-left"><h4>
- 	<a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a>
+<?php if($item['Item']['type'] == 'article'): ?>
+ 	<a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?>
+ 	<small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>
+ <?php elseif($item['Item']['type'] == 'question'): ?>
+ 	<a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo h($item['Item']['title']); ?></a>
+ <?php endif; ?>
  </h4>
         <small>
  	<a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?>

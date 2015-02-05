@@ -4,7 +4,7 @@
 		<legend><?php echo __('Add Comment'); ?></legend>
 	<?php
 		echo $this->Form->input('item_id');
-		echo $this->Form->input('user_id');
+		// echo $this->Form->input('user_id');
 		echo $this->Form->input('comment_txt');
 	?>
 	</fieldset>

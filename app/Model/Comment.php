@@ -7,7 +7,10 @@ App::uses('AppModel', 'Model');
  * @property User $User
  */
 class Comment extends AppModel {
-
+public function beforeSave($options = array())
+  {
+  	$this->data['Comment']['user_id'] = AuthComponent::user('id');
+  }
 /**
  * Validation rules
  *

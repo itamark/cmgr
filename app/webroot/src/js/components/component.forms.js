@@ -21,7 +21,7 @@ $(document).on('submit', 'form', function(e){
 
                         console.log('success');
                         switch ($this.attr('id')) {
-                            case 'ItemIndexForm':
+                            case 'ItemAddForm':
                                 postItem(response);
                                 break;
                             case 'UserLoginForm':
@@ -39,36 +39,7 @@ $(document).on('submit', 'form', function(e){
        
 });
 
-// config.form.each(function () {
-//     var $this = $(this);
-//     var $parent = $this.parent();
 
-//      $this.submit(function(e){
-//             e.preventDefault();
-//             $.ajax({
-//                     type: $this.attr('method'),
-//                     url: $this.attr('action'),
-//                     data: $this.serialize(),
-//                     success: function(response, textStatus, jqXHR) {
-//                         console.log('success');
-//                         switch ($this.attr('id')) {
-//                             case 'ItemIndexForm':
-//                                 postItem(response);
-//                                 break;
-//                             case 'UserLoginForm':
-//                                 loginForm();
-//                                 break;
-//                             case 'CommentViewForm':
-//                                 postComment(response);
-//                                 break;
-//                         }
-//                     },
-//                     error: function(jqXHR, data, errorThrown) {
-//                         console.log(jqXHR);
-//                     }
-//                 });
-//         });
-// });
         
 
     };
@@ -78,8 +49,11 @@ $(document).on('submit', 'form', function(e){
     }
 
     var postItem = function(response){
- $('textarea').val('');
-        $('.itemscontainer').load('/comments/newitems/'+response[0].Comment.item_id);
+                $('textarea').val('');
+        // $('.itemscontainer').load('/comments/newitems/'+response[0].Comment.item_id);
+                // $('.contentcontainer').load('/items/index'); 
+                $('.items.form').empty().prepend('<div class="alert alert-success" role="alert">Thanks for submitting!</div>');
+
    }
 
     var postComment = function(response){
