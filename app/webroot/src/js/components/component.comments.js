@@ -8,13 +8,13 @@ Component.Comments = function($) {
     var init = function(page, options) {
         config.page = page;
         config = App.Utils.extend(options, config);
-
+ Component.Forms.init(page, {});
         $('a.comments').click(function(e){
             e.preventDefault();
             // $('.overlaybackground').addClass('open');
             Component.Overlay.toggleOverlay();
             $('#commentcontainer').load($(this).attr('href'), function(){
-                Component.Forms.init(page, {});
+               
             });
         });
 
@@ -26,6 +26,8 @@ Component.Comments = function($) {
             document.getElementById('commentcontainer').innerHTML = '';
         }
         });
+
+        
 
     };
 

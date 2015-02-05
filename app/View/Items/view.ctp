@@ -5,14 +5,15 @@
 <div id="postcomment">
 <p><?php echo h($item['Item']['post_comment']); ?></p>
 </div>
+<div class="items form col-lg-10 col-lg-offset-1">
 
 <?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'))); ?>
 	<fieldset>
-		<legend><?php echo __('Add Comment'); ?></legend>
+		<legend><?php echo __('What do you think?'); ?></legend>
 	<?php
 		echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
 		echo $this->Form->input('user_id', array('default' => h($item['User']['id']), 'type' => 'hidden'));
-		echo $this->Form->input('comment_txt');
+		echo $this->Form->input('comment_txt', array('label' => false));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
@@ -44,6 +45,8 @@
 	<?php endforeach; ?>
 	</table>
 </div>
+</div>
+
 <!-- 
 
 <div class="items view">
