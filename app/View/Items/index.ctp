@@ -2,7 +2,7 @@
 <pre>
 <?php print_r($items); ?>
 </pre> -->
-<ul class="list-group">
+<ul class="list-group  col-lg-8">
     <?php foreach ($items as $item): ?>
     <?php $comments = count(h($item['Comment'])); ?>
     <li class="list-group-item item-listing clearfix" id="item-<?php echo h($item['Item']['id']); ?>">
@@ -21,6 +21,7 @@
  	<a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?>
  	</a>
  </small></div>
+ <div class="pull-right"><img class="media-object img-circle" src="https://secure.gravatar.com/avatar/<?php echo md5(h($item['User']['email'])); ?>?s=30&d=mm"></div>
     
     </li>
     <?php endforeach; ?>

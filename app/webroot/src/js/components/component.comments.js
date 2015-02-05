@@ -11,7 +11,6 @@ Component.Comments = function($) {
  Component.Forms.init(page, {});
         $('a.comments').click(function(e){
             e.preventDefault();
-            // $('.overlaybackground').addClass('open');
             Component.Overlay.toggleOverlay();
             $('#commentcontainer').load($(this).attr('href'), function(){
                
@@ -22,12 +21,11 @@ Component.Comments = function($) {
             if(e.target.className == 'overlaybackground open'){
                  e.preventDefault();
                 Component.Overlay.toggleOverlay();
-            // $('.overlaybackground').remove('*:not(#commentcontainer)');
             document.getElementById('commentcontainer').innerHTML = '';
         }
         });
 
-        
+
 
     };
 

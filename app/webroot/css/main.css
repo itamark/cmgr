@@ -17,6 +17,7 @@ body #content .list-group-item {
   margin-bottom: -1px;
   background-color: #ffffff;
   border: 1px solid #ffffff;
+  border-radius: 5px;
 }
 body #content .list-group-item .comments:hover {
   cursor: pointer;
@@ -33,6 +34,9 @@ body #content .list-group-item .upvote span.glyphicon-arrow-up:hover {
 body #content .list-group-item .content {
   display: block;
   width: auto;
+}
+body #content .list-group-item:hover {
+  background: beige;
 }
 body nav.navbar-fixed-top {
   z-index: 3;

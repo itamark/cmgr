@@ -40,11 +40,13 @@ public $paginate = array(
  * @return void
  */
 	public function view($id = null) {
+
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));
 		}
 		$options = array('conditions' => array('Item.' . $this->Item->primaryKey => $id));
 		$this->set('item', $this->Item->find('first', $options));
+		$this->set('comments', $this->Item->Comment->find('all', $options));
 		$this->layout = false;
 	}
 
