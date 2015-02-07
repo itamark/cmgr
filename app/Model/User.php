@@ -104,7 +104,8 @@ class User extends AppModel
       'exclusive' => '',
       'finderQuery' => '',
       'counterQuery' => ''
-    )
+    ),
+    'Upvote'=> array()
   );
 
 }
