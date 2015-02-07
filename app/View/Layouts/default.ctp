@@ -18,7 +18,7 @@ $cakeDescription = __d('cake_dev', 'New Project');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
-<html>
+<html class="<?php if($this->params['controller'] == 'users' && $this->params['action'] == 'login'){ echo 'login-page'; } ?>">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -40,6 +40,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <body>
+
 	<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">

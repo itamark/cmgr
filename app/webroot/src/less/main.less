@@ -1,7 +1,23 @@
 @import "mixins.less";
 
+html{
+	&.login-page{
+		background: #000000;
+background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.65) 59%, rgba(0,0,0,0.65) 100%), url('/img/desk.jpg') no-repeat;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(59%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))), url('/img/desk.jpg') no-repeat;
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 59%,rgba(0,0,0,0.65) 100%), url('/img/desk.jpg') no-repeat;
+background: -o-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 59%,rgba(0,0,0,0.65) 100%), url('/img/desk.jpg') no-repeat;
+background: -ms-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 59%,rgba(0,0,0,0.65) 100%), url('/img/desk.jpg') no-repeat;
+background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 59%,rgba(0,0,0,0.65) 100%), url('/img/desk.jpg') no-repeat;
+background-size:cover;
+	body{
+		background-color:transparent;
+	}
+	}
+}
+
 body{
-	background-color: #ffffff;
+	// background-color: #ffffff;
 	padding-top:50px;
 	position: relative;
 	display:block;

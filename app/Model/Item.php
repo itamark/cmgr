@@ -89,7 +89,8 @@ class Item extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+    	'Upvote'=> array()
 	);
 
 }
