@@ -21,6 +21,7 @@ $(function() {
    if($page.find('a.comments').length > 0){
     Component.Comments.init($page, {});
    }
+   Component.Upvotes.init($page, {});
 
     // Global Components Init()
      // Component.Overlay.init($page, {});

@@ -7,7 +7,13 @@
     <?php $comments = count(h($item['Comment'])); ?>
     <li class="list-group-item item-listing clearfix" id="item-<?php echo h($item['Item']['id']); ?>">
     	<div class="upvote pull-left">
-    		<span class="glyphicon glyphicon-arrow-up pull-left" hidden-aria="true"></span>
+    		<span class="glyphicon glyphicon-arrow-up pull-left upvotearrow" hidden-aria="true"></span><br>
+    		<span class="votecount"></span>
+
+
+
+
+
     	</div>
 <div class="content  pull-left"><h4>
 <?php if($item['Item']['type'] == 'article'): ?>

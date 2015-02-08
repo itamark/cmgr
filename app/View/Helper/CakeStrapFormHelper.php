@@ -44,7 +44,7 @@ class CakeStrapFormHelper extends FormHelper {
 		return parent::textarea($fieldName, $options);
 	}
 
-	public function end($string ='Salvar',$options = array()) {
+	public function end($string ='Submit',$options = array()) {
 		
 		$optionsDefault = array('class'=>'btn btn-primary','div'=>'form-group');
 		$options = array_merge_recursive($optionsDefault, $options);
