@@ -22,6 +22,8 @@ public $paginate = array(
  */
 	public $components = array('Paginator');
 
+
+
 /**
  * index method
  *
