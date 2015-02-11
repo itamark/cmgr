@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class ItemsController extends AppController {
-
+public $uses = array('Item', 'Upvote');
 
 public $paginate = array(
         'limit' => 25,
@@ -30,8 +30,16 @@ public $paginate = array(
  * @return void
  */
 	public function index() {
-		$this->Item->recursive = 1;
-		$this->set('items', $this->paginate());
+		$newitems = [];
+		$this->Item->recursive = 2;
+		$items = $this->Item->find('all');
+		foreach($items as $key=>$item){
+			$upvotes = $this->Upvote->find('count', array('conditions' => array('Upvote.item_id' => $item['Item']['id'])));
+			$item['Item']['upvote_count'] = $upvotes;
+			array_push($newitems, $item);
+		}
+		$this->set('items', $newitems);
+		
 	}
 
 /**

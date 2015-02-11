@@ -1,14 +1,22 @@
-<!-- 
-<pre>
+
+<!-- <pre>
 <?php print_r($items); ?>
-</pre> -->
+</pre>  -->
 <ul class="list-group  col-lg-8">
     <?php foreach ($items as $item): ?>
     <?php $comments = count(h($item['Comment'])); ?>
     <li class="list-group-item item-listing clearfix" id="item-<?php echo h($item['Item']['id']); ?>">
     	<div class="upvote pull-left">
-    		<span class="glyphicon glyphicon-arrow-up pull-left upvotearrow" hidden-aria="true"></span><br>
-    		<span class="votecount"></span>
+    		<span class="glyphicon glyphicon-arrow-up pull-left upvotearrow 
+    		<?php foreach ($item['User']['Upvote'] as $upvote){
+    				if($upvote['item_id'] == $item['Item']['id']){
+    					echo 'upvoted';
+    				}
+    			} ?>" 
+    			hidden-aria="true"></span><br>
+    		<span class="votecount">
+     			<?php echo $item['Item']['upvote_count'] ?>
+ 			</span>
 
 
 
