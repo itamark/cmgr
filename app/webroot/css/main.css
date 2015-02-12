@@ -43,6 +43,10 @@ body #content .list-group-item .upvote {
 body #content .list-group-item .upvote span.glyphicon-arrow-up:hover {
   cursor: pointer;
 }
+body #content .list-group-item .upvote span.upvotearrow {
+  position: relative;
+  left: -5px;
+}
 body #content .list-group-item .upvote span.upvotearrow.upvoted {
   color: #d9230f;
 }
