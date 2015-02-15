@@ -25,13 +25,24 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('bootstrap');
-    echo $this->Html->css('main');
+		echo $this->Html->css('foundation');
+    echo $this->Html->css('normalize');
+        echo $this->Html->css('main');
+
+        // echo $this->Html->css('main');
+
 		echo $this->Html->script('jquery.min');
-		echo $this->Html->script('bootstrap');
+		echo $this->Html->script('foundation.min');
+        echo $this->Html->script('modernizr');
+        echo $this->Html->script('placeholder');
+                echo $this->Html->script('fastclick');
+
+
     echo $this->Html->script('scripts');
 
 		echo $this->fetch('meta');
@@ -40,60 +51,74 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <body>
+  <div class="contain-to-grid sticky">
+<nav class="top-bar" data-topbar role="navigation"  data-options="sticky_on: large">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">CMGR</a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
 
-	<nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-          	<?php if (AuthComponent::user('id')): ?>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="/logout">Logout</a></li>
-              </ul>
-            </li>
-            <li><a href="/items/add" title="New Item" class="additem comments"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
-        <?php else: ?>
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+<!--       <li class="active"><a href="#">Right Button Active</a></li>
+ -->     
+<?php if (AuthComponent::user('id')): ?>
+  <li class="has-dropdown">
+        <a href="#">User</a>
+        <ul class="dropdown">
+          <li><a href="/logout">Logout</a></li>
+<!--           <li class="active"><a href="#">Active link in dropdown</a></li>
+ -->        </ul>
+      </li>
+      <?php else: ?>
         <li><a href="/users/login">Login</a></li>
-    <?php endif; ?>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    <div class="overlaybackground"><div id="commentcontainer"></div></div>
+      <?php endif; ?>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="#">Left Nav Button</a></li>
+    </ul>
+  </section>
+</nav>
+</div>
+
+<!--     <div class="overlaybackground"><div id="commentcontainer"></div></div>
     <div id="slideout">
-    </div>
+    </div> -->
 	<div id="container">
-		<!-- <div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
-		</div> -->
+
 		<div id="content">
-			<div class="container">
+      <div class="large-3 push-9 columns">
+<ul class="side-nav">
+<li><a href="#" class="button small">Submit a Question or Link</a></li>
+<li><a href="#">Section 2</a></li>
+<li><a href="#">Section 3</a></li>
+<li><a href="#">Section 4</a></li>
+<li><a href="#">Section 5</a></li>
+<li><a href="#">Section 6</a></li>
+</ul>
+      </div>
+			<div class="container large-9 small-12 pull-3 columns">
 
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		</div>
+
 		<div id="footer">
 			
 		</div>
+
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
+  <script>
+  $(document).foundation();
+  $(document).foundation('reflow');
+</script>
 </body>
 </html>

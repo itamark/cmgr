@@ -1,118 +1,12 @@
-html.login-page {
-  background: #000000;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 59%, rgba(0, 0, 0, 0.65) 100%), url('/img/desk.jpg') no-repeat;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(59%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.65))), url('/img/desk.jpg') no-repeat;
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 59%, rgba(0, 0, 0, 0.65) 100%), url('/img/desk.jpg') no-repeat;
-  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 59%, rgba(0, 0, 0, 0.65) 100%), url('/img/desk.jpg') no-repeat;
-  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 59%, rgba(0, 0, 0, 0.65) 100%), url('/img/desk.jpg') no-repeat;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 59%, rgba(0, 0, 0, 0.65) 100%), url('/img/desk.jpg') no-repeat;
-  background-size: cover;
+.listing.row {
+  margin-bottom: 2em;
 }
-html.login-page body {
-  background-color: transparent;
-}
-body {
-  padding-top: 50px;
-  position: relative;
-  display: block;
-}
-body #content {
-  margin-top: 20px;
-}
-body #content .media-object.round {
+.listing.row .img-circle {
   border-radius: 50%;
 }
-body #content .list-group-item {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
-  margin-bottom: -1px;
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-}
-body #content .list-group-item .comments:hover {
+.listing.row .upvotearrow:hover {
   cursor: pointer;
 }
-body #content .list-group-item .upvote {
-  display: block;
-  min-width: 32px;
-  font-size: 20px;
-  height: 100%;
-}
-body #content .list-group-item .upvote span.glyphicon-arrow-up:hover {
-  cursor: pointer;
-}
-body #content .list-group-item .upvote span.upvotearrow {
-  position: relative;
-  left: -5px;
-}
-body #content .list-group-item .upvote span.upvotearrow.upvoted {
-  color: #d9230f;
-}
-body #content .list-group-item .content {
-  display: block;
-  width: auto;
-}
-body #content .list-group-item:hover {
-  background: beige;
-}
-body nav.navbar-fixed-top {
-  z-index: 3;
-}
-body nav.navbar-fixed-top .container {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-body nav.navbar-fixed-top .container a.additem {
-  background-color: #d9230f;
-  display: block;
-  border-radius: 50%;
-}
-body nav.navbar-fixed-top .container a.additem span.glyphicon-plus {
-  color: #FAF8F8;
-}
-body nav.navbar-fixed-top .container a.additem:hover {
-  background-color: #d9230f;
-}
-.overlaybackground {
-  z-index: 5;
-}
-.overlaybackground.open {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background: rgba(0, 0, 0, 0.5);
-  top: 0px;
-}
-.overlaybackground.open #commentcontainer {
-  overflow-y: scroll;
-  width: 60%;
-  position: absolute;
-  right: 0;
-  height: 100%;
-  background: #FAF8F8;
-}
-.overlaybackground.open #commentcontainer header {
-  width: 100%;
-  height: 100px;
-  padding: 20px;
-  background: #181830;
-}
-.overlaybackground.open #commentcontainer header h2 {
-  color: #FAF8F8;
-}
-.overlaybackground.open #commentcontainer header h2 a {
-  color: #FAF8F8;
-  text-decoration: none;
-}
-.overlaybackground.open #commentcontainer header h2 a:hover {
-  text-decoration: none;
-}
-.overlaybackground.open #commentcontainer div#postcomment {
-  background: #183078;
-  width: 100%;
-  height: auto;
-  padding: 20px;
-  color: #FAF8F8;
+.listing.row span.upvoted {
+  color: #2ba6cb;
 }

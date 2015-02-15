@@ -354,8 +354,9 @@ $(document).on('click', '.upvotearrow', function(e){
             $.ajax({
                     type: 'post',
                     url: '/upvotes/vote',
-                    data: {item_id : $this.closest('li').attr('id').split('-')[1]},
+                    data: {item_id : $this.attr('id').split('-')[1]},
                     success: function(response, textStatus, jqXHR) {
+
 $this.next().next().html(response.count);
 $this.toggleClass('upvoted');
 
