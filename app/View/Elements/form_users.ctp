@@ -1,5 +1,5 @@
 <h2 class="form-signin-heading"> <?php echo $label ?></h2>
-<?php echo $this->Form->create('User');?>
+<?php echo $this->Form->create('User', array('controller' => 'users', 'action' => 'add'));?>
 	<?php echo $this->Form->input('username',array(
 		'label' => __('Username'),
 		'value' => !empty( $user['username'] ) ? $user['username'] : ''));?>

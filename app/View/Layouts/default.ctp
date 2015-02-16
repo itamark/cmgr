@@ -98,6 +98,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<div id="container">
 
 		<div id="content">
+
       <div class="large-3 medium-3 push-9 columns">
 <ul class="side-nav">
 <li><a href="#" class="button small right-off-canvas-toggle">Submit a Question or Link</a></li>
@@ -189,7 +190,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </script>
 
 </div>
-
   </div>
 </body>
 </html>
