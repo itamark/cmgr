@@ -16,7 +16,8 @@
 
 <div class="items form col-lg-10 col-lg-offset-1">
 
-<?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'))); ?>
+<?php if (AuthComponent::user('id')): ?>
+	<?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'))); ?>
 	<?php
 		echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
 		echo $this->Form->input('user_id', array('default' => h($item['User']['id']), 'type' => 'hidden'));
@@ -25,6 +26,12 @@
 <?php echo '<div class="row">'; ?>
 <?php echo $this->Form->end(__('Submit')); ?>
 <?php echo '</div>'; ?>
+<?php else: ?>
+	<div class="row panel">
+		To comment, please <a href="/sign-up">sign in</a>.
+	</div>
+<?php endif ?>
+
 <div id="commentsview">
 	<?php foreach ($comments as $comment): ?>
 	<div class="row">
