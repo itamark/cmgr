@@ -195,22 +195,22 @@ Component.Comments = function($) {
     var init = function(page, options) {
         config.page = page;
         config = App.Utils.extend(options, config);
- Component.Forms.init(page, {});
-        $('a.comments').click(function(e){
-            e.preventDefault();
-            Component.Overlay.toggleOverlay();
-            $('#commentcontainer').load($(this).attr('href'), function(){
+ // Component.Forms.init(page, {});
+        // $('a.comments').click(function(e){
+        //     e.preventDefault();
+        //     Component.Overlay.toggleOverlay();
+        //     $('#commentcontainer').load($(this).attr('href'), function(){
                
-            });
-        });
+        //     });
+        // });
 
-        $('.overlaybackground').click(function(e){
-            if(e.target.className == 'overlaybackground open'){
-                 e.preventDefault();
-                Component.Overlay.toggleOverlay();
-            document.getElementById('commentcontainer').innerHTML = '';
-        }
-        });
+        // $('.overlaybackground').click(function(e){
+        //     if(e.target.className == 'overlaybackground open'){
+        //          e.preventDefault();
+        //         Component.Overlay.toggleOverlay();
+        //     document.getElementById('commentcontainer').innerHTML = '';
+        // }
+        // });
 
 
 
@@ -239,11 +239,13 @@ Component.Forms = function($) {
 
     // PUBLIC..................................................................
     var init = function(page, options) {
+        console.log('loaded');
         config.page = page;
         config = App.Utils.extend(options, config);
-        config.form = config.page.find('form');
+        config.form = config.page.find('form:not(#mc-embedded-subscribe-form)');
 
-$(document).on('submit', 'form', function(e){
+$(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
+
      e.preventDefault();
      var $this = $(this);
             $.ajax({
@@ -254,7 +256,7 @@ $(document).on('submit', 'form', function(e){
 
                         console.log('success');
                         switch ($this.attr('id')) {
-                            case 'ItemAddForm':
+                            case 'ItemIndexForm':
                                 postItem(response);
                                 break;
                             case 'UserLoginForm':
@@ -282,11 +284,12 @@ $(document).on('submit', 'form', function(e){
     }
 
     var postItem = function(response){
-                $('textarea').val('');
+                // $('textarea').val('');
+                console.log(response.new_id);
         // $('.itemscontainer').load('/comments/newitems/'+response[0].Comment.item_id);
                 // $('.contentcontainer').load('/items/index'); 
-                $('.items.form').empty().prepend('<div class="alert alert-success" role="alert">Thanks for submitting!</div>');
-
+                // $('.items.form').empty().prepend('<div class="alert alert-success" role="alert">Thanks for submitting!</div>');
+                window.location = "/items/view/"+response.new_id;
    }
 
     var postComment = function(response){

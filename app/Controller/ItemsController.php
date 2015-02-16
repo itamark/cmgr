@@ -7,6 +7,13 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class ItemsController extends AppController {
+
+public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('index', 'view');
+	}
+
+
 public $uses = array('Item', 'Upvote');
 
 public $paginate = array(
@@ -57,7 +64,7 @@ public $paginate = array(
 		$options = array('conditions' => array('Item.' . $this->Item->primaryKey => $id));
 		$this->set('item', $this->Item->find('first', $options));
 		$this->set('comments', $this->Item->Comment->find('all', $options));
-		$this->layout = false;
+		// $this->layout = false;
 	}
 
 
@@ -79,8 +86,9 @@ public $paginate = array(
 		if ($this->request->is('post')) {
 			$this->Item->create();
 			if ($this->Item->save($this->request->data)) {
-				$this->Session->setFlash(__('The item has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				$this->request->data['new_id'] = $this->Item->id;
+				header('Content-type: application/json');
+				die(json_encode($this->request->data));
 			} else {
 				$this->Session->setFlash(__('The item could not be saved. Please, try again.'));
 			}

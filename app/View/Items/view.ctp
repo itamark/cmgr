@@ -1,28 +1,44 @@
-<header>
-	<h2><a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a></h2>
-	
-</header>
+<div class="row">
+  <div class="large-12 columns">
+  		<h3><a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a></h3>
 <div id="postcomment">
 <p><?php echo h($item['Item']['post_comment']); ?></p>
 </div>
+
+
+  </div>
+</div>
+
+
+<header>
+	
+</header>
+
 <div class="items form col-lg-10 col-lg-offset-1">
 
 <?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'))); ?>
-	<fieldset>
-		<legend><?php echo __('What do you think?'); ?></legend>
 	<?php
 		echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
 		echo $this->Form->input('user_id', array('default' => h($item['User']['id']), 'type' => 'hidden'));
-		echo $this->Form->input('comment_txt', array('label' => false));
+		echo $this->Form->input('comment_txt', array('label' => false, 'placeholder' => 'What do you think?'));
 	?>
-	</fieldset>
+<?php echo '<div class="row">'; ?>
 <?php echo $this->Form->end(__('Submit')); ?>
+<?php echo '</div>'; ?>
 <div id="commentsview">
 	<?php foreach ($comments as $comment): ?>
-  <li class="list-group-item item-listing" id="comment-<?php echo h($comment['Comment']['id']); ?>">
+	<div class="row">
+		<div class="large-1 columns">
+<img class="media-object" src="https://secure.gravatar.com/avatar/<?php echo md5(h($comment['User']['email'])); ?>?s=25&d=mm">
+		</div>
+		<div class="large-11 columns">
+<p><?php echo $comment['Comment']['comment_txt']; ?></p>
+		</div>
+	</div>
+<!--   <li class="list-group-item item-listing" id="comment-<?php echo h($comment['Comment']['id']); ?>">
 <img class="media-object" src="https://secure.gravatar.com/avatar/<?php echo md5(h($comment['User']['email'])); ?>?s=25&d=mm">
 <p><?php echo $comment['Comment']['comment_txt']; ?></p>
- </li>
+ </li> -->
   <?php endforeach; ?>
 </div>
 </div>
