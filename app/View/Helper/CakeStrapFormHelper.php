@@ -46,7 +46,7 @@ class CakeStrapFormHelper extends FormHelper {
 
 	public function end($string ='Submit',$options = array()) {
 		
-		$optionsDefault = array('class'=>'btn btn-primary','div'=>'form-group');
+		$optionsDefault = array('class'=>'button small right','div'=>'form-group');
 		$options = array_merge_recursive($optionsDefault, $options);
 
 		$retorno  = parent::submit($string,$options);

@@ -44,7 +44,7 @@ class Item extends AppModel {
 		),
 		'url' => array(
 			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+				'rule' => 'url',
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

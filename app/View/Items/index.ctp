@@ -4,6 +4,7 @@
 </pre>  -->
 
 <!-- Begin MailChimp Signup Form -->
+
 <div class="row">
   <div class="large-12 columns">
 <div id="mc_embed_signup">
@@ -17,7 +18,7 @@
 	<input type="email" value="" name="EMAIL" placeholder="Email" class="required email" style="" id="mce-EMAIL">
         </div>
         <div class="small-2 columns">
-   <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button small"></div>
+   <input type="submit" value="Go" name="subscribe" id="mc-embedded-subscribe" class="button small postfix"></div>
         </div>
       </div>
 </div>

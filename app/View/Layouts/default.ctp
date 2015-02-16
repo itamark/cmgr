@@ -51,6 +51,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <body>
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+
+
+
   <div class="contain-to-grid sticky">
 <nav class="top-bar" data-topbar role="navigation"  data-options="sticky_on: large">
   <ul class="title-area">
@@ -80,9 +85,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     </ul>
 
     <!-- Left Nav Section -->
-    <ul class="left">
+<!--     <ul class="left">
       <li><a href="#">Left Nav Button</a></li>
-    </ul>
+    </ul> -->
   </section>
 </nav>
 </div>
@@ -93,17 +98,79 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<div id="container">
 
 		<div id="content">
-      <div class="large-3 push-9 columns">
+      <div class="large-3 medium-3 push-9 columns">
 <ul class="side-nav">
-<li><a href="#" class="button small">Submit a Question or Link</a></li>
-<li><a href="#">Section 2</a></li>
-<li><a href="#">Section 3</a></li>
-<li><a href="#">Section 4</a></li>
+<li><a href="#" class="button small right-off-canvas-toggle">Submit a Question or Link</a></li>
+<li><a href="#">Jobs</a></li>
+<li><a href="#">Discussion</a></li>
+<li><a href="#">CMGR Newsletter</a></li>
 <li><a href="#">Section 5</a></li>
 <li><a href="#">Section 6</a></li>
 </ul>
+
+
       </div>
-			<div class="container large-9 small-12 pull-3 columns">
+
+      <aside class="right-off-canvas-menu">
+        sdf
+        <div class="row">
+          <div class="large-12 columns">
+
+<ul class="tabs" data-tab>
+  <li class="tab-title active"><a href="#panel1">Post a Link</a></li>
+  <li class="tab-title"><a href="#panel2">Ask a Question</a></li>
+</ul>
+<div class="tabs-content">
+  <div class="content active" id="panel1">
+<?php echo $this->Form->create('Item', array(
+        'url' => array(
+            'controller'=>'items',
+            'action'=>'add'
+        )
+    )); ?>
+  <fieldset>
+    <legend><?php echo __('Post an Article'); ?></legend>
+  <?php
+    // echo $this->Form->input('user_id');
+    echo $this->Form->input('type', array('default' => 'article', 'type' => 'hidden'));
+    echo $this->Form->input('title');
+    echo $this->Form->input('url');
+    echo $this->Form->input('post_comment');
+  ?>
+  </fieldset>
+<?php echo $this->Form->end(__('Submit')); ?>
+  </div>
+  <div class="content" id="panel2">
+<?php echo $this->Form->create('Item', array(
+        'url' => array(
+            'controller'=>'items',
+            'action'=>'add'
+        )
+    )); ?>
+  <fieldset>
+    <legend><?php echo __('Ask a Question'); ?></legend>
+  <?php
+    // echo $this->Form->input('user_id');
+    echo $this->Form->input('type', array('default' => 'question', 'type' => 'hidden'));
+    echo $this->Form->input('title');
+    echo $this->Form->input('post_comment');
+    // echo $this->Form->input('url');
+  ?>
+  </fieldset>
+<?php echo $this->Form->end(__('Submit')); ?>
+  </div>
+
+</div>
+
+
+          </div>
+        </div>
+
+
+
+    </aside>
+    <a class="exit-off-canvas"></a>
+			<div class="container large-9 medium-9 small-12 pull-3 columns">
 
 			<?php echo $this->Session->flash(); ?>
 
@@ -118,7 +185,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php echo $this->element('sql_dump'); ?>
   <script>
   $(document).foundation();
-  $(document).foundation('reflow');
+  $(document).foundation('reflow', 'off-canvas');
 </script>
+
+</div>
+
+  </div>
 </body>
 </html>
