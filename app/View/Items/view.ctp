@@ -28,7 +28,7 @@
 <?php echo '</div>'; ?>
 <?php else: ?>
 	<div class="row panel">
-		To comment, please <a href="/sign-up">sign in</a>.
+		To comment, please <a href="/users/login">sign in</a> or <a href="/sign-up">register</a>.
 	</div>
 <?php endif ?>
 
