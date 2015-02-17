@@ -239,7 +239,7 @@ Component.Forms = function($) {
 
     // PUBLIC..................................................................
     var init = function(page, options) {
-        console.log('loaded');
+        // console.log('loaded');
         config.page = page;
         config = App.Utils.extend(options, config);
         config.form = config.page.find('form:not(#mc-embedded-subscribe-form)');
@@ -262,6 +262,8 @@ $(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
                             case 'UserLoginForm':
                                 loginForm();
                                 break;
+                            case 'UserAddForm':
+                                userReg();
                             case 'CommentViewForm':
                                 postComment(response);
                                 break;
@@ -280,6 +282,10 @@ $(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
     };
 
     var loginForm = function(){
+         window.location = '/';
+    }
+
+    var userReg = function(){
          window.location = '/';
     }
 

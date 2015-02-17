@@ -6,7 +6,7 @@
 <!-- Begin MailChimp Signup Form -->
 
 <div class="row">
-  <div class="large-12 columns">
+  <div class="large-11 push-1 columns">
 <div id="mc_embed_signup">
 <form action="http://cmgr.us9.list-manage.com/subscribe/post?u=a79d5f301ae99a362a69ea02b&amp;id=1f26e7205f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
@@ -34,7 +34,7 @@
 </div>
 <?php foreach ($items as $item): ?>
 	<div class="row">
-		<div class="large-12 columns">
+		<div class="large-11 push-1 columns">
     <?php $comments = count(h($item['Comment'])); ?>
     <div class="row listing">
     	<div class="large-1 columns">

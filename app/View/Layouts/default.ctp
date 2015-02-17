@@ -22,7 +22,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
+		<?php echo 'CMGR' ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -113,7 +113,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       </div>
 
       <aside class="right-off-canvas-menu">
-        sdf
+        
         <div class="row">
           <div class="large-12 columns">
 
