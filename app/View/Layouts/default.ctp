@@ -101,7 +101,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
       <div class="large-3 medium-3 push-9 columns">
 <ul class="side-nav">
-<li><a href="#" class="button small right-off-canvas-toggle">Submit a Question or Link</a></li>
+<li>
+  <?php if (AuthComponent::user('id')): ?>
+  <a href="#" class="button small right-off-canvas-toggle">Submit a Question or Link</a>
+<?php else: ?>
+      <a href="#" data-reveal-id="myModal" class="button small">Submit a Question or Link</a>
+    <?php endif; ?>
+</li>
 <li><a href="#">Jobs</a></li>
 <li><a href="#">Discussion</a></li>
 <li><a href="#">CMGR Newsletter</a></li>
@@ -127,18 +133,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         'url' => array(
             'controller'=>'items',
             'action'=>'add'
-        )
+        ), 'class' => 'ajaxform'
     )); ?>
-  <fieldset>
-    <legend><?php echo __('Post an Article'); ?></legend>
+    <h4><?php echo __('Post an Article'); ?></h4>
   <?php
     // echo $this->Form->input('user_id');
     echo $this->Form->input('type', array('default' => 'article', 'type' => 'hidden'));
-    echo $this->Form->input('title');
-    echo $this->Form->input('url');
-    echo $this->Form->input('post_comment');
+    echo $this->Form->input('title', array('label' => false, 'placeholder' => 'Title'));
+    echo $this->Form->input('url', array('label' => false, 'placeholder' => 'Link'));
+    echo $this->Form->input('post_comment', array('label' => false, 'placeholder' => 'Comment'));
   ?>
-  </fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
   </div>
   <div class="content" id="panel2">
@@ -146,18 +150,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         'url' => array(
             'controller'=>'items',
             'action'=>'add'
-        )
+        ), 'class' => 'ajaxform'
     )); ?>
-  <fieldset>
-    <legend><?php echo __('Ask a Question'); ?></legend>
+    <h4><?php echo __('Ask a Question'); ?></h4>
   <?php
     // echo $this->Form->input('user_id');
     echo $this->Form->input('type', array('default' => 'question', 'type' => 'hidden'));
-    echo $this->Form->input('title');
-    echo $this->Form->input('post_comment');
+    echo $this->Form->input('title', array('label' => false, 'placeholder' => 'Question'));
+    echo $this->Form->input('post_comment', array('label' => false, 'placeholder' => 'Comment'));
     // echo $this->Form->input('url');
   ?>
-  </fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
   </div>
 
