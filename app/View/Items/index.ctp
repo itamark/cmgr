@@ -41,7 +41,7 @@
 <div class="upvote pull-left">
     		<span class="glyphicon glyphicon-arrow-up pull-left upvotearrow 
     		<?php foreach ($item['User']['Upvote'] as $upvote){
-    				if($upvote['item_id'] == $item['Item']['id']){
+    				if($upvote['item_id'] == $item['Item']['id'] && $upvote['user_id'] == AuthComponent::user('id')){
     					echo 'upvoted';
     				}
     			} ?>" 
