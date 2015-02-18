@@ -39,17 +39,28 @@
     <div class="row listing">
     	<div class="large-1 columns">
 <div class="upvote pull-left">
-    		<span class="glyphicon glyphicon-arrow-up pull-left upvotearrow 
-    		<?php foreach ($item['User']['Upvote'] as $upvote){
-    				if($upvote['item_id'] == $item['Item']['id']){
-    					echo 'upvoted';
-    				}
-    			} ?>" 
-    			hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span><br>
+  <?php if (AuthComponent::user('id')): ?>
+    <span class="glyphicon glyphicon-arrow-up pull-left upvotearrow 
+        <?php foreach ($item['User']['Upvote'] as $upvote){
+            if($upvote['item_id'] == $item['Item']['id'] && $upvote['user_id'] == AuthComponent::user('id')){
+              echo 'upvoted';
+            }
+          } ?>" 
+          hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
+  <?php else: ?>
+      <span href="#" data-reveal-id="myModal">&#9650;</span>
+
+  <?php endif ?>
+
+    		
+
+
+          <br>
     		<span class="votecount">
      			<?php echo $item['Item']['upvote_count'] ?>
  			</span>
     	</div>
+
     	</div>
     	<div class="large-10 columns">
 <div class="clearfix">
@@ -76,4 +87,7 @@
      </div>
      <?php endforeach; ?>
 
-
+<div id="myModal" class="reveal-modal" data-reveal>
+  <h2>You must be logged in</h2>
+  <?php echo $this->element('form_login') ?>
+</div>

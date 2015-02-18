@@ -1,9 +1,11 @@
 html,
-body,
 .off-canvas-wrap,
 .inner-wrap {
   height: auto;
   width: 100%;
+}
+body {
+  height: 100%;
 }
 .listing.row {
   margin-bottom: 2em;
@@ -37,4 +39,10 @@ body,
   padding: 1rem 2rem;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 1rem;
+}
+.right-off-canvas-menu .tab-title {
+  width: 50%;
+}
+.right-off-canvas-menu h4 {
+  color: white;
 }
