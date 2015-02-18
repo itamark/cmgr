@@ -1,9 +1,11 @@
 html,
-body,
 .off-canvas-wrap,
 .inner-wrap {
   height: auto;
   width: 100%;
+}
+body {
+  height: 100%;
 }
 .listing.row {
   margin-bottom: 2em;
