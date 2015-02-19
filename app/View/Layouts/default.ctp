@@ -80,7 +80,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
  -->        </ul>
       </li>
       <?php else: ?>
-        <li><a href="/users/login">Login</a></li>
+        <li><a href="#" data-reveal-id="myModal">Login</a></li>
       <?php endif; ?>
     </ul>
 
@@ -108,11 +108,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       <a href="#" data-reveal-id="myModal" class="button small">Submit a Question or Link</a>
     <?php endif; ?>
 </li>
-<li><a href="#">Jobs</a></li>
+<!-- <li><a href="#">Jobs</a></li>
 <li><a href="#">Discussion</a></li>
 <li><a href="#">CMGR Newsletter</a></li>
 <li><a href="#">Section 5</a></li>
-<li><a href="#">Section 6</a></li>
+<li><a href="#">Section 6</a></li> -->
 </ul>
 
 

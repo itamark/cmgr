@@ -1,7 +1,7 @@
 
-<!-- <pre>
+ <pre>
 <?php print_r($items); ?>
-</pre>  -->
+</pre>  
 
 <!-- Begin MailChimp Signup Form -->
 

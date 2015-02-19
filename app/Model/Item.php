@@ -16,6 +16,9 @@ class Item extends AppModel {
   	if($this->data['Item']['type'] == 'article' && mb_substr($this->data['Item']['url'], 0, 4) !== 'http') $this->data['Item']['url'] = 'http://' . $this->data['Item']['url'];
   }
 
+
+  
+
 /**
  * Validation rules
  *
