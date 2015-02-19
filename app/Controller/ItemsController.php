@@ -19,7 +19,7 @@ public $uses = array('Item', 'Upvote');
 public $paginate = array(
         'limit' => 25,
         'order' => array(
-            'Item.created' => 'desc'
+            'Item.user_id' => 'desc'
         )
     );
 /**
@@ -39,7 +39,9 @@ public $paginate = array(
 	public function index() {
 		$newitems = [];
 		$this->Item->recursive = 2;
+
 		$items = $this->Item->find('all');
+
 		foreach($items as $key=>$item){
 			$upvotes = $this->Upvote->find('count', array('conditions' => array('Upvote.item_id' => $item['Item']['id'])));
 			$item['Item']['upvote_count'] = $upvotes;
