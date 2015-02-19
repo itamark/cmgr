@@ -215,11 +215,12 @@ class UsersController extends AppController {
 
 			$email = new CakeEmail();
 			$email->template('remember_password', 'default')
-					->config('gmail')
+					->config('default')
 					->emailFormat('html')
 					->subject(__('Remember password - ' . Configure::read('Application.name')))
 					->to($user['User']['email'])
-					->from(Configure::read('Application.from_email'))
+					// ->from(Configure::read('Application.from_email'))
+					->from('itamar@cmgr.org')
 					->viewVars(array('hash' => $hash))
 					->send();
 

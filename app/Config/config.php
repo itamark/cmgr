@@ -18,8 +18,8 @@ $config = array(
 	),
 	
 	'Email' => array(
-		'from_email' => array('Joe' => 'example@example.com'),
-		'contact_mail' => array('Joe' => 'example@example.com')
+		'from_email' => array('Itamar' => 'itamar@cmgr.org'),
+		'contact_mail' => array('Itamar' => 'itamar@cmgr.org')
 	)
 );
 

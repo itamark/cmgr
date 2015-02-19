@@ -19,7 +19,7 @@ public $uses = array('Item', 'Upvote');
 public $paginate = array(
         'limit' => 25,
         'order' => array(
-            'Item.created' => 'desc'
+            'Item.user_id' => 'desc'
         )
     );
 /**
@@ -39,14 +39,36 @@ public $paginate = array(
 	public function index() {
 		$newitems = [];
 		$this->Item->recursive = 2;
+
 		$items = $this->Item->find('all');
+
 		foreach($items as $key=>$item){
-			$upvotes = $this->Upvote->find('count', array('conditions' => array('Upvote.item_id' => $item['Item']['id'])));
-			$item['Item']['upvote_count'] = $upvotes;
+			// $upvotes = $this->Upvote->find('count', array('conditions' => array('Upvote.item_id' => $item['Item']['id'])));
+			// $upvotes = $item['Item']['upvote_count'];
+			// $item['Item']['upvote_count'] = $upvotes;
+			$item['Item']['score'] = $this->hot($upvotes, strtotime($item['Item']['created']));
 			array_push($newitems, $item);
 		}
-		$this->set('items', $newitems);
+		$sorteditems = Set::sort($newitems, '{n}.Item.score', 'asc');
+		$this->set('items', $this->paginate());
 		
+	}
+
+	public function hot($upvotes, $date){
+	$s = $upvotes;
+    $order = log10(max(abs($s), 1));
+
+    if ($s > 0) {
+        $sign = 1;
+    } else if ($s < 0) {
+        $sign = -1;
+    } else {
+        $sign = 0;
+    }
+
+    $seconds = $date - 1134028003;
+
+    return round($sign * $order + $seconds / 45000, 7);
 	}
 
 /**
@@ -84,9 +106,11 @@ public $paginate = array(
  */
 	public function add() {
 		if ($this->request->is('post')) {
+
 			$this->Item->create();
 			if ($this->Item->save($this->request->data)) {
 				$this->request->data['new_id'] = $this->Item->id;
+				$this->Upvote->vote();
 				header('Content-type: application/json');
 				die(json_encode($this->request->data));
 			} else {

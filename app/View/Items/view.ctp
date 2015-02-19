@@ -17,7 +17,7 @@
 <div class="items form col-lg-10 col-lg-offset-1">
 
 <?php if (AuthComponent::user('id')): ?>
-	<?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'))); ?>
+	<?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'), 'class' => 'ajaxform')); ?>
 	<?php
 		echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
 		echo $this->Form->input('user_id', array('default' => h($item['User']['id']), 'type' => 'hidden'));
@@ -36,7 +36,7 @@
 	<?php foreach ($comments as $comment): ?>
 	<div class="row">
 		<div class="large-1 columns">
-<img class="media-object" src="https://secure.gravatar.com/avatar/<?php echo md5(h($comment['User']['email'])); ?>?s=25&d=mm">
+<img class="media-object img-circle" src="https://secure.gravatar.com/avatar/<?php echo md5(h($comment['User']['email'])); ?>?s=25&d=mm">
 		</div>
 		<div class="large-11 columns">
 <p><?php echo $comment['Comment']['comment_txt']; ?></p>
