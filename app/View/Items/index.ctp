@@ -1,7 +1,7 @@
-
+<!-- 
  <pre>
 <?php print_r($items); ?>
-</pre>  
+</pre>  --> 
 
 <!-- Begin MailChimp Signup Form -->
 
@@ -64,6 +64,7 @@
     	</div>
     	<div class="large-10 columns">
 <div class="clearfix">
+  <?php echo $item['Item']['score']; ?>
 	<?php if($item['Item']['type'] == 'article'): ?>
  	<a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?>
  	<small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>
@@ -73,7 +74,9 @@
 </div>
 
 
-<small><a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?>
+<small><a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?> 
+  <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?>
+   <?php echo strtotime($item['Item']['created']); ?>
  	</a></small>
 
     	</div>
