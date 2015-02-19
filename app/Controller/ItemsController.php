@@ -7,6 +7,7 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class ItemsController extends AppController {
+public $uses = array('Item', 'Upvote');
 
 public function beforeFilter() {
 		parent::beforeFilter();
@@ -14,12 +15,13 @@ public function beforeFilter() {
 	}
 
 
-public $uses = array('Item', 'Upvote');
+
+
 
 public $paginate = array(
         'limit' => 25,
         'order' => array(
-            'Item.user_id' => 'desc'
+            'Item.score' => 'desc'
         )
     );
 /**
@@ -37,22 +39,14 @@ public $paginate = array(
  * @return void
  */
 	public function index() {
-		$newitems = [];
+
 		$this->Item->recursive = 2;
 
 		$items = $this->Item->find('all');
-
-		foreach($items as $key=>$item){
-			// $upvotes = $this->Upvote->find('count', array('conditions' => array('Upvote.item_id' => $item['Item']['id'])));
-			// $upvotes = $item['Item']['upvote_count'];
-			// $item['Item']['upvote_count'] = $upvotes;
-			$item['Item']['score'] = $this->hot($upvotes, strtotime($item['Item']['created']));
-			array_push($newitems, $item);
-		}
-		$sorteditems = Set::sort($newitems, '{n}.Item.score', 'asc');
-		$this->set('items', $this->paginate());
-		
+$sorted = Set::sort($items, '{n}.Item.score', 'desc');
+		$this->set('items', $sorted);
 	}
+
 
 	public function hot($upvotes, $date){
 	$s = $upvotes;
@@ -108,9 +102,15 @@ public $paginate = array(
 		if ($this->request->is('post')) {
 
 			$this->Item->create();
+			$this->Item->set(array(
+  				  'score' => $this->hot(1, date("Y-m-d H:i:s"))
+				));
 			if ($this->Item->save($this->request->data)) {
+				$this->request->data['Upvote']['user_id'] = AuthComponent::user('id');
+				$this->request->data['Upvote']['item_id'] = $this->Item->id;
+				// $this->updateScore($this->Item->id);
+				$this->Item->Upvote->saveAll($this->request->data);
 				$this->request->data['new_id'] = $this->Item->id;
-				$this->Upvote->vote();
 				header('Content-type: application/json');
 				die(json_encode($this->request->data));
 			} else {
@@ -121,6 +121,16 @@ public $paginate = array(
 		$this->set(compact('users'));
 		$this->layout = false;
 	}
+
+	public function updateScore($id){
+				$this->Item->read(null, $this->Item->id);
+				$this->Item->set(array(
+  				  'score' => 1
+				));
+				$this->Item->save();
+	}
+
+
 
 /**
  * edit method
