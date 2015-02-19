@@ -18,6 +18,15 @@ class Item extends AppModel {
   	if($this->data['Item']['type'] == 'article' && mb_substr($this->data['Item']['url'], 0, 4) !== 'http') $this->data['Item']['url'] = 'http://' . $this->data['Item']['url'];
   }
 
+  public function afterFind($results, $primary = false){
+	parent::afterFind($results, $primary);
+	foreach ($results as $key => $val) {
+        $results[$key]['Item']['upvote_count'] = $this->Upvote->find('count', array('conditions' => array('Upvote.item_id' => $val['Item']['id'])));
+		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvote_count'], strtotime($val['Item']['created']));		
+    }
+    return $results;
+}
+
 //   public $virtualFields = array(
 //     'score' => 'CONCAT(User.first_name, " ", User.last_name)'
 // );
@@ -41,7 +50,7 @@ class Item extends AppModel {
   }
 
 
-  
+
 
 /**
  * Validation rules

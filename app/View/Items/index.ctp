@@ -1,7 +1,7 @@
 <!-- 
  <pre>
 <?php print_r($items); ?>
-</pre>  --> 
+</pre>  -->
 
 <!-- Begin MailChimp Signup Form -->
 
@@ -46,6 +46,7 @@
               echo 'upvoted';
             }
           } ?>" 
+
           hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
   <?php else: ?>
       <span href="#" data-reveal-id="myModal">&#9650;</span>
@@ -76,7 +77,6 @@
 
 <small><a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?> 
   <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?>
-   <?php echo strtotime($item['Item']['created']); ?>
  	</a></small>
 
     	</div>

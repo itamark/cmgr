@@ -304,7 +304,7 @@ $(document).on('submit', 'form.ajaxform', function(e){
 
     var postItem = function(response){
                 // $('textarea').val('');
-                console.log(response.new_id);
+                console.log(response);
         // $('.itemscontainer').load('/comments/newitems/'+response[0].Comment.item_id);
                 // $('.contentcontainer').load('/items/index'); 
                 // $('.items.form').empty().prepend('<div class="alert alert-success" role="alert">Thanks for submitting!</div>');
