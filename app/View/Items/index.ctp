@@ -1,16 +1,17 @@
-<!-- 
- <pre>
+
+<!--  <pre>
 <?php print_r($items); ?>
-</pre>  -->
+</pre>  --> 
 
 <!-- Begin MailChimp Signup Form -->
-
+ 
 <div class="row">
   <div class="large-11 push-1 columns">
-<div id="mc_embed_signup">
+    
+<div id="mc_embed_signup" class="row listing alert-box info radius" data-alert>
 <form action="http://cmgr.us9.list-manage.com/subscribe/post?u=a79d5f301ae99a362a69ea02b&amp;id=1f26e7205f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-	<h4>Sign up for our newsletter!</h4>
+	<h5>Sign up for our newsletter!</h5>
 <div class="mc-field-group" style="float:left;">
 	
 <div class="row collapse">
@@ -29,10 +30,24 @@
     <div style="position: absolute; left: -5000px;"><input type="text" name="b_a79d5f301ae99a362a69ea02b_1f26e7205f" tabindex="-1" value=""></div>
     
 </form>
+<a href="#" class="close">&times;</a>
 </div>
   </div>
 </div>
+<div class="row">
+  <div class="large-11 push-1 columns">
+    <dl class="sub-nav">
+  <dt>Filter:</dt>
+  <dd class="active"><a href="/">Hot</a></dd>
+  <dd><a href="#">Active</a></dd>
+  <dd><a href="#">Pending</a></dd>
+  <dd class-"hide-for-small-only"><a href="#">Suspended</a></dd>
+</dl>
+ </div>
+</div> 
+<?php //echo $this->Paginator->sort('created', 'Recent'); ?>
 <?php foreach ($items as $item): ?>
+  <?php echo $item['Item']['score']; ?>
 	<div class="row">
 		<div class="large-11 push-1 columns">
     <?php $comments = count(h($item['Comment'])); ?>
@@ -65,7 +80,7 @@
     	</div>
     	<div class="large-10 columns">
 <div class="clearfix">
-  <?php echo $item['Item']['score']; ?>
+
 	<?php if($item['Item']['type'] == 'article'): ?>
  	<a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?>
  	<small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>
@@ -89,7 +104,7 @@
     </div>
      </div>
      <?php endforeach; ?>
-
+<?php echo $this->Paginator->numbers(); ?>
 <div id="myModal" class="reveal-modal" data-reveal>
   <h2>You must be logged in</h2>
   <?php echo $this->element('form_login') ?>
