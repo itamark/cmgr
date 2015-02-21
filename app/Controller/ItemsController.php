@@ -34,17 +34,15 @@ public $paginate = array(
 
 
 /**
- * index method
+ * index metfhknmnmmn/;//mnhod
  *
  * @return void
  */
 	public function index() {
-
 		$this->Item->recursive = 2;
-
-		$items = $this->Item->find('all');
-$sorted = Set::sort($items, '{n}.Item.score', 'desc');
-		$this->set('items', $sorted);
+		// $paginated = $this->paginate('Item');
+		// die(print_r($paginated));
+		$this->set('items', $this->paginate('Item'));
 	}
 
 

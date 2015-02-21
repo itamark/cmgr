@@ -51,8 +51,8 @@ class AppController extends Controller
 
     $this->Auth->authenticate = array('Form');
 
-    $this->Auth->loginRedirect = array('controller'=>'pages','action'=>'index');
-    $this->Auth->logoutRedirect = array('action' => 'login', 'controller' => 'users');
+    $this->Auth->loginRedirect = '/';
+    $this->Auth->logoutRedirect = '/';
     $this->Auth->authError = 'You are not allowed to see that.';
 
     # Login with Cookie
