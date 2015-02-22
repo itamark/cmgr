@@ -38,11 +38,11 @@ public $paginate = array(
  *
  * @return void
  */
-	public function index() {
+		public function index() {
 		$this->Item->recursive = 2;
-		// $paginated = $this->paginate('Item');
-		// die(print_r($paginated));
-		$this->set('items', $this->paginate('Item'));
+		$items = $this->Item->find('all');
+$sorted = Set::sort($items, '{n}.Item.score', 'desc');
+		$this->set('items', $sorted);
 	}
 
 
