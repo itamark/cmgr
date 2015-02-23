@@ -1,0 +1,121 @@
+<?php
+/**
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       app.View.Layouts
+ * @since         CakePHP(tm) v 0.10.0.1076
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+$cakeDescription = __d('cake_dev', 'New Project');
+$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
+?>
+<!DOCTYPE html>
+<html class="<?php if($this->params['controller'] == 'users' && $this->params['action'] == 'login'){ echo 'login-page'; } ?>">
+<head>
+	<?php echo $this->Html->charset(); ?>
+	<title>
+		<?php echo 'CMGR' ?>:
+		<?php echo $this->fetch('title'); ?>
+	</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<?php
+		echo $this->Html->meta('icon');
+
+		echo $this->Html->css('foundation');
+    echo $this->Html->css('normalize');
+        echo $this->Html->css('main');
+
+        // echo $this->Html->css('main');
+
+		echo $this->Html->script('jquery.min');
+		echo $this->Html->script('foundation.min');
+        echo $this->Html->script('modernizr');
+        echo $this->Html->script('placeholder');
+                echo $this->Html->script('fastclick');
+
+
+    echo $this->Html->script('scripts');
+
+		echo $this->fetch('meta');
+		echo $this->fetch('css');
+		echo $this->fetch('script');
+	?>
+</head>
+<body>
+
+
+
+
+  <div class="contain-to-grid sticky">
+<nav class="top-bar" data-topbar role="navigation"  data-options="sticky_on: large">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">CMGR</a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+<!--       <li class="active"><a href="#">Right Button Active</a></li>
+ -->     
+<?php if (AuthComponent::user('id')): ?>
+  <li class="has-dropdown">
+        <a href="#">User</a>
+        <ul class="dropdown">
+          <li><a href="/logout">Logout</a></li>
+<!--           <li class="active"><a href="#">Active link in dropdown</a></li>
+ -->        </ul>
+      </li>
+      <?php else: ?>
+        <li><a href="#" data-reveal-id="myModal">Login</a></li>
+      <?php endif; ?>
+    </ul>
+
+    <!-- Left Nav Section -->
+<!--     <ul class="left">
+      <li><a href="#">Left Nav Button</a></li>
+    </ul> -->
+  </section>
+</nav>
+</div>
+
+<!--     <div class="overlaybackground"><div id="commentcontainer"></div></div>
+    <div id="slideout">
+    </div> -->
+	<div id="container">
+
+		<div id="content">
+
+			<div class="container large-12 medium-9 small-12 push-1 columns">
+
+			<?php echo $this->Session->flash(); ?>
+
+			<?php echo $this->fetch('content'); ?>
+		</div>
+
+		<div id="footer">
+			
+		</div>
+
+	</div>
+	<?php echo $this->element('sql_dump'); ?>
+  <script>
+  $(document).foundation();
+  $(document).foundation('reflow', 'off-canvas');
+</script>
+
+
+</body>
+</html>
