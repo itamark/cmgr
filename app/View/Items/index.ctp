@@ -73,7 +73,7 @@
 
           <br>
     		<span class="votecount">
-     			<?php echo $item['Item']['upvote_count'] ?>
+     			<?php echo $item['Item']['upvotes'] ?>
  			</span>
     	</div>
 
