@@ -47,8 +47,8 @@
 </div> 
 <?php //echo $this->Paginator->sort('created', 'Recent'); ?>
 <?php foreach ($items as $item): ?>
-  <?php echo $item['Item']['score']; ?>
-	<div class="row">
+<!--   <?php echo $item['Item']['score']; ?>
+ -->	<div class="row">
 		<div class="large-11 push-1 columns">
     <?php $comments = count(h($item['Comment'])); ?>
     <div class="row listing">
