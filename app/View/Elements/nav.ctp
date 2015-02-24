@@ -18,8 +18,8 @@
 	<li class="has-dropdown">
         <a href="#">Admin</a>
         <ul class="dropdown">
-          <li><a href="/itemsadmin/index">Posts</a></li>
-          <li><a href="/usersadmin/index">Users</a></li>
+          <li><a href="/itemsAdmin/index">Posts</a></li>
+          <li><a href="/usersAdmin/index">Users</a></li>
 
 <!--           <li class="active"><a href="#">Active link in dropdown</a></li>
  -->        </ul>
