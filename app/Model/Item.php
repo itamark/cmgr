@@ -21,9 +21,14 @@ class Item extends AppModel {
   public function afterFind($results, $primary = false){
 	parent::afterFind($results, $primary);
 	foreach ($results as $key => $val) {
-        $results[$key]['Item']['upvote_count'] = $this->Upvote->find('count', array('conditions' => array('Upvote.item_id' => $val['Item']['id'])));
-		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvote_count'], strtotime($val['Item']['created']));		
+        $results[$key]['Item']['upvotes'] = $this->Upvote->find('count', array(
+        'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'])
+    ));
+		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvotes'], strtotime($val['Item']['created']));		
     }
+    // echo '<pre>';
+    // print_r($results);
+    // echo '</pre>';
     return $results;
 }
 
