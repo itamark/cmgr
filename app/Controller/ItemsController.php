@@ -29,7 +29,7 @@ public $paginate = array(
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator'); 
 
 
 
