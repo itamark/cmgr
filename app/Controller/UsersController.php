@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2');
+		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view');
 	}
 
 	public function index() {
@@ -55,10 +55,10 @@ class UsersController extends AppController {
 
 
 	public function view($username = null) {
-		if (AuthComponent::user('role') != 'admin') {
-			throw new ForbiddenException("You're now allowed to do this.");
-		}
-
+		// if (AuthComponent::user('role') != 'admin') {
+		// 	throw new ForbiddenException("You're now allowed to do this.");
+		// }
+$this->User->recursive = 2;
 		$user = $this->User->findByUsername($username);
 		$user = Hash::extract($user,'User');
 		$this->User->id = $user['id'];
@@ -66,7 +66,22 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		$this->set('user', $user);
+				$itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
+            'Item.created' => 'desc'
+        ));
+				$commentoptions = array('order' => array(
+            'Comment.created' => 'desc'
+        ));
+
+				$upvoteoptions = array('conditions' => array('Upvote.user_id' => $user['id']), 'order' => array(
+            'Upvote.id' => 'desc'
+        ));
+
+				$this->set('user', $this->User->find('first', $options));
+				$this->set('items', $this->User->Item->find('all', $itemoptions));
+				$this->set('comments', $this->User->Comment->find('all', $commentoptions));
+				$this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));
+
 	}
 
 

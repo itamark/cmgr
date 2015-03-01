@@ -90,8 +90,10 @@
 </div>
 
 
-<small><a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?> 
-  <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?>
+<small>Submitted <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?> by 
+<?php echo $this->Html->link($item['User']['username'], array('controller' => 'users', 'action' => 'view', $item['User']['username'])); ?>
+  <?php echo h($item['User']['username']); ?> | <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?> 
+
  	</a></small>
 
     	</div>
