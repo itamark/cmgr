@@ -18,12 +18,12 @@ public function beforeFilter() {
 
 
 
-public $paginate = array(
-        'limit' => 25,
-        'order' => array(
-            'Item.score' => 'asc'
-        )
-    );
+// public $paginate = array(
+//     // 'Item' => array(
+//     //     'limit' => 20,
+//     //     'order' => array('score' => 'desc')
+//     // )
+// );
 /**
  * Components
  *
@@ -40,11 +40,18 @@ public $paginate = array(
  */
 		public function index() {
  		$this->Item->recursive = 2;
-		$this->set('items', $this->paginate());
+$this->paginate = array(
+    'limit' => 10,
+    'order' => array( // sets a default order to sort by
+      'Item.score' => 'desc'
+    )
+  );
+  $items = $this->paginate('Item');
+  $this->set(compact('items'));
 	}
 
 	public function recent() {
-		$this->Item->recursive = 2;
+		$this->Item->recursive = 2;	
 		$items = $this->Item->find('all');
 $sorted = Set::sort($items, '{n}.Item.created', 'desc');
 		$this->set('items', $sorted);

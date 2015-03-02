@@ -42,8 +42,9 @@
   <dd><a href="#">Active</a></dd>
   <dd><a href="#">Pending</a></dd>
   <dd class-"hide-for-small-only"><a href="#">Suspended</a></dd>
-  <?php echo $this->Paginator->sort('id', 'ID'); ?>
-</dl>
+<?php echo $this->Paginator->sort('upvotes', 'Top', array('class' => 'button')); ?>
+  <?php echo $this->Paginator->sort('score', 'Hot', array('class' => 'button')); ?>
+  <?php echo $this->Paginator->sort('created', 'Recent', array('class' => 'button')); ?></dl>
  </div>
 </div> 
 <?php //echo $this->Paginator->sort('created', 'Recent'); ?>
