@@ -58,8 +58,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
   <div class="contain-to-grid sticky">
       <?php echo $this->element('nav'); ?>
-
-
+</div>
+  <div class="contain-to-grid">
+      <?php echo $this->element('subnav'); ?>
 </div>
 
 <!--     <div class="overlaybackground"><div id="commentcontainer"></div></div>

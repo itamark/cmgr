@@ -42,6 +42,7 @@
 
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/', array('controller' => 'items', 'action' => 'index'));
+	Router::connect('/recent', array('controller' => 'items', 'action' => 'recent'));
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
