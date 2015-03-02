@@ -42,7 +42,6 @@
   <dd><a href="#">Active</a></dd>
   <dd><a href="#">Pending</a></dd>
   <dd class-"hide-for-small-only"><a href="#">Suspended</a></dd>
-  <?php echo $this->Paginator->sort('id', 'ID'); ?>
 </dl>
  </div>
 </div> 
@@ -81,7 +80,7 @@
     	</div>
     	<div class="large-10 columns">
 <div class="clearfix">
-<?php echo h($item['Item']['score']); ?>
+
 	<?php if($item['Item']['type'] == 'article'): ?>
  	<a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?>
  	<small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>

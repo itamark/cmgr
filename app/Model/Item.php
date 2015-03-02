@@ -26,9 +26,8 @@ class Item extends AppModel {
     ));
 		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvotes'], strtotime($val['Item']['created']));		
     }
-    // echo '<pre>';
-    // print_r($results);
-    // echo '</pre>';
+    
+    $results = Set::sort($results, '{n}.Item.score', 'desc');
     return $results;
 }
 
