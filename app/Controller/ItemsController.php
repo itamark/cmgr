@@ -41,9 +41,12 @@ public function beforeFilter() {
 		public function index() {
  		$this->Item->recursive = 2;
 $this->paginate = array(
+	'conditions' => array(
+         'Item.removed' => false
+    ),
     'limit' => 10,
     'order' => array( // sets a default order to sort by
-      'Item.score' => 'desc'
+      'Item.score' => 'desc'	
     )
   );
   $items = $this->paginate('Item');
@@ -145,6 +148,30 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
   				  'score' => 1
 				));
 				$this->Item->save();
+	}
+
+	public function flag($item_id = null){
+		$this->Item->read(null, $item_id);
+		$this->Item->set(array(
+			'flagged' => true
+			));
+		$this->Item->save();
+	}
+
+	public function unflag($item_id = null){
+		$this->Item->read(null, $item_id);
+		$this->Item->set(array(
+			'flagged' => false
+			));
+		$this->Item->save();
+	}
+
+	public function remove($item_id = null){
+		$this->Item->read(null, $item_id);
+		$this->Item->set(array(
+			'removed' => true
+			));
+		$this->Item->save();
 	}
 
 
