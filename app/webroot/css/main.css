@@ -66,3 +66,7 @@ h1 {
   font-weight: normal;
   font-style: normal;
 }
+
+.label.alerty {
+    background-color: #c60f13;
+    color: #FFFFFF; }
