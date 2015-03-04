@@ -77,7 +77,7 @@ $this->User->recursive = 2;
             'Upvote.id' => 'desc'
         ));
 
-				$this->set('user', $this->User->find('first', $options));
+				$this->set('user', $this->User->findByUsername($user['username']));
 				$this->set('items', $this->User->Item->find('all', $itemoptions));
 				$this->set('comments', $this->User->Comment->find('all', $commentoptions));
 				$this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));

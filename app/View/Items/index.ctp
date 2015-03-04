@@ -36,15 +36,10 @@
 </div>
 <div class="row">
   <div class="large-11 push-1 columns">
-    <dl class="sub-nav">
-  <dt>Filter:</dt>
-  <dd class="active"><a href="/">Hot</a></dd>
-  <dd><a href="#">Active</a></dd>
-  <dd><a href="#">Pending</a></dd>
-  <dd class-"hide-for-small-only"><a href="#">Suspended</a></dd>
-<?php echo $this->Paginator->sort('upvotes', 'Top', array('class' => 'button')); ?>
-  <?php echo $this->Paginator->sort('score', 'Hot', array('class' => 'button')); ?>
-  <?php echo $this->Paginator->sort('created', 'Recent', array('class' => 'button')); ?></dl>
+ 
+<?php echo $this->Paginator->sort('upvotes', 'Top', array('class' => 'button small')); ?>
+  <?php echo $this->Paginator->sort('score', 'Hot', array('class' => 'button small')); ?>
+  <?php echo $this->Paginator->sort('created', 'Recent', array('class' => 'button small')); ?>
  </div>
 </div> 
 <?php //echo $this->Paginator->sort('created', 'Recent'); ?>
@@ -82,7 +77,6 @@
     	</div>
     	<div class="large-10 columns">
 <div class="clearfix">
-<?php echo h($item['Item']['score']); ?>
 	<?php if($item['Item']['type'] == 'article'): ?>
  	<a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?>
  	<small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>
@@ -109,7 +103,4 @@
      </div>
      <?php endforeach; ?>
 <?php echo $this->Paginator->numbers(); ?>
-<div id="myModal" class="reveal-modal" data-reveal>
-  <h2>You must be logged in</h2>
-  <?php echo $this->element('form_login') ?>
-</div>
+

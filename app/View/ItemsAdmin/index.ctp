@@ -26,6 +26,7 @@
       <td><?php echo $item['Item']['title']; ?></td>
       <td><?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?></td>
       <td>
+        <?php echo $item['Item']['live']; ?>
         <?php echo $item['Item']['live'] ? '<span class="label success">Live</span>' : ''; ?>
         <?php echo $item['Item']['flagged'] ? '<span class="label alert">Flagged</span>' : ''; ?>
         <?php echo $item['Item']['resolved'] ? '<span class="label default">Resolved</span>' : ''; ?>
