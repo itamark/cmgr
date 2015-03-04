@@ -169,7 +169,8 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 	public function remove($item_id = null){
 		$this->Item->read(null, $item_id);
 		$this->Item->set(array(
-			'removed' => true
+			'removed' => true,
+			'live' => false
 			));
 		$this->Item->save();
 	}
