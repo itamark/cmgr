@@ -2,7 +2,9 @@
 <!--  <pre>
 <?php print_r($items); ?>
 </pre>  --> 
-
+<pre>
+  <?php print_r(AuthComponent::user('username')); ?>
+</pre>
 <!-- Begin MailChimp Signup Form -->
  
 <div class="row">
