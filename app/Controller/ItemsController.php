@@ -11,19 +11,19 @@ public $uses = array('Item', 'Upvote');
 
 public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'view');
+		$this->Auth->allow('index', 'view', 'recent');
 	}
 
 
 
 
 
-public $paginate = array(
-        'limit' => 25,
-        'order' => array(
-            'Item.score' => 'desc'
-        )
-    );
+// public $paginate = array(
+//     // 'Item' => array(
+//     //     'limit' => 20,
+//     //     'order' => array('score' => 'desc')
+//     // )
+// );
 /**
  * Components
  *
@@ -39,9 +39,32 @@ public $paginate = array(
  * @return void
  */
 		public function index() {
+ 		$this->Item->recursive = 2;
+$this->paginate = array(
+	'conditions' => array(
+         'Item.removed' => false
+    ),
+    'limit' => 10,
+    'order' => array( // sets a default order to sort by
+      'Item.score' => 'desc'	
+    )
+  );
+  $items = $this->paginate('Item');
+  $this->set(compact('items'));
+  $this->set('datacontroller', 'itemsIndex');
+	}
+
+	public function recent() {
+		$this->Item->recursive = 2;	
+		$items = $this->Item->find('all');
+$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$this->set('items', $sorted);
+	}
+
+	public function top() {
 		$this->Item->recursive = 2;
 		$items = $this->Item->find('all');
-$sorted = Set::sort($items, '{n}.Item.score', 'desc');
+$sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		$this->set('items', $sorted);
 	}
 
@@ -126,6 +149,33 @@ $sorted = Set::sort($items, '{n}.Item.score', 'desc');
   				  'score' => 1
 				));
 				$this->Item->save();
+	}
+
+	public function flag($item_id = null){
+		$this->Item->read(null, $item_id);
+		$this->Item->set(array(
+			'flagged' => true
+			));
+		if($this->Item->save()){
+			die('Flagged');
+		};
+	}
+
+	public function unflag($item_id = null){
+		$this->Item->read(null, $item_id);
+		$this->Item->set(array(
+			'flagged' => false
+			));
+		$this->Item->save();
+	}
+
+	public function remove($item_id = null){
+		$this->Item->read(null, $item_id);
+		$this->Item->set(array(
+			'removed' => true,
+			'live' => false
+			));
+		$this->Item->save();
 	}
 
 

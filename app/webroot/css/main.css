@@ -11,6 +11,20 @@ body {
 h1 {
   font-family: "questaregular";
 }
+#linkedinbutton {
+  display: block;
+  width: 275px;
+  height: 50px;
+  background-image: url('/img/Sign-In-Large---Default.png');
+  background-repeat: none;
+  background-size: cover;
+}
+#linkedinbutton:hover {
+  background-image: url('/img/Sign-In-Large---Hover.png');
+}
+#linkedinbutton:active {
+  background-image: url('/img/Sign-In-Large---Active.png');
+}
 .img-circle {
   border-radius: 50%;
 }
@@ -57,6 +71,10 @@ h1 {
   width: 50%;
 }
 .right-off-canvas-menu h4 {
+  color: white;
+}
+.label.red {
+  background-color: #c60f13;
   color: white;
 }
 @font-face {

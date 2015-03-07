@@ -20,6 +20,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <!DOCTYPE html>
 <html class="<?php if($this->params['controller'] == 'users' && $this->params['action'] == 'login'){ echo 'login-page'; } ?>">
 <head>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css">
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo 'CMGR' ?>:
@@ -50,7 +51,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('script');
 	?>
 </head>
-<body>
+<body data-controller="<?php echo @$datacontroller; ?>">
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
 
@@ -58,8 +59,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
   <div class="contain-to-grid sticky">
       <?php echo $this->element('nav'); ?>
-
-
+</div>
+  <div class="contain-to-grid">
+      <?php echo $this->element('subnav'); ?>
 </div>
 
 <!--     <div class="overlaybackground"><div id="commentcontainer"></div></div>
@@ -85,7 +87,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <li><a href="#">Section 6</a></li> -->
 </ul>
 
-
+</div>
+  </div>
+  <div id="myModal" class="reveal-modal" data-reveal>
+  <h2>You must be logged in</h2>
+  <?php echo $this->element('form_login') ?>
+</div>
       </div>
 
       <aside class="right-off-canvas-menu">
@@ -153,7 +160,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div id="footer">
 			
 		</div>
-
+  </div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
   <script>
@@ -161,7 +168,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   $(document).foundation('reflow', 'off-canvas');
 </script>
 
-</div>
-  </div>
+
 </body>
 </html>
