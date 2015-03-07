@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view');
+		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view', 'opauth_complete');
 	}
 
 	public function index() {
@@ -11,6 +11,52 @@ class UsersController extends AppController {
 		}
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
+	}
+
+	public function opauth_complete(){
+		$conditions = array(
+    'User.email' => $this->data['auth']['info']['email']
+);
+// if the user exists by email
+if ($this->User->hasAny($conditions)){
+	//log them in
+	$user = $this->User->find('first', array('User.email' => $this->data['auth']['info']['email']));
+	$id = $user['User']['id'];
+        $this->request->data['User'] = array_merge(
+            $user['User'],
+            array('id' => $id)
+        );
+        unset($this->request->data['User']['password']);
+        $this->Auth->login($this->request->data['User']);
+        return $this->redirect('/');
+    
+}
+// if the user does not exist
+else {
+	// create them
+	if ($this->request->is('post')) {
+		$this->request->data['User']['email'] = $this->data['auth']['info']['email'];
+		$this->request->data['User']['username'] = $this->data['auth']['info']['email'];
+
+		$this->User->create();
+
+		if ($this->User->save($this->request->data)) {
+		$id = $this->User->id;
+        $this->request->data['User'] = array_merge(
+            $this->request->data['User'],
+            array('id' => $id)
+        );
+        unset($this->request->data['User']['password']);
+        $this->Auth->login($this->request->data['User']);
+        return $this->redirect('/');
+			} else {
+				# Create a loop with validation errors
+				$this->Error->set($this->User->invalidFields());
+			}
+		}
+}
+
+		die(print_r($this->data));
 	}
 
 	public function login() {
