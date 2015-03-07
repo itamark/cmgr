@@ -8,6 +8,9 @@ body {
   height: 100%;
   background: #eee;
 }
+h1 {
+  font-family: "questaregular";
+}
 .img-circle {
   border-radius: 50%;
 }
@@ -16,6 +19,9 @@ body {
   padding: 10px;
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.listing.row#mc_embed_signup {
+  margin-top: 1em;
 }
 .listing.row .upvotearrow:hover {
   cursor: pointer;
@@ -44,9 +50,19 @@ body {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 1rem;
 }
+.top-bar .name h1 {
+  font-size: 2em;
+}
 .right-off-canvas-menu .tab-title {
   width: 50%;
 }
 .right-off-canvas-menu h4 {
   color: white;
+}
+@font-face {
+  font-family: 'questaregular';
+  src: url('../fonts/2-Questa_Regular-webfont.eot');
+  src: url('../fonts/2-Questa_Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/2-Questa_Regular-webfont.woff2') format('woff2'), url('../fonts/2-Questa_Regular-webfont.woff') format('woff'), url('../fonts/2-Questa_Regular-webfont.ttf') format('truetype'), url('../fonts/2-Questa_Regular-webfont.svg#questaregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }

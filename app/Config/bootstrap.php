@@ -70,6 +70,7 @@ Cache::config('default', array('engine' => 'File'));
  *
  */
 CakePlugin::loadAll();
+CakePlugin::load('Opauth', array('routes' => true, 'bootstrap' => true));
 /**
  * To prefer app translation over plugin translation, you can set
  *
@@ -96,6 +97,11 @@ CakePlugin::loadAll();
 Configure::write('Dispatcher.filters', array(
 	'AssetDispatcher',
 	'CacheDispatcher'
+));
+
+Configure::write('Opauth.Strategy.LinkedIn', array(
+   'api_key' => '777e88m15vltcr',
+   'secret_key' => 'em5BATHfg0Zv5uwO'
 ));
 
 App::uses('CakeEmail', 'Network/Email');

@@ -18,9 +18,23 @@ class Item extends AppModel {
   	if($this->data['Item']['type'] == 'article' && mb_substr($this->data['Item']['url'], 0, 4) !== 'http') $this->data['Item']['url'] = 'http://' . $this->data['Item']['url'];
   }
 
-//   public $virtualFields = array(
-//     'score' => 'CONCAT(User.first_name, " ", User.last_name)'
-// );
+    public $virtualFields = array(
+    'score' => 'Item.created'
+);
+
+  public function afterFind($results, $primary = false){
+	parent::afterFind($results, $primary);
+	foreach ($results as $key => $val) {
+        $results[$key]['Item']['upvotes'] = $this->Upvote->find('count', array(
+        'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'])
+    ));
+		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvotes'], strtotime($val['Item']['created']));		
+    }
+    // $results = Set::sort($results, '{n}.Item.score', 'desc');
+    return $results;
+}
+
+
 
   public function hot($upvotes, $date)
   {
@@ -41,7 +55,7 @@ class Item extends AppModel {
   }
 
 
-  
+
 
 /**
  * Validation rules

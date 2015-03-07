@@ -41,7 +41,13 @@
 	Router::connect('/sign-up', array('controller' => 'users', 'action' => 'add'));
 
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
-	Router::connect('/', array('controller' => 'items', 'action' => 'index', 'home'));
+	Router::connect('/', array('controller' => 'items', 'action' => 'index'));
+	Router::connect('/recent', array('controller' => 'items', 'action' => 'recent'));
+	
+Router::connect(
+   '/opauth-complete/*', 
+   array('controller' => 'users', 'action' => 'opauth_complete')
+);
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
