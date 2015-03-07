@@ -12,7 +12,6 @@ Component.Forms = function($) {
         config.form = config.page.find('form:not(#mc-embedded-subscribe-form)');
 
 $(document).on('submit', 'form.ajaxform', function(e){
-
      e.preventDefault();
      var $this = $(this);
             $.ajax({

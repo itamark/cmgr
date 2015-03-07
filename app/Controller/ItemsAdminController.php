@@ -10,10 +10,8 @@ public function index() {
 		$items = $this->Item->find('all');
 $sorted = Set::sort($items, '{n}.Item.score', 'desc');
 		$this->set('items', $sorted);
+		$this->set('datacontroller', 'itemsAdmin');
 	}
-
-
-
 }
 
  ?>
