@@ -51,7 +51,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('script');
 	?>
 </head>
-<body>
+<body data-controller="<?php echo @$datacontroller; ?>">
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
 

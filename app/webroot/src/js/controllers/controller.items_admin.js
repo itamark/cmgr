@@ -1,4 +1,4 @@
- Controller['users_add'] = function($) {
+ Controller['itemsAdmin'] = function($) {
 
     var config = {
         page: ""

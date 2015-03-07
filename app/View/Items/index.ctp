@@ -92,7 +92,7 @@
 <?php echo $this->Html->link($item['User']['username'], array('controller' => 'users', 'action' => 'view', $item['User']['username'])); ?>
   <?php echo h($item['User']['username']); ?> | <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?> 
 
- 	</a> <?php echo $this->Html->link('Flag', array('controller' => 'items', 'action' => 'flag', $item['Item']['id'])); ?></small>
+ 	</a> <?php echo $this->Html->link('Flag', array('controller' => 'items', 'action' => 'flag', $item['Item']['id']), array('class' => 'label red flag')); ?></small>
 
     	</div>
     	<div class="large-1 columns">

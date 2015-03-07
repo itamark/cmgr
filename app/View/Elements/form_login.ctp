@@ -1,5 +1,15 @@
 	<div class="medium-6 push-3 columns">
-		<?php echo $this->Form->create('User',array(
+
+
+<?php
+echo $this->Html->link(
+    '',
+    '/auth/linkedin',
+    array('id' => 'linkedinbutton')
+);
+?>
+
+		<!-- <?php echo $this->Form->create('User',array(
 												'url' => array(
 													'controller' => 'users',
 													'action' => 'login'
@@ -20,7 +30,7 @@
 		    </label>
 		  </div>
 		  <button type="submit" class="button right small"><?php echo __('Login')?></button>
-		</form>
+		</form> -->
 
 
 	</div>

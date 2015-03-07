@@ -51,6 +51,7 @@ $this->paginate = array(
   );
   $items = $this->paginate('Item');
   $this->set(compact('items'));
+  $this->set('datacontroller', 'itemsIndex');
 	}
 
 	public function recent() {
@@ -155,7 +156,9 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		$this->Item->set(array(
 			'flagged' => true
 			));
-		$this->Item->save();
+		if($this->Item->save()){
+			die('Flagged');
+		};
 	}
 
 	public function unflag($item_id = null){
