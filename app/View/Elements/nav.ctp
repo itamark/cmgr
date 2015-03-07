@@ -1,55 +1,47 @@
 <?php if(!Configure::read('Application.maintenance')){?>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<?php echo $this->Html->link(
-			Configure::read('Application.name'),
-			AuthComponent::user('id') ? "/home" : "/"
-			, array('class' => 'navbar-brand')) ?>
-	</div>
+<nav class="top-bar" data-topbar role="navigation"  data-options="sticky_on: large">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">CMGR</a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
 
-	<!-- Collect the nav links, forms, and other content for toggling -->
-	<div class="collapse navbar-collapse navbar-ex1-collapse">
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+<!--       <li class="active"><a href="#">Right Button Active</a></li>
+ -->     
+<?php if (AuthComponent::user('id')): ?>
+	<?php if (AuthComponent::user('role') == 'admin'): ?>
+	<li class="has-dropdown">
+        <a href="#">Admin</a>
+        <ul class="dropdown">
+          <li><a href="/itemsAdmin/index">Posts</a></li>
+          <li><a href="/usersAdmin/index">Users</a></li>
 
-		<?php if(AuthComponent::user('id')){?>
-			<ul class="nav navbar-nav side-nav">
-				<li class="<?php echo $this->params->params['controller'] == 'pages' ? 'active' : ''?>"><a href="<?php echo $this->params->webroot?>home"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-				<li class="dropdown <?php echo $this->params->params['controller'] == 'users' ? 'active' : ''?>">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i> Users <b
-							class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo $this->params->webroot?>users"><i class="fa fa-list"></i> List</a></li>
-						<li><a href="<?php echo $this->params->webroot?>users/add"><i class="fa fa-plus"></i> Register new user</a></li>
-					</ul>
-				</li>
-<!--				<li><a href="tables.html"><i class="fa fa-list"></i> Activity</a></li>-->
-			</ul>
-		<?php } ?>
+<!--           <li class="active"><a href="#">Active link in dropdown</a></li>
+ -->        </ul>
+      </li>
+            <?php endif; ?>
 
+  <li class="has-dropdown">
+        <a href="#">User</a>
+        <ul class="dropdown">
+          <li><a href="/logout">Logout</a></li>
+<!--           <li class="active"><a href="#">Active link in dropdown</a></li>
+ -->        </ul>
+      </li>
+      <?php else: ?>
+        <li><a href="#" data-reveal-id="myModal">Login</a></li>
+      <?php endif; ?>
+    </ul>
 
-
-		<?php if(AuthComponent::user('id')){?>
-
-		<ul class="nav navbar-nav navbar-right navbar-user">
-			<li class="dropdown user-dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo AuthComponent::user('username')?> <b
-						class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><a href="<?php echo $this->params->webroot?>me"><i class="fa fa-user"></i> Profile</a></li>
-					<li><a href="<?php echo $this->params->webroot?>me/edit"><i class="fa fa-gear"></i> Settings</a></li>
-					<li class="divider"></li>
-					<li><a href="<?php echo $this->params->webroot?>logout"><i class="fa fa-power-off"></i> Log Out</a></li>
-				</ul>
-			</li>
-		</ul>
-		<?php }?>
-	</div>
-	<!-- /.navbar-collapse -->
+    <!-- Left Nav Section -->
+<!--     <ul class="left">
+      <li><a href="#">Left Nav Button</a></li>
+    </ul> -->
+  </section>
 </nav>
 <?php } ?>

@@ -1,5 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
+
+
 /**
  * Item Model
  *
@@ -15,6 +17,45 @@ class Item extends AppModel {
   	// if the article url doesn't have a host - give it one.
   	if($this->data['Item']['type'] == 'article' && mb_substr($this->data['Item']['url'], 0, 4) !== 'http') $this->data['Item']['url'] = 'http://' . $this->data['Item']['url'];
   }
+
+    public $virtualFields = array(
+    'score' => 'Item.created'
+);
+
+  public function afterFind($results, $primary = false){
+	parent::afterFind($results, $primary);
+	foreach ($results as $key => $val) {
+        $results[$key]['Item']['upvotes'] = $this->Upvote->find('count', array(
+        'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'])
+    ));
+		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvotes'], strtotime($val['Item']['created']));		
+    }
+    // $results = Set::sort($results, '{n}.Item.score', 'desc');
+    return $results;
+}
+
+
+
+  public function hot($upvotes, $date)
+  {
+    $s = $upvotes;
+    $order = log10(max(abs($s), 1));
+
+    if ($s > 0) {
+        $sign = 1;
+    } else if ($s < 0) {
+        $sign = -1;
+    } else {
+        $sign = 0;
+    }
+
+    $seconds = $date - 1134028003;
+
+    return round($sign * $order + $seconds / 45000, 7);
+  }
+
+
+
 
 /**
  * Validation rules

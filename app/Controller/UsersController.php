@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2');
+		$this->Auth->allow('opauth_complete','add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view');
 	}
 
 	public function index() {
@@ -12,6 +12,52 @@ class UsersController extends AppController {
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}
+
+	public function opauth_complete() {
+		$conditions = array(
+    'User.email' => $this->data['auth']['info']['email']
+);
+if ($this->User->hasAny($conditions)){
+$user = $this->User->find('first', array(
+        'conditions' => array('User.email' => $this->data['auth']['info']['email'])
+    ));
+$id = $user['User']['id'];
+$this->request->data['User']['username'] = $user['User']['email'];
+$this->request->data['User']['password'] = $user['User']['password'];
+$this->request->data['User']['email'] = $user['User']['email'];
+$this->request->data['User'] = array_merge(
+            $this->request->data['User'],
+            array('id' => $id)
+        );
+unset($this->request->data['User']['password']);
+ $this->Auth->login($this->request->data['User']);
+        return $this->redirect('/');
+    //login stuff
+}
+else {
+			if ($this->request->is('post')) {
+$this->User->create();
+$this->request->data['User']['username'] = $this->data['auth']['info']['email'];
+$this->request->data['User']['password'] = $this->data['auth']['uid'];
+$this->request->data['User']['email'] = $this->data['auth']['info']['email'];
+
+
+			if ($this->User->save($this->request->data)) {
+				$id = $this->User->id;
+				 $this->request->data['User'] = array_merge(
+            $this->request->data['User'],
+            array('id' => $id)
+        );
+		unset($this->request->data['User']['password']);
+        $this->Auth->login($this->request->data['User']);
+        return $this->redirect('/');
+			} 
+	// die(print_r($this->request->data));
+}
+	 //register stuff
+}
+       // debug($this->data);
+   }
 
 	public function login() {
 
@@ -27,6 +73,7 @@ class UsersController extends AppController {
 
 			# Try to log in the user
 			if ($this->Auth->login()) {
+				
 				if (!empty($this->request->data['User']['remember_me']) && $this->request->data['User']['remember_me'] == 'S') {
 					$cookie = array();
 					$cookie['username'] = $this->request->data['User']['username'];
@@ -39,7 +86,8 @@ class UsersController extends AppController {
 				# Redirect to home
 				$this->redirect($this->Auth->redirectUrl());
 			} else {
-				$this->Session->setFlash(__('Invalid username or password, try again'), 'flash_fail');
+				$this->Session->setFlash(__('Sorry - couldn\'nt log you in, try again'), 'flash_fail');
+				// $this->redirect('/users/login?pw=false');
 			}
 		}
 	}
@@ -54,10 +102,10 @@ class UsersController extends AppController {
 
 
 	public function view($username = null) {
-		if (AuthComponent::user('role') != 'admin') {
-			throw new ForbiddenException("You're now allowed to do this.");
-		}
-
+		// if (AuthComponent::user('role') != 'admin') {
+		// 	throw new ForbiddenException("You're now allowed to do this.");
+		// }
+$this->User->recursive = 2;
 		$user = $this->User->findByUsername($username);
 		$user = Hash::extract($user,'User');
 		$this->User->id = $user['id'];
@@ -65,7 +113,22 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		$this->set('user', $user);
+				$itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
+            'Item.created' => 'desc'
+        ));
+				$commentoptions = array('order' => array(
+            'Comment.created' => 'desc'
+        ));
+
+				$upvoteoptions = array('conditions' => array('Upvote.user_id' => $user['id']), 'order' => array(
+            'Upvote.id' => 'desc'
+        ));
+
+				$this->set('user', $this->User->findByUsername($user['username']));
+				$this->set('items', $this->User->Item->find('all', $itemoptions));
+				$this->set('comments', $this->User->Comment->find('all', $commentoptions));
+				$this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));
+
 	}
 
 
@@ -214,11 +277,12 @@ class UsersController extends AppController {
 
 			$email = new CakeEmail();
 			$email->template('remember_password', 'default')
-					->config('gmail')
+					->config('default')
 					->emailFormat('html')
 					->subject(__('Remember password - ' . Configure::read('Application.name')))
 					->to($user['User']['email'])
-					->from(Configure::read('Application.from_email'))
+					// ->from(Configure::read('Application.from_email'))
+					->from('itamar@cmgr.org')
 					->viewVars(array('hash' => $hash))
 					->send();
 

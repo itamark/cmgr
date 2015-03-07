@@ -6,6 +6,8 @@ class User extends AppModel
   public $name = 'User';
   public $displayField = 'username';
 
+  
+
   public function beforeSave($options = array())
   {
     if (isset($this->data[$this->alias]['password']) && !empty($this->data[$this->alias]['password']))

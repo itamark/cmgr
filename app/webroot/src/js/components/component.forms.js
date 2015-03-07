@@ -11,8 +11,7 @@ Component.Forms = function($) {
         config = App.Utils.extend(options, config);
         config.form = config.page.find('form:not(#mc-embedded-subscribe-form)');
 
-$(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
-
+$(document).on('submit', 'form.ajaxform', function(e){
      e.preventDefault();
      var $this = $(this);
             $.ajax({
@@ -38,6 +37,19 @@ $(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
                     },
                     error: function(jqXHR, data, errorThrown) {
                         console.log(jqXHR);
+                        switch ($this.attr('id')) {
+                            case 'ItemIndexForm':
+                                postItem(response);
+                                break;
+                            case 'UserLoginForm':
+                                window.location = '/users/login?pw="false"';
+                                break;
+                            case 'UserAddForm':
+                                userReg();
+                            case 'CommentViewForm':
+                                postComment(response);
+                                break;
+                        }
                     }
                 });
        
@@ -58,7 +70,7 @@ $(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
 
     var postItem = function(response){
                 // $('textarea').val('');
-                console.log(response.new_id);
+                console.log(response);
         // $('.itemscontainer').load('/comments/newitems/'+response[0].Comment.item_id);
                 // $('.contentcontainer').load('/items/index'); 
                 // $('.items.form').empty().prepend('<div class="alert alert-success" role="alert">Thanks for submitting!</div>');

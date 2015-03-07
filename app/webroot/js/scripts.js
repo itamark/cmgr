@@ -244,8 +244,7 @@ Component.Forms = function($) {
         config = App.Utils.extend(options, config);
         config.form = config.page.find('form:not(#mc-embedded-subscribe-form)');
 
-$(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
-
+$(document).on('submit', 'form.ajaxform', function(e){
      e.preventDefault();
      var $this = $(this);
             $.ajax({
@@ -271,6 +270,19 @@ $(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
                     },
                     error: function(jqXHR, data, errorThrown) {
                         console.log(jqXHR);
+                        switch ($this.attr('id')) {
+                            case 'ItemIndexForm':
+                                postItem(response);
+                                break;
+                            case 'UserLoginForm':
+                                window.location = '/users/login?pw="false"';
+                                break;
+                            case 'UserAddForm':
+                                userReg();
+                            case 'CommentViewForm':
+                                postComment(response);
+                                break;
+                        }
                     }
                 });
        
@@ -291,7 +303,7 @@ $(document).on('submit', 'form:not(#mc-embedded-subscribe-form)', function(e){
 
     var postItem = function(response){
                 // $('textarea').val('');
-                console.log(response.new_id);
+                console.log(response);
         // $('.itemscontainer').load('/comments/newitems/'+response[0].Comment.item_id);
                 // $('.contentcontainer').load('/items/index'); 
                 // $('.items.form').empty().prepend('<div class="alert alert-success" role="alert">Thanks for submitting!</div>');
@@ -432,7 +444,7 @@ $this.toggleClass('upvoted');
 
 }(); */
 
- Controller['users_add'] = function($) {
+ Controller['itemsAdmin'] = function($) {
 
     var config = {
         page: ""
@@ -452,6 +464,54 @@ $this.toggleClass('upvoted');
     };
 
 }(); 
+
+ Controller['itemsIndex'] = function($) {
+
+    var config = {
+        page: ""
+    };
+
+    // PUBLIC..................................................................
+    var init = function(page) {
+        config.page = page;
+        // $('body').on('click', '.flag', function(){
+        //     alert('hi');
+        // });
+$('body').on('click', '.flag', function (e){
+    e.preventDefault();
+    var link = e.target.href;
+    flag(e.target);
+        // alert(parse[parse.length-1]);
+    });
+
+    };
+
+    // PRIVATE.................................................................
+    var dbug = function(enabled) {};
+
+    var flag = function(elem){
+        $.ajax({
+            url: elem.href,
+            type: 'post',
+            success: function(response){
+                console.log(response);
+                if(response == 'Flagged'){
+                    elem.innerHTML = 'Thanks!';
+                }
+            },
+            error: function(){
+                console.log('sorry');
+            }
+
+        });
+    }
+
+    // PUBLIC INTERFACE........................................................
+    return {
+        init: init
+    };
+
+}(jQuery); 
 
 $(function() {
 

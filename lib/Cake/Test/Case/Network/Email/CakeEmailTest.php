@@ -1393,7 +1393,7 @@ class CakeEmailTest extends CakeTestCase {
 			"\r\n" .
 			"\r\n" .
 			"\r\n" .
-			"This email was sent using the CakePHP Framework, http://cakephp.org." .
+			"" .
 			"\r\n" .
 			"\r\n" .
 			"--$boundary\r\n" .
@@ -1747,7 +1747,7 @@ class CakeEmailTest extends CakeTestCase {
 		$expected = '<p>This email was sent using the <a href="http://cakephp.org">CakePHP Framework</a></p>';
 		$this->assertContains($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_HTML));
 
-		$expected = 'This email was sent using the CakePHP Framework, http://cakephp.org.';
+		$expected = '';
 		$this->assertContains($expected, $this->CakeEmail->message(CakeEmail::MESSAGE_TEXT));
 
 		$message = $this->CakeEmail->message();
