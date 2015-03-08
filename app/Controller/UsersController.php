@@ -56,7 +56,7 @@ else {
 		}
 }
 
-		die(print_r($this->data));
+		
 	}
 
 	public function login() {

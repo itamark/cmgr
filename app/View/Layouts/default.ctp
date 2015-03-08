@@ -80,6 +80,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       <a href="#" data-reveal-id="myModal" class="button small">Submit a Question or Link</a>
     <?php endif; ?>
 </li>
+<li class="module">
+Welcome!
+</li>
 <!-- <li><a href="#">Jobs</a></li>
 <li><a href="#">Discussion</a></li>
 <li><a href="#">CMGR Newsletter</a></li>
