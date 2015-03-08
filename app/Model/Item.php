@@ -19,7 +19,8 @@ class Item extends AppModel {
   }
 
     public $virtualFields = array(
-    'score' => 'Item.created'
+    'score' => 'Item.created',
+    'upvoted' => 'Item.created'
 );
 
   public function afterFind($results, $primary = false){
@@ -27,6 +28,9 @@ class Item extends AppModel {
 	foreach ($results as $key => $val) {
         $results[$key]['Item']['upvotes'] = $this->Upvote->find('count', array(
         'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'])
+    ));
+        $results[$key]['Item']['upvoted'] = $this->Upvote->find('count', array(
+        'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'], 'Upvote.user_id' => AuthComponent::user('id'))
     ));
 		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvotes'], strtotime($val['Item']['created']));		
     }

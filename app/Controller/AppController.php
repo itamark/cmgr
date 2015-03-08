@@ -86,7 +86,7 @@ class AppController extends Controller
 	  if( $this->params->params['controller'] == 'users' && $this->params->params['action'] == 'login'){
 		  $this->dbIsConnected();
 	  }
-
+// debug(AuthComponent::user());
     # To enable portuguese language as main
     # Configure::write('Config.language', 'por');
 

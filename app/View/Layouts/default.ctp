@@ -81,7 +81,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <?php endif; ?>
 </li>
 <li class="module">
-Welcome!
+  <img src="<?php echo AuthComponent::user('image'); ?>">
+Welcome, <?php echo AuthComponent::user('first_name'); ?>
 </li>
 <!-- <li><a href="#">Jobs</a></li>
 <li><a href="#">Discussion</a></li>

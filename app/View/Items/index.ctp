@@ -12,7 +12,7 @@
 <form action="http://cmgr.us9.list-manage.com/subscribe/post?u=a79d5f301ae99a362a69ea02b&amp;id=1f26e7205f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
 	<h5>Sign up for our newsletter!</h5>
-<div class="mc-field-group" style="float:left;">
+<div class="mc-field-gr oup" style="float:left;">
 	
 <div class="row collapse">
         <div class="small-10 columns">
@@ -43,6 +43,7 @@
  </div>
 </div> 
 <?php //echo $this->Paginator->sort('created', 'Recent'); ?>
+
 <?php foreach ($items as $item): ?>
 <!--   <?php echo $item['Item']['score']; ?>
  -->	<div class="row">
@@ -53,11 +54,10 @@
 <div class="upvote pull-left">
   <?php if (AuthComponent::user('id')): ?>
     <span class="glyphicon glyphicon-arrow-up pull-left upvotearrow 
-        <?php foreach ($item['User']['Upvote'] as $upvote){
-            if($upvote['item_id'] == $item['Item']['id'] && $upvote['user_id'] == AuthComponent::user('id')){
-              echo 'upvoted';
-            }
-          } ?>" 
+    <?php if($item['Item']['upvoted']){
+      echo 'upvoted';
+    } ?>
+       
 
           hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
   <?php else: ?>
