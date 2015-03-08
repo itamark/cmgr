@@ -32,6 +32,12 @@ h1 {
 .listing.row .upvote {
   text-align: center;
 }
+.module {
+  margin-bottom: 1em;
+  padding: 10px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
 .tabs dd.active a,
 .tabs .tab-title.active a {
   background-color: #2ba6cb;

@@ -14,6 +14,7 @@ class UsersController extends AppController {
 	}
 
 	public function opauth_complete(){
+		 // debug($this->data);
 		$conditions = array(
     'User.email' => $this->data['auth']['info']['email']
 );
@@ -35,8 +36,14 @@ if ($this->User->hasAny($conditions)){
 else {
 	// create them
 	if ($this->request->is('post')) {
+		$this->request->data['User']['linkedin_id'] = $this->data['auth']['uid'];
 		$this->request->data['User']['email'] = $this->data['auth']['info']['email'];
+		$this->request->data['User']['image'] = $this->data['auth']['info']['image'];
 		$this->request->data['User']['username'] = $this->data['auth']['info']['email'];
+		$this->request->data['User']['first_name'] = $this->data['auth']['info']['first_name'];
+		$this->request->data['User']['last_name'] = $this->data['auth']['info']['last_name'];
+		$this->request->data['User']['headline'] = $this->data['auth']['info']['headline'];
+
 
 		$this->User->create();
 
@@ -56,7 +63,7 @@ else {
 		}
 }
 
-		die(print_r($this->data));
+		
 	}
 
 	public function login() {
