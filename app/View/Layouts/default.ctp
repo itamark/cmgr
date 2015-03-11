@@ -105,7 +105,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   <h2>Login</h2>
  <a href="/auth/linkedin"><img src="/img/Sign-in-Large---Default.png"></a>
 </div>
-      </div>
+      
 
       <aside class="right-off-canvas-menu">
         
@@ -174,6 +174,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		</div>
   </div>
 	</div>
+  </div>
 	<?php echo $this->element('sql_dump'); ?>
   <script>
   $(document).foundation();

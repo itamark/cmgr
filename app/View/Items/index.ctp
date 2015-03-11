@@ -31,17 +31,17 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <!--  <div class="row">
       <div class="large-12 columns">
         
         <?php echo $this->Paginator->sort('upvotes', 'Top', array('class' => 'button small')); ?>
         <?php echo $this->Paginator->sort('score', 'Hot', array('class' => 'button small')); ?>
         <?php echo $this->Paginator->sort('created', 'Recent', array('class' => 'button small')); ?>
       </div>
-    </div>
+    </div> -->
     <?php //echo $this->Paginator->sort('created', 'Recent'); ?>
     <?php foreach ($items as $item): ?>
-     <div class="row">
+    <div class="row">
       <div class="large-12 columns">
         <?php $comments = count(h($item['Comment'])); ?>
         <div class="row listing">
@@ -64,7 +64,8 @@
           <hr>
           <div class="large-12 columns">
             <div class="row">
-              <div class="large-1 columns">
+              
+              <div class="large-12 columns">
                 <div class="upvote pull-left">
                   <?php if (AuthComponent::user('id')): ?>
                   <span class="glyphicon glyphicon-arrow-up pull-left upvotearrow
@@ -82,21 +83,22 @@
                     <?php echo $item['Item']['upvotes'] ?>
                   </span>
                 </div>
-                <div class="pull-right">
+                <div class="pull-left">
                   <a href="/items/view/<?php echo $item['Item']['id']; ?>"><i class="fa fa-comment"></i></a> <br><?php echo count(h($item['Comment'])); ?>
                 </div>
-              </div>
-              <div class="large-11 columns">
-                <small>Submitted <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?> by
-                <?php echo $this->Html->link($item['User']['first_name'].' '.$item['User']['last_name'], array('controller' => 'users', 'action' => 'view', $item['User']['username'])); ?>
-                | <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?>
-                </a> <?php echo $this->Html->link('Flag', array('controller' => 'items', 'action' => 'flag', $item['Item']['id'])); ?></small>
+                <div class="pull-left" style="padding-left:10px;">
+                  <small>Submitted <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?> by
+                  <?php echo $this->Html->link($item['User']['first_name'].' '.$item['User']['last_name'], array('controller' => 'users', 'action' => 'view', $item['User']['username'])); ?>
+                  <!-- | <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?>
+                  </a> <?php echo $this->Html->link('Flag', array('controller' => 'items', 'action' => 'flag', $item['Item']['id'])); ?> -->
+                  </small>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
     <!--   <?php echo $item['Item']['score']; ?>
     --> <!-- <div class="row">
       <div class="large-12 columns">
