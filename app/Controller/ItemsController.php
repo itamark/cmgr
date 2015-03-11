@@ -38,7 +38,7 @@ public function beforeFilter() {
  *
  * @return void
  */
-		public function index() {
+public function index() {
  		$this->Item->recursive = 2;
 $this->paginate = array(
 	'conditions' => array(
@@ -52,6 +52,7 @@ $this->paginate = array(
   $items = $this->paginate('Item');
   $this->set(compact('items'));
 	}
+
 
 	public function recent() {
 		$this->Item->recursive = 2;	
@@ -129,7 +130,7 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 				$this->request->data['Upvote']['user_id'] = AuthComponent::user('id');
 				$this->request->data['Upvote']['item_id'] = $this->Item->id;
 				// $this->updateScore($this->Item->id);
-				$this->Item->Upvote->saveAll($this->request->data);
+				$this->Item->Upvote->save($this->request->data);
 				$this->request->data['new_id'] = $this->Item->id;
 				header('Content-type: application/json');
 				die(json_encode($this->request->data));
@@ -155,7 +156,9 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		$this->Item->set(array(
 			'flagged' => true
 			));
-		$this->Item->save();
+		if($this->Item->save()){
+			return 'flagged';
+		}
 	}
 
 	public function unflag($item_id = null){
@@ -163,7 +166,9 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		$this->Item->set(array(
 			'flagged' => false
 			));
-		$this->Item->save();
+		if($this->Item->save()){
+			return 'unflagged';
+		}
 	}
 
 	public function remove($item_id = null){

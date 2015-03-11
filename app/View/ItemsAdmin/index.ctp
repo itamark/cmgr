@@ -78,7 +78,7 @@
 
           hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
   <?php else: ?>
-      <span href="#" data-reveal-id="myModal">&#9650;</span>
+      <span href="#" data-reveal-id="mustBeModal">&#9650;</span>
 
   <?php endif; ?>
 

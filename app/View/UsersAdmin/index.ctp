@@ -58,7 +58,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 id="myModalLabel"><?php echo __('Remove user') ?></h4>
+        <h4 id="mustBeModalLabel"><?php echo __('Remove user') ?></h4>
       </div>
       <div class="modal-body">
         <p><?php echo __('Are you sure you want to delete the user ') ?><span class="label-uname strong"></span> ?</p>

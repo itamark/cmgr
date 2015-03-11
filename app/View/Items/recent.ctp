@@ -64,7 +64,7 @@
 
           hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
   <?php else: ?>
-      <span href="#" data-reveal-id="myModal">&#9650;</span>
+      <span href="#" data-reveal-id="mustBeModal">&#9650;</span>
 
   <?php endif ?>
 
@@ -107,7 +107,7 @@
      </div>
      <?php endforeach; ?>
 <?php echo $this->Paginator->numbers(); ?>
-<div id="myModal" class="reveal-modal" data-reveal>
+<div id="mustBeModal" class="reveal-modal" data-reveal>
   <h2>You must be logged in</h2>
   <?php echo $this->element('form_login') ?>
 </div>
