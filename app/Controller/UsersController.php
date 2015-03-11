@@ -9,7 +9,7 @@ class UsersController extends AppController {
 		if (AuthComponent::user('role') != 'admin') {
 			throw new ForbiddenException("You're now allowed to do this.");
 		}
-		$this->User->recursive = 0;
+		$this->User->recursive = 2;
 		$this->set('users', $this->paginate());
 	}
 
@@ -39,7 +39,7 @@ else {
 		$this->request->data['User']['linkedin_id'] = $this->data['auth']['uid'];
 		$this->request->data['User']['email'] = $this->data['auth']['info']['email'];
 		$this->request->data['User']['image'] = $this->data['auth']['info']['image'];
-		$this->request->data['User']['username'] = $this->data['auth']['info']['email'];
+		$this->request->data['User']['username'] = $this->data['auth']['uid'];
 		$this->request->data['User']['first_name'] = $this->data['auth']['info']['first_name'];
 		$this->request->data['User']['last_name'] = $this->data['auth']['info']['last_name'];
 		$this->request->data['User']['headline'] = $this->data['auth']['info']['headline'];

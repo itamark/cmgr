@@ -57,7 +57,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 
 
-  <div class="contain-to-grid sticky">
+  <div class="contain-to-grid">
       <?php echo $this->element('nav'); ?>
 </div>
   <div class="contain-to-grid">
@@ -71,18 +71,21 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 		<div id="content">
 
-      <div class="large-3 medium-3 push-9 columns">
+      <div class="large-4 medium-4 push-8 columns">
 <ul class="side-nav">
 <li>
   <?php if (AuthComponent::user('id')): ?>
-  <a href="#" class="button small right-off-canvas-toggle">Submit a Question or Link</a>
+  <a href="#" class="button small right-off-canvas-toggle" style="  width: 100%;">Submit a Question or Link</a>
 <?php else: ?>
-      <a href="#" data-reveal-id="myModal" class="button small">Submit a Question or Link</a>
+      <a href="#" data-reveal-id="mustBeModal" class="button small"  style="  width: 100%;">Submit a Question or Link</a>
     <?php endif; ?>
 </li>
-<li class="module">
-  <img src="<?php echo AuthComponent::user('image'); ?>">
-Welcome, <?php echo AuthComponent::user('first_name'); ?>
+<li class="module" style="">
+  <div style="  width: 100%;
+ 
+  text-align: center;"><img src="<?php echo AuthComponent::user('image'); ?>" style=" border-radius:50%;"></div>
+  
+<div style="">Welcome<?php if(!AuthComponent::user('first_name')){ echo '!'; } else { echo ', '.AuthComponent::user('first_name').'!'; } ?></div>
 </li>
 <!-- <li><a href="#">Jobs</a></li>
 <li><a href="#">Discussion</a></li>
@@ -93,9 +96,14 @@ Welcome, <?php echo AuthComponent::user('first_name'); ?>
 
 </div>
   </div>
-  <div id="myModal" class="reveal-modal" data-reveal>
+  <div id="mustBeModal" class="reveal-modal" data-reveal>
   <h2>You must be logged in</h2>
-  <?php echo $this->element('form_login') ?>
+ <!--  <?php echo $this->element('form_login') ?> -->
+ <a href="/auth/linkedin"><img src="/img/Sign-in-Large---Default.png"></a>
+</div>
+<div id="loginModal" class="reveal-modal" data-reveal>
+  <h2>Login</h2>
+ <a href="/auth/linkedin"><img src="/img/Sign-in-Large---Default.png"></a>
 </div>
       </div>
 
@@ -154,7 +162,7 @@ Welcome, <?php echo AuthComponent::user('first_name'); ?>
 
     </aside>
     <a class="exit-off-canvas"></a>
-			<div class="container large-9 medium-9 small-12 pull-3 columns">
+			<div class="container large-8 medium-8 small-12 pull-4 columns">
 
 			<?php echo $this->Session->flash(); ?>
 

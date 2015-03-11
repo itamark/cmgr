@@ -27,14 +27,14 @@
             <?php endif; ?>
 
   <li class="has-dropdown">
-        <a href="#">User</a>
+        <a href="#"><?php echo AuthComponent::user('first_name').' '.AuthComponent::user('last_name'); ?></a>
         <ul class="dropdown">
           <li><a href="/logout">Logout</a></li>
 <!--           <li class="active"><a href="#">Active link in dropdown</a></li>
  -->        </ul>
       </li>
       <?php else: ?>
-        <li><a href="#" data-reveal-id="myModal">Login</a></li>
+        <li><a href="#" data-reveal-id="loginModal">Login</a></li>
       <?php endif; ?>
     </ul>
 

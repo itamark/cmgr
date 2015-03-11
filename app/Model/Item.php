@@ -23,9 +23,11 @@ class Item extends AppModel {
     'upvoted' => 'Item.created'
 );
 
-  public function afterFind($results, $primary = false){
+ public function afterFind($results, $primary = false){
 	parent::afterFind($results, $primary);
+	
 	foreach ($results as $key => $val) {
+
         $results[$key]['Item']['upvotes'] = $this->Upvote->find('count', array(
         'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'])
     ));
@@ -35,6 +37,7 @@ class Item extends AppModel {
 		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvotes'], strtotime($val['Item']['created']));		
     }
     // $results = Set::sort($results, '{n}.Item.score', 'desc');
+
     return $results;
 }
 

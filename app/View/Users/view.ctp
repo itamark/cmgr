@@ -4,8 +4,17 @@
 </pre>  -->
 <div class="row">
   <div class="large-11 push-1 columns">
-  	<h3><?php echo $user['User']['username'] ?></h3>
-  	<img class="media-object" src="https://secure.gravatar.com/avatar/<?php echo md5($user['User']['email']) ?>?s=100&d=mm">
+  	<h3><?php echo $user['User']['first_name'].' '.$user['User']['last_name']; ?></h3>
+    <div class="large-2 pull-left"><img class="media-object" src="<?php echo $user['User']['image']; ?>"></div>
+    <div class="large-10 pull-right">
+      Headline: <?php echo $user['User']['headline']; ?>
+
+
+    </div>
+ <div class="large-10">
+
+ </div>
+  	
   </div>
 </div>
 <hr>
@@ -22,6 +31,7 @@
 
   <!-- begin Posts Tab -->
   <div class="content active" id="panel11">
+   
     <?php foreach ($items as $item): ?>
           <?php $cmts = count(h($item['Comment'])); ?>
     <div class="row listing">
@@ -29,7 +39,7 @@
 <div class="upvote pull-left">
   <?php if (AuthComponent::user('id')): ?>
     <span class="glyphicon glyphicon-arrow-up pull-left upvotearrow 
-        <?php foreach ($item['User']['Upvote'] as $upvote){
+        <?php foreach ($item['Upvote'] as $upvote){
             if($upvote['item_id'] == $item['Item']['id'] && $upvote['user_id'] == AuthComponent::user('id')){
               echo 'upvoted';
             }
@@ -37,7 +47,7 @@
 
           hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
   <?php else: ?>
-      <span href="#" data-reveal-id="myModal">&#9650;</span>
+      <span href="#" data-reveal-id="mustBeModal">&#9650;</span>
 
   <?php endif ?>
 
@@ -86,7 +96,7 @@
 <?php foreach ($comments as $comment): ?>
       <div class="row listing">
 
-<?php echo $this->Html->link($comment['User']['username'], array('controller' => 'users', 'action' => 'view', $comment['User']['username'])); ?> commented on 
+<?php echo $this->Html->link($comment['User']['first_name'], array('controller' => 'users', 'action' => 'view', $comment['User']['username'])); ?> commented on 
 <a href="/items/view/<?php echo $comment['Item']['id']; ?>"><?php echo $comment['Item']['title']; ?></a> <small><?php echo $this->Time->timeAgoInWords($comment['Comment']['created']); ?></small>
   <br>
 <p> <?php echo $comment['Comment']['comment_txt']; ?></p>
@@ -101,7 +111,6 @@
 
   <!-- begin Upvotes Tab -->
   <div class="content" id="panel31">
-
     <?php foreach ($upvotes as $upvote): ?>
           <?php $cmts = count(h($upvote['Comment'])); ?>
     <div class="row listing">
@@ -117,7 +126,7 @@
 
           hidden-aria="true" id="item-<?php echo h($upvote['Item']['id']); ?>">&#9650;</span>
   <?php else: ?>
-      <span href="#" data-reveal-id="myModal">&#9650;</span>
+      <span href="#" data-reveal-id="mustBeModal">&#9650;</span>
 
   <?php endif ?>
 

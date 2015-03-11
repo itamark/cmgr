@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row listing" style="margin-top: 1em;">
   <div class="large-12 columns">
   		<h3><a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?></a></h3>
 <div id="postcomment">
