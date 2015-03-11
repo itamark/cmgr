@@ -69,7 +69,7 @@ class AppController extends Controller
       );
 
       # Manually login the user
-      if( $this->Auth->login($user['User']) ){
+      if( $this->Auth->login($user) ){
         $this->redirect('/home');
       }
 
