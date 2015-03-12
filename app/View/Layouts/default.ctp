@@ -60,7 +60,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   <div class="contain-to-grid">
       <?php echo $this->element('nav'); ?>
 </div>
-  <div class="contain-to-grid">
+  <div class="contain-to-grid subnav">
       <?php echo $this->element('subnav'); ?>
 </div>
 
