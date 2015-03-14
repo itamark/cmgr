@@ -90,7 +90,8 @@
                   <small>Submitted <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?> by
                   <?php echo $this->Html->link($item['User']['first_name'].' '.$item['User']['last_name'], array('controller' => 'users', 'action' => 'view', $item['User']['username'])); ?>
                   <!-- | <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?>
-                  </a> <?php echo $this->Html->link('Flag', array('controller' => 'items', 'action' => 'flag', $item['Item']['id'])); ?> -->
+                  </a>  -->
+                  <?php echo $this->Html->link('Flag', array('controller' => 'items', 'action' => 'flag', $item['Item']['id']), array('class' => 'flag')); ?>
                   </small>
                 </div>
               </div>
