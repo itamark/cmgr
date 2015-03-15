@@ -11,7 +11,7 @@ public $uses = array('Item', 'Upvote');
 
 public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'view', 'recent');
+		$this->Auth->allow('index', 'view', 'recent', 'flag');
 	}
 
 
@@ -51,6 +51,22 @@ $this->paginate = array(
   );
   $items = $this->paginate('Item');
   $this->set(compact('items'));
+	}
+
+	public function questions() {
+		$this->Item->recursive = 2;	
+		$options = array('conditions' => array('Item.type' => 'question'));
+		$items = $this->Item->find('all', $options);
+$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$this->set('items', $sorted);
+	}
+
+	public function articles() {
+		$this->Item->recursive = 2;	
+		$options = array('conditions' => array('Item.type' => 'article'));
+		$items = $this->Item->find('all', $options);
+$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$this->set('items', $sorted);
 	}
 
 
@@ -152,22 +168,28 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 	}
 
 	public function flag($item_id = null){
+if($this->request->is('post')){
+	$this->layout = false;
+
 		$this->Item->read(null, $item_id);
 		$this->Item->set(array(
 			'flagged' => true
 			));
 		if($this->Item->save()){
-			return 'flagged';
-		}
+			die('flagged');
+		} 
+}
+		
 	}
 
 	public function unflag($item_id = null){
+		$this->layout = false;
 		$this->Item->read(null, $item_id);
 		$this->Item->set(array(
 			'flagged' => false
 			));
 		if($this->Item->save()){
-			return 'unflagged';
+			die('unflagged');
 		}
 	}
 

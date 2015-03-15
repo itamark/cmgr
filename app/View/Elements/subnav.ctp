@@ -19,11 +19,13 @@
       
 
     </ul>
-    <ul class="right">
-  <li><a href="/" >Hot</a></li>
-        <li><a href="/recent" >Recent</a></li>
-        <li><a href="/top" >Top</a></li>
+    <?php if($this->params['controller'] == 'items' && $this->params['action'] == 'index'): ?>
+    <ul class="left">
+        <li><?php echo $this->Paginator->sort('Item.upvotes', 'Top', array('class' => '')); ?></li>
+         <li><?php echo $this->Paginator->sort('score', 'Hot', array('class' => '')); ?></li>
+         <li><?php echo $this->Paginator->sort('created', 'Recent', array('class' => '')); ?></li>
     </ul>
+  <?php endif; ?>
 
 
 

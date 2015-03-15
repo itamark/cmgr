@@ -25,6 +25,7 @@
             ],
             "watch": [
                 "app/webroot/src/less/main.less"
+
             ]
         }
     },

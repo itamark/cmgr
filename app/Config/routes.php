@@ -43,6 +43,8 @@
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/', array('controller' => 'items', 'action' => 'index'));
 	Router::connect('/recent', array('controller' => 'items', 'action' => 'recent'));
+	Router::connect('/questions', array('controller' => 'items', 'action' => 'questions'));
+	Router::connect('/articles', array('controller' => 'items', 'action' => 'articles'));
 	
 Router::connect(
    '/opauth-complete/*', 

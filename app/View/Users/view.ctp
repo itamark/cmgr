@@ -2,12 +2,18 @@
 <!--  <pre>
 <?php print_r($comments); ?>
 </pre>  -->
-<div class="row">
-  <div class="large-11 push-1 columns">
-  	<h3><?php echo $user['User']['first_name'].' '.$user['User']['last_name']; ?></h3>
-    <div class="large-2 pull-left"><img class="media-object" src="<?php echo $user['User']['image']; ?>"></div>
+<div class="row listing">
+  <div class="large-2 columns">
+       <img class="media-object" src="/img/users/<?php echo AuthComponent::user('id'); ?>.jpg" style="width:100%; border-radius:50%;">
+  </div>
+  <div class="large-10 columns">
+<h3><?php echo $user['User']['first_name'].' '.$user['User']['last_name']; ?></h3>
+<h5><?php echo $user['User']['headline']; ?></h5>
+  </div>
+<!--   <div class="large-12 columns">
+  	
     <div class="large-10 pull-right">
-      Headline: <?php echo $user['User']['headline']; ?>
+      Headline: 
 
 
     </div>
@@ -15,13 +21,13 @@
 
  </div>
   	
-  </div>
+  </div> -->
 </div>
 <hr>
 
 
-
-<div class="large-11 push-1 columns">
+<div class="row">
+<div class="large-12 columns">
 <ul class="tabs" data-tab>
   <li class="tab-title active"><a href="#panel11">Posts</a></li>
   <li class="tab-title"><a href="#panel21">Comments</a></li>
@@ -79,7 +85,7 @@
 
       </div>
       <div class="large-1 columns">
- <div class="pull-right"><img class="media-object img-circle" src="https://secure.gravatar.com/avatar/<?php echo md5(h($item['User']['email'])); ?>?s=50&d=mm"></div>
+ <div class="pull-right"><img class="media-object img-circle" src="/img/users/<?php echo $item['User']['id']; ?>.jpg"></div>
       </div>
 
     </div>
@@ -169,7 +175,7 @@
 
 
 
-
+ </div>
 
   </div>
   
