@@ -53,6 +53,22 @@ $this->paginate = array(
   $this->set(compact('items'));
 	}
 
+	public function questions() {
+		$this->Item->recursive = 2;	
+		$options = array('conditions' => array('Item.type' => 'question'));
+		$items = $this->Item->find('all', $options);
+$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$this->set('items', $sorted);
+	}
+
+	public function articles() {
+		$this->Item->recursive = 2;	
+		$options = array('conditions' => array('Item.type' => 'article'));
+		$items = $this->Item->find('all', $options);
+$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$this->set('items', $sorted);
+	}
+
 
 	public function recent() {
 		$this->Item->recursive = 2;	

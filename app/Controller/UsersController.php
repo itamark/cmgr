@@ -20,9 +20,12 @@ class UsersController extends AppController {
 );
 // if the user exists by email
 if ($this->User->hasAny($conditions)){
+
 	//log them in
 	$user = $this->User->find('first', array('User.email' => $this->data['auth']['info']['email']));
 	$id = $user['User']['id'];
+			copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
+
         $this->request->data['User'] = array_merge(
             $user['User'],
             array('id' => $id)
@@ -35,7 +38,7 @@ if ($this->User->hasAny($conditions)){
 // if the user does not exist
 else {
 	// create them
-	if ($this->request->is('post')) {
+	if ($this->request->is('post')) {	
 		$this->request->data['User']['linkedin_id'] = $this->data['auth']['uid'];
 		$this->request->data['User']['email'] = $this->data['auth']['info']['email'];
 		$this->request->data['User']['image'] = $this->data['auth']['info']['image'];
@@ -44,11 +47,12 @@ else {
 		$this->request->data['User']['last_name'] = $this->data['auth']['info']['last_name'];
 		$this->request->data['User']['headline'] = $this->data['auth']['info']['headline'];
 
-
 		$this->User->create();
 
 		if ($this->User->save($this->request->data)) {
 		$id = $this->User->id;
+		copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
+
         $this->request->data['User'] = array_merge(
             $this->request->data['User'],
             array('id' => $id)

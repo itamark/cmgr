@@ -81,11 +81,18 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <?php endif; ?>
 </li>
 <li class="module" style="">
+  <?php if( AuthComponent::user('id')): ?>
   <div style="  width: 100%;
  
-  text-align: center;"><img src="<?php echo AuthComponent::user('image'); ?>" style=" border-radius:50%;"></div>
+  text-align: center;"><img src="/img/users/<?php echo AuthComponent::user('id'); ?>.jpg" style=" border-radius:50%;"></div>
+<?php endif; ?>
   
-<div style="">Welcome<?php if(!AuthComponent::user('first_name')){ echo '!'; } else { echo ', '.AuthComponent::user('first_name').'!'; } ?></div>
+<div style="">Welcome<?php if(!AuthComponent::user('first_name')){ echo '!'; } else { echo ', '.AuthComponent::user('first_name').'!'; } ?><br>
+  <?php if(!AuthComponent::user('id')): ?>
+<p>CMGR gives community builders from all over the world a platform to share ideas and experience with one another.</p>
+<?php endif; ?>
+
+</div>
 </li>
 <!-- <li><a href="#">Jobs</a></li>
 <li><a href="#">Discussion</a></li>
