@@ -16,6 +16,7 @@ class InvitesController extends AppController {
     }
 
     public function invite(){
+        $this->layout = 'fullwidth';
     	if($this->request->is('post')){
     		if($this->Invite->save($this->request->data)){
                 
@@ -42,7 +43,27 @@ class InvitesController extends AppController {
 
     }
 
-   
+    public function invited($code = null){
+                $this->layout = 'fullwidth';
+
+      // Check if exists
+        if ($this->Invite->hasAny(array(
+    'Invite.invite_code' => $code
+))){
+               $invite = $this->Invite->find('first', array(
+        'conditions' => array('Invite.invite_code' => $code)
+    ));
+
+
+
+
+        } else {
+
+            die('nope');
+        }
+
+}
+
 
 //     public function vote() {
 //         if ($this->request->is('post')) {
