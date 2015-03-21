@@ -45,6 +45,9 @@
 	Router::connect('/recent', array('controller' => 'items', 'action' => 'recent'));
 	Router::connect('/questions', array('controller' => 'items', 'action' => 'questions'));
 	Router::connect('/articles', array('controller' => 'items', 'action' => 'articles'));
+	Router::connect('/admin/users', array('controller' => 'usersadmin', 'action' => 'index'));
+	Router::connect('/admin/items', array('controller' => 'itemsadmin', 'action' => 'index'));
+
 	
 Router::connect(
    '/opauth-complete/*', 

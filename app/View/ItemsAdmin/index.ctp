@@ -2,7 +2,7 @@
 <!--  <pre>
 <?php print_r($items); ?>
 </pre>  --> 
-
+<h2>Manage Posts</h2>
 <table>
   <thead>
     <tr>
@@ -40,7 +40,7 @@
         
  <a class="" data-dropdown="autoCloseExample" aria-controls="autoCloseExample" aria-expanded="false">Action &raquo;</a>
   <ul id="autoCloseExample" class="f-dropdown" data-dropdown-content tabindex="-1" aria-hidden="true" aria-autoclose="false" tabindex="-1">
-    <li><?php echo $this->Html->link('Unflag', array('controller' => 'items', 'action' => 'unflag', $item['Item']['id'])); ?></li>
+    <li><?php echo $this->Html->link('Unflag', array('controller' => 'items', 'action' => 'unflag', $item['Item']['id']), array('class'=> 'flag')); ?></li>
     <li><?php echo $this->Html->link('Remove', array('controller' => 'items', 'action' => 'remove', $item['Item']['id'])); ?></li>
     <li><a href="#">Yet another</a></li>
   </ul>

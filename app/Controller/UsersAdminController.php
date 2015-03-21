@@ -13,12 +13,11 @@ public function index() {
 		if (AuthComponent::user('role') != 'admin') {
 			throw new ForbiddenException("You're now allowed to do this.");
 		}
-				$this->User->recursive = 2;
-
+		$this->User->recursive = 2;
 		$users = $this->User->find('all');
-$sorted = Set::sort($users, '{n}.User.id', 'desc');
+		$sorted = Set::sort($users, '{n}.User.id', 'desc');
 		$this->set('users', $sorted);
-
+		$this->set('dataController', 'usersAdmin');
 	}
 
 
