@@ -2,4 +2,4 @@
 Please follow this link to sign up: http://www.cmgr.org/invites/invited/<?php echo $invite_code; ?>
 <br>
 See you there!<br>
-<?php echo $first_name; ?>
+<?php echo $invitor_name; ?>
