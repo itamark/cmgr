@@ -20,7 +20,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <!DOCTYPE html>
 <html class="<?php if($this->params['controller'] == 'users' && $this->params['action'] == 'login'){ echo 'login-page'; } ?>">
 <head>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.css">
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo 'CMGR' ?>:
@@ -68,6 +68,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <div id="slideout">
     </div> -->
 	<div id="container">
+    
 
 		<div id="content">
 
@@ -129,7 +130,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         'url' => array(
             'controller'=>'items',
             'action'=>'add'
-        ), 'class' => 'ajaxform'
+        ), 'class' => 'postForm ajaxform'
     )); ?>
     <h4><?php echo __('Post an Article'); ?></h4>
   <?php
@@ -146,7 +147,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         'url' => array(
             'controller'=>'items',
             'action'=>'add'
-        ), 'class' => 'ajaxform'
+        ), 'class' => 'postForm ajaxform'
     )); ?>
     <h4><?php echo __('Ask a Question'); ?></h4>
   <?php

@@ -21,6 +21,8 @@ Component.Flag = function($) {
 
                         if(response == 'flagged'){
                             $this.html('Flagged!')
+                        } else if(response == 'unflagged'){
+                            $this.html('Unflagged');
                         }
                         
                     },

@@ -10,6 +10,7 @@ class UsersController extends AppController {
 			throw new ForbiddenException("You're now allowed to do this.");
 		}
 		$this->User->recursive = 2;
+		$this->layout = 'admin';
 		$this->set('users', $this->paginate());
 	}
 
@@ -126,7 +127,7 @@ $this->User->recursive = 2;
 				$itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
             'Item.created' => 'desc'
         ));
-				$commentoptions = array('order' => array(
+				$commentoptions = array('conditions' => array('Comment.user_id' => $user['id']),'order' => array(
             'Comment.created' => 'desc'
         ));
 
@@ -216,7 +217,7 @@ $this->User->recursive = 2;
 			CakeLog::info('The user '.AuthComponent::user('username').' (ID: '.AuthComponent::user('id').') deleted user (ID: '.$this->User->id.')','users');
 
 			$this->Session->setFlash(__('User deleted'), 'flash_success');
-			$this->redirect(array('action' => 'index'));
+			$this->redirect(array('controller'=>'usersadmin', 'action' => 'index'));
 		}
 
 		$this->Session->setFlash(__('User was not deleted'), 'flash_fail');

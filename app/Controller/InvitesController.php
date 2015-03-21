@@ -19,15 +19,17 @@ class InvitesController extends AppController {
     	if($this->request->is('post')){
     		if($this->Invite->save($this->request->data)){
     			$invite = $this->Invite->read(null, $this->Invite->id);
-    			$email = new CakeEmail();
-			$email->template('invite', 'default')
-					->config('default')
-					->emailFormat('html')
-					->subject(__('You are invited to join ' . Configure::read('Application.name')))
-					->to($invite['Invite']['invitee_email'])
-					// ->from(Configure::read('Application.from_email'))
-					->from(AuthComponent::user('email'))
-					->send();
+   //  			$email = new CakeEmail();
+			// $email->template('invite', 'default')
+			// 		->config('default')
+			// 		->emailFormat('html')
+			// 		->subject(__('You are invited to join ' . Configure::read('Application.name')))
+			// 		->to($invite['Invite']['invitee_email'])
+			// 		// ->from(Configure::read('Application.from_email'))
+			// 		->from(AuthComponent::user('email'))
+			// 		->send();
+
+    			CakeEmail::deliver($invite['Invite']['invitee_email'], 'Subject', 'Message', array('from' => 'itamar@cmgr.org'));
 
     		}
     	}

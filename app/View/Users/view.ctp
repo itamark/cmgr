@@ -31,8 +31,8 @@
 <ul class="tabs" data-tab>
   <li class="tab-title active"><a href="#panel11">Posts</a></li>
   <li class="tab-title"><a href="#panel21">Comments</a></li>
-  <li class="tab-title"><a href="#panel31">Upvotes</a></li>
-</ul>
+<!--   <li class="tab-title"><a href="#panel31">Upvotes</a></li>
+ --></ul>
 <div class="tabs-content">
 
   <!-- begin Posts Tab -->

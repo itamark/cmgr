@@ -11,7 +11,7 @@ public $uses = array('Item', 'Upvote');
 
 public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'view', 'recent', 'flag');
+		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag');
 	}
 
 
@@ -182,15 +182,21 @@ if($this->request->is('post')){
 		
 	}
 
-	public function unflag($item_id = null){
-		$this->layout = false;
-		$this->Item->read(null, $item_id);
-		$this->Item->set(array(
-			'flagged' => false
-			));
-		if($this->Item->save()){
-			die('unflagged');
-		}
+		public function unflag($item_id = null){
+
+if($this->request->is('post')){
+	die('ohi');
+	// $this->layout = false;
+
+	// 	$this->Item->read(null, $item_id);
+	// 	$this->Item->set(array(
+	// 		'flagged' => false
+	// 		));
+	// 	if($this->Item->save()){
+	// 		die('unflagged');
+	// 	} 
+}
+		
 	}
 
 	public function remove($item_id = null){
@@ -199,7 +205,12 @@ if($this->request->is('post')){
 			'removed' => true,
 			'live' => false
 			));
-		$this->Item->save();
+		if($this->Item->save()){
+			$this->redirect(array('action' => 'index'));
+		} else {
+
+		}
+		
 	}
 
 

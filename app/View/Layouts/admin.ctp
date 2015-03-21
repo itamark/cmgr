@@ -50,7 +50,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('script');
 	?>
 </head>
-<body>
+<body data-controller="<?php echo @$dataController; ?>">
 
 
 
@@ -68,7 +68,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 		<div id="content">
 
-			<div class="container large-12 medium-9 small-12 push-1 columns">
+			<div class="container large-12 medium-9 small-12 columns">
 
 			<?php echo $this->Session->flash(); ?>
 

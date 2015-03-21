@@ -22,7 +22,10 @@ $(document).on('submit', 'form.ajaxform', function(e){
                     success: function(response, textStatus, jqXHR) {
 
                         console.log('success');
-                        switch ($this.attr('id')) {
+                        if($this.attr('class') == 'postForm'){
+                            postItem(response);
+                        } else {
+                            switch ($this.attr('id')) {
                             case 'ItemIndexForm':
                                 postItem(response);
                                 break;
@@ -35,6 +38,8 @@ $(document).on('submit', 'form.ajaxform', function(e){
                                 postComment(response);
                                 break;
                         }
+                        }
+                        
                     },
                     error: function(jqXHR, data, errorThrown) {
                         console.log(jqXHR);
