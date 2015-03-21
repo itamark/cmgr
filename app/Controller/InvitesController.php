@@ -18,18 +18,24 @@ class InvitesController extends AppController {
     public function invite(){
     	if($this->request->is('post')){
     		if($this->Invite->save($this->request->data)){
+                
     			$invite = $this->Invite->read(null, $this->Invite->id);
-   //  			$email = new CakeEmail();
-			// $email->template('invite', 'default')
-			// 		->config('default')
-			// 		->emailFormat('html')
-			// 		->subject(__('You are invited to join ' . Configure::read('Application.name')))
-			// 		->to($invite['Invite']['invitee_email'])
-			// 		// ->from(Configure::read('Application.from_email'))
-			// 		->from(AuthComponent::user('email'))
-			// 		->send();
+                // die(print_r($invite['Invite']['invite_code']));
+    			$email = new CakeEmail();
+			     $email->template('invite', 'default')
+					->config('default')
+					->emailFormat('html')
+                    ->viewVars(array(
+                        'invite_code' => $invite['Invite']['invite_code'],
+                        'invitor name' => AuthComponent::user('first_name')
+                        ))
+					->subject(__(AuthComponent::user('first_name'). 'invited you to join CMGR'))
+					->to($invite['Invite']['invitee_email'])
+					// ->from(Configure::read('Application.from_email'))
+					->from(AuthComponent::user('email'))
+					->send();
 
-    			CakeEmail::deliver($invite['Invite']['invitee_email'], 'Subject', 'Message', array('from' => 'itamar@cmgr.org'));
+    			// CakeEmail::deliver($invite['Invite']['invitee_email'], 'Subject', 'Message', array('from' => 'itamar@cmgr.org'));
 
     		}
     	}
