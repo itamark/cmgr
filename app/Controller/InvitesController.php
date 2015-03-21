@@ -29,7 +29,7 @@ class InvitesController extends AppController {
                         'invite_code' => $invite['Invite']['invite_code'],
                         'invitor_name' => AuthComponent::user('first_name')
                         ))
-					->subject(__(AuthComponent::user('first_name'). 'invited you to join CMGR'))
+					->subject(__(AuthComponent::user('first_name').' invited you to join CMGR'))
 					->to($invite['Invite']['invitee_email'])
 					// ->from(Configure::read('Application.from_email'))
 					->from(AuthComponent::user('email'))
