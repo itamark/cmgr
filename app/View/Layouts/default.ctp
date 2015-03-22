@@ -20,7 +20,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <!DOCTYPE html>
 <html class="<?php if($this->params['controller'] == 'users' && $this->params['action'] == 'login'){ echo 'login-page'; } ?>">
 <head>
-  <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo 'CMGR' ?>:
