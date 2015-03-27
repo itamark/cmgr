@@ -25,8 +25,9 @@ if ($this->User->hasAny($conditions)){
 	//log them in
 	$user = $this->User->find('first', array('User.email' => $this->data['auth']['info']['email']));
 	$id = $user['User']['id'];
+			if(isset($this->data['auth']['info']['image'])){
 			copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
-
+			}
         $this->request->data['User'] = array_merge(
             $user['User'],
             array('id' => $id)
@@ -42,7 +43,9 @@ else {
 	if ($this->request->is('post')) {	
 		$this->request->data['User']['linkedin_id'] = $this->data['auth']['uid'];
 		$this->request->data['User']['email'] = $this->data['auth']['info']['email'];
-		$this->request->data['User']['image'] = $this->data['auth']['info']['image'];
+		if(isset($this->data['auth']['info']['image'])){
+					$this->request->data['User']['image'] = $this->data['auth']['info']['image'];
+		}
 		$this->request->data['User']['username'] = $this->data['auth']['uid'];
 		$this->request->data['User']['first_name'] = $this->data['auth']['info']['first_name'];
 		$this->request->data['User']['last_name'] = $this->data['auth']['info']['last_name'];
@@ -52,7 +55,10 @@ else {
 
 		if ($this->User->save($this->request->data)) {
 		$id = $this->User->id;
-		copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
+		if(isset($this->data['auth']['info']['image'])){
+			copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
+		}
+		
 
         $this->request->data['User'] = array_merge(
             $this->request->data['User'],

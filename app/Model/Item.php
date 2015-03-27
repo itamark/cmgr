@@ -24,10 +24,12 @@ class Item extends AppModel {
 );
 
  public function afterFind($results, $primary = false){
-	parent::afterFind($results, $primary);
-	
-	foreach ($results as $key => $val) {
 
+	parent::afterFind($results, $primary);
+
+
+
+	foreach ($results as $key => $val) {
         $results[$key]['Item']['upvotes'] = $this->Upvote->find('count', array(
         'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'])
     ));

@@ -4,7 +4,7 @@
 </pre>  -->
 <div class="row listing">
   <div class="large-2 columns">
-       <img class="media-object" src="/img/users/<?php echo AuthComponent::user('id'); ?>.jpg" style="width:100%; border-radius:50%;">
+       <img class="media-object" src="/img/users/<?php echo $user['User']['id']; ?>.jpg" style="width:100%; border-radius:50%;">
   </div>
   <div class="large-10 columns">
 <h3><?php echo $user['User']['first_name'].' '.$user['User']['last_name']; ?></h3>

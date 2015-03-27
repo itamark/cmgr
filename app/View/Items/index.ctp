@@ -93,61 +93,6 @@
         </div>
       </div>
     </div>
-    <!--   <?php echo $item['Item']['score']; ?>
-    --> <!-- <div class="row">
-      <div class="large-12 columns">
-        <?php $comments = count(h($item['Comment'])); ?>
-        <div class="row listing">
-          <div class="large-11 columns">
-            <h3>
-            <?php if($item['Item']['type'] == 'article'): ?>
-            <a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?>
-            <small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>
-            <?php elseif($item['Item']['type'] == 'question'): ?>
-            <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo h($item['Item']['title']); ?></a>
-            <?php endif; ?>
-            </h3>
-            <div class="upvote pull-left">
-              <?php if (AuthComponent::user('id')): ?>
-              <span class="glyphicon glyphicon-arrow-up pull-left upvotearrow
-                <?php if($item['Item']['upvoted']){
-                echo 'upvoted';
-                } ?>"
-                
-              hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
-              <?php else: ?>
-              <span href="#" data-reveal-id="mustBeModal">&#9650;</span>
-              <?php endif; ?>
-              
-              <br>
-              <span class="votecount">
-                <?php echo $item['Item']['upvotes'] ?>
-              </span>
-            </div>
-          </div>
-          <div class="large-1 columns">
-            <i class="fa fa-<?php if($item['Item']['type'] == 'question'){ echo 'question'; } else { echo 'link'; } ?>"></i>
-            <div class="clearfix">
-              <h2>
-              <?php if($item['Item']['type'] == 'article'): ?>
-              <a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?>
-              <small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>
-              <?php elseif($item['Item']['type'] == 'question'): ?>
-              <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo h($item['Item']['title']); ?></a>
-              <?php endif; ?>
-              <h2>
-            </div>
-            <small>Submitted <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?> by
-            <?php echo $this->Html->link($item['User']['first_name'].' '.$item['User']['last_name'], array('controller' => 'users', 'action' => 'view', $item['User']['username'])); ?>
-            | <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($comments != 1){echo 's';} ?>
-            </a> <?php echo $this->Html->link('Flag', array('controller' => 'items', 'action' => 'flag', $item['Item']['id'])); ?></small>
-          </div>
-          <div class="large-1 columns">
-            <div class="pull-right"><img class="media-object img-circle" src="https://secure.gravatar.com/avatar/<?php echo md5(h($item['User']['email'])); ?>?s=50&d=mm"></div>
-          </div>
-          <hr>
-        </div>
-      </div>
-    </div> -->
+
     <?php endforeach; ?>
     <?php echo $this->Paginator->numbers(); ?>
