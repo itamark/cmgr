@@ -70,13 +70,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<div id="container">
     
 
-		<div id="content">
 
-      <div class="large-4 medium-4 push-8 columns">
+      <div class="large-3 medium-3 columns">
 <ul class="side-nav">
 <li>
   <?php if (AuthComponent::user('id')): ?>
-  <a href="#" class="button small right-off-canvas-toggle" style="  width: 100%;">Submit a Question or Link</a>
+  <a href="#" class="button small left-off-canvas-toggle" style="  width: 100%;">Submit a Question or Link</a>
 <?php else: ?>
       <a href="#" data-reveal-id="mustBeModal" class="button small"  style="  width: 100%;">Submit a Question or Link</a>
     <?php endif; ?>
@@ -92,7 +91,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   <?php if(!AuthComponent::user('id')): ?>
 <p>CMGR gives community builders from all over the world a platform to share ideas and experience with one another.</p>
 <?php endif; ?>
-
+<ul class="list">
+  <li><?php echo $this->Paginator->sort('score', 'Trending', array('direction' => 'desc')); ?></li>
+  <li><?php echo $this->Paginator->sort('created', 'Latest', array('direction' => 'desc')); ?></li>
+  <li><a href="#">Must Read</a></li>
+  <li><a href="#">Events</a></li>
+<!--   <li><a href="#">Link 5</a></li>
+ --></ul>
 </div>
 </li>
 <!-- <li><a href="#">Jobs</a></li>
@@ -103,19 +108,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </ul>
 
 </div>
-  </div>
-  <div id="mustBeModal" class="reveal-modal" data-reveal>
-  <h2>You must be logged in</h2>
- <!--  <?php echo $this->element('form_login') ?> -->
- <a href="/auth/linkedin"><img src="/img/Sign-in-Large---Default.png"></a>
-</div>
-<div id="loginModal" class="reveal-modal" data-reveal>
-  <h2>Login</h2>
- <a href="/auth/linkedin"><img src="/img/Sign-in-Large---Default.png"></a>
-</div>
-      
+ 
 
-      <aside class="right-off-canvas-menu">
+
+      <aside class="left-off-canvas-menu ">
         
         <div class="row">
           <div class="large-12 columns">
@@ -169,8 +165,17 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 
     </aside>
+     <div id="mustBeModal" class="reveal-modal" data-reveal>
+  <h2>You must be logged in</h2>
+ <!--  <?php echo $this->element('form_login') ?> -->
+ <a href="/auth/linkedin"><img src="/img/Sign-in-Large---Default.png"></a>
+</div>
+<div id="loginModal" class="reveal-modal" data-reveal>
+  <h2>Login</h2>
+ <a href="/auth/linkedin"><img src="/img/Sign-in-Large---Default.png"></a>
+</div>
     <a class="exit-off-canvas"></a>
-			<div class="container large-8 medium-8 small-12 pull-4 columns">
+			<div class="container large-9 medium-9 small-12 columns">
 
 			<?php echo $this->Session->flash(); ?>
 
