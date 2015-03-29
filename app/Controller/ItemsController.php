@@ -148,15 +148,19 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 				// $this->updateScore($this->Item->id);
 				$this->Item->Upvote->save($this->request->data);
 				$this->request->data['new_id'] = $this->Item->id;
+								$this->Session->setFlash(__('Saved!'));
+
 				header('Content-type: application/json');
-				die(json_encode($this->request->data));
+				// die(json_encode($this->request->data));
 			} else {
 				$this->Session->setFlash(__('The item could not be saved. Please, try again.'));
 			}
 		}
 		$users = $this->Item->User->find('list');
 		$this->set(compact('users'));
-		$this->layout = false;
+					$this->redirect(array('action' => 'index'));
+
+		// $this->layout = false;
 	}
 
 	public function updateScore($id){

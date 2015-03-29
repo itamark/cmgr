@@ -60,9 +60,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   <div class="contain-to-grid">
       <?php echo $this->element('nav'); ?>
 </div>
-  <div class="contain-to-grid subnav">
-      <?php echo $this->element('subnav'); ?>
-</div>
+  
 
 <!--     <div class="overlaybackground"><div id="commentcontainer"></div></div>
     <div id="slideout">
@@ -73,12 +71,38 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
       <div class="large-3 medium-3 columns">
 <ul class="side-nav">
-<li>
+<!-- <li>
   <?php if (AuthComponent::user('id')): ?>
   <a href="#" class="button small left-off-canvas-toggle" style="  width: 100%;">Submit a Question or Link</a>
 <?php else: ?>
       <a href="#" data-reveal-id="mustBeModal" class="button small"  style="  width: 100%;">Submit a Question or Link</a>
     <?php endif; ?>
+</li> -->
+<li>
+<div id="mc_embed_signup" class="row listing alert-box info radius" data-alert>
+      <form action="http://cmgr.us9.list-manage.com/subscribe/post?u=a79d5f301ae99a362a69ea02b&amp;id=1f26e7205f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+          <h5>Sign up for our newsletter!</h5>
+          <div class="mc-field-gr oup" style="float:left;">
+            
+            <div class="row collapse">
+              <div class="small-10 columns">
+                <input type="email" value="" name="EMAIL" placeholder="Email" class="required email" style="" id="mce-EMAIL">
+              </div>
+              <div class="small-2 columns">
+                <input type="submit" value="Go" name="subscribe" id="mc-embedded-subscribe" class="button small postfix"></div>
+              </div>
+            </div>
+          </div>
+          <div id="mce-responses" class="clear">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;"><input type="text" name="b_a79d5f301ae99a362a69ea02b_1f26e7205f" tabindex="-1" value=""></div>
+            
+          </form>
+          <a href="#" class="close">&times;</a>
+        </div>
 </li>
 <li class="module" style="">
   <?php if( AuthComponent::user('id')): ?>

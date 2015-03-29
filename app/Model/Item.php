@@ -15,6 +15,11 @@ class Item extends AppModel {
   {
   	$this->data['Item']['user_id'] = AuthComponent::user('id');
   	// if the article url doesn't have a host - give it one.
+  	if(isset($this->data['Item']['url'])){
+  		$this->data['Item']['type'] = 'article';
+  	} else {
+  		$this->data['Item']['type'] = 'question';
+  	}
   	if($this->data['Item']['type'] == 'article' && mb_substr($this->data['Item']['url'], 0, 4) !== 'http') $this->data['Item']['url'] = 'http://' . $this->data['Item']['url'];
   }
 
@@ -37,7 +42,13 @@ class Item extends AppModel {
         'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'], 'Upvote.user_id' => AuthComponent::user('id'))
     ));
 		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvotes'], strtotime($val['Item']['created']));		
+    
+// $results[$key]['Comments']
+
+
     }
+
+    
     // $results = Set::sort($results, '{n}.Item.score', 'desc');
 
     return $results;

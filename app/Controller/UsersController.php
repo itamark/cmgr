@@ -15,15 +15,15 @@ class UsersController extends AppController {
 	}
 
 	public function opauth_complete(){
-		 // debug($this->data);
+		  
 		$conditions = array(
-    'User.email' => $this->data['auth']['info']['email']
+    'User.username' => $this->data['auth']['uid']
 );
 // if the user exists by email
 if ($this->User->hasAny($conditions)){
-
+//debug($this->data);
 	//log them in
-	$user = $this->User->find('first', array('User.email' => $this->data['auth']['info']['email']));
+	$user = $this->User->find('first', array('conditions' => array('User.username' => $this->data['auth']['uid'])));
 	$id = $user['User']['id'];
 			if(isset($this->data['auth']['info']['image'])){
 			copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
