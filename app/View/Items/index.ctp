@@ -40,44 +40,10 @@
       
     <?php //echo $this->Paginator->sort('created', 'Recent'); ?>
     <?php foreach ($items as $item): ?>
- <div class="row listing">
-        <?php $comments = count(h($item['Comment'])); ?>
-          <div class="large-2 columns">
-            <img src="/img/users/<?php echo h($item['Item']['user_id']); ?>.jpg">  
-          </div>
-          <div class="large-10 columns">
-            <div class="row">
-              <div class="large-12 columns">
-                <?php echo h($item['User']['first_name']); ?> <?php echo h($item['User']['last_name']); ?>
-              </div>
-            </div>
-            <div class="row">
- <div class="large-12 columns">
-            <small><?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?></small>  
+      <?php echo $this->element('post', array(
+    "item" => $item
+)) ?>
 
-              </div>
-            </div>
-
-          </div>
-          <div class="large-12 columns">
-            <?php echo h($item['Item']['post_comment']); ?>
-          </div>
-          <hr>
-
-          
-          <?php 
-$commentors = array();
-          foreach($item['Comment'] as $comment){
-if ( in_array($comment['user_id'], $commentors) ) {
-        continue;
-    }
-    $commentors[] = $comment['user_id'];
-echo '<img src="/img/users/'.$comment['user_id'].'.jpg" style="width:30px; border-radius:50%;" title="'.$comment['User']['first_name'].' '.$comment['User']['last_name'].'">';
-          } ?>
-          
-
-  
-    </div>
 
 
 
