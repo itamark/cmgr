@@ -12,7 +12,6 @@
 
   <?php if (AuthComponent::user('id')): ?>
 <div class="row listing">
-  
  <?php echo $this->Form->create('Item', array(
         'url' => array(
             'controller'=>'items',

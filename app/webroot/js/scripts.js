@@ -302,8 +302,8 @@ $(document).on('submit', 'form.ajaxform', function(e){
                     url: $this.attr('action'),
                     data: $this.serialize(),
                     success: function(response, textStatus, jqXHR) {
-
-                        console.log('success');
+ // console.log(response.Comment.item_id);
+                    //    console.log('success');
                         if($this.attr('class') == 'postForm'){
                             postItem(response);
                         } else {
@@ -316,7 +316,8 @@ $(document).on('submit', 'form.ajaxform', function(e){
                                 break;
                             case 'UserAddForm':
                                 userReg();
-                            case 'CommentViewForm':
+                            case 'CommentIndexForm'+response.Comment.item_id:
+                             console.log(response.Comment.item_id);
                                 postComment(response);
                                 break;
                         }
@@ -334,7 +335,7 @@ $(document).on('submit', 'form.ajaxform', function(e){
                                 break;
                             case 'UserAddForm':
                                 userReg();
-                            case 'CommentViewForm':
+                            case 'CommentIndexForm':
                                 postComment(response);
                                 break;
                         }
@@ -366,8 +367,11 @@ $(document).on('submit', 'form.ajaxform', function(e){
    }
 
     var postComment = function(response){
+        console.log(response.Comment.item_id);
         $('textarea').val('');
-        $('#commentsview').load('/items/view_comments/'+response.Comment.item_id);  
+        // $('#commentsview').load('/items/view_comments/'+response.Comment.item_id);  
+        $('.commentsview#commentsview'+response.Comment.item_id).load('/items/view_comments/'+response.Comment.item_id);  
+
     }
 
 

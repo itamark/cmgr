@@ -37,8 +37,13 @@
             <?php echo h($item['Item']['post_comment']); ?>
           </div>
           <hr>
+<div class="large-12 columns">
+<span class="count-icon">
+    <i class="fa fa-2x fa-comment"></i>
+    <span class="count"><?php echo $comments; ?></span>
+</span>
 
-          
+
           <?php 
 $commentors = array();
           foreach($item['Comment'] as $comment){
@@ -46,22 +51,30 @@ if ( in_array($comment['user_id'], $commentors) ) {
         continue;
     }
     $commentors[] = $comment['user_id'];
+echo '<a href="/users/view/'.$comment['User']['username'].'">';
 echo '<img src="/img/users/'.$comment['user_id'].'.jpg" style="width:30px; border-radius:50%;" title="'.$comment['User']['first_name'].' '.$comment['User']['last_name'].'">';
+echo '</a>';
           } ?>
           
 
   <?php if (AuthComponent::user('id')): ?>
-	<?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'), 'class' => 'ajaxform')); ?>
+  
+	<?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'), 'class' => 'ajaxform', 'id' => 'CommentIndexForm'.$item['Item']['id'])); ?>
 	<?php
 		echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
 		echo $this->Form->input('user_id', array('default' => h($item['User']['id']), 'type' => 'hidden'));
-		echo $this->Form->input('comment_txt', array('label' => false, 'placeholder' => 'What do you think?'));
+		echo $this->Form->input('comment_txt', array('label' => false, 'placeholder' => 'What do you think?', 'rows' => '1'));
 	?>
 <?php echo $this->Form->end(__('Submit')); ?>
 <?php endif; ?>
+
+<div class="commentsview" id="commentsview<?php echo $item['Item']['id']; ?>">
 <div>
 	<?php foreach($item['Comment'] as $comment): ?>
 	<?php echo $comment['comment_txt'].'<br>'; ?>
 <?php endforeach; ?>
 </div>
+  </div>
+</div>
+
     </div> 
