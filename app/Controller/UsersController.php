@@ -145,6 +145,7 @@ $this->User->recursive = 2;
 				$this->set('items', $this->User->Item->find('all', $itemoptions));
 				$this->set('comments', $this->User->Comment->find('all', $commentoptions));
 				$this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));
+				$this->layout = 'fullwidth';
 
 	}
 

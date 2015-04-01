@@ -53,6 +53,28 @@ $this->paginate = array(
   $this->set(compact('items'));
 	}
 
+	/**
+ * index metfhknmnmmn/;//mnhod
+ *
+ * @return void
+ */
+public function must_read() {
+ 		$this->Item->recursive = 2;
+$this->paginate = array(
+	'conditions' => array(
+         'Item.removed' => false,
+         'Item.must_read' => true
+    ),
+    'limit' => 10,
+    'order' => array( // sets a default order to sort by
+      'Item.score' => 'desc'	
+    )
+  );
+  $items = $this->paginate('Item');
+  $this->set(compact('items'));
+   $this->layout = 'fullwidth';
+	}
+
 	public function questions() {
 		$this->Item->recursive = 2;	
 		$options = array('conditions' => array('Item.type' => 'question'));
@@ -179,6 +201,7 @@ if($this->request->is('post')){
 		$this->Item->set(array(
 			'flagged' => true
 			));
+		debug($this->Item->save());
 		if($this->Item->save()){
 			die('flagged');
 		} 

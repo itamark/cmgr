@@ -71,10 +71,10 @@
 <div class="clearfix">
 
   <?php if($item['Item']['type'] == 'article'): ?>
-  <a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['title']); ?>
+  <a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['post_comment']); ?>
   <small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>
  <?php elseif($item['Item']['type'] == 'question'): ?>
-  <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo h($item['Item']['title']); ?></a>
+  <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo h($item['Item']['post_comment']); ?></a>
  <?php endif; ?>
 </div>
 

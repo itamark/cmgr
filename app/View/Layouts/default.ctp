@@ -118,7 +118,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <ul class="list">
   <li><?php echo $this->Paginator->sort('score', 'Trending', array('direction' => 'desc')); ?></li>
   <li><?php echo $this->Paginator->sort('created', 'Latest', array('direction' => 'desc')); ?></li>
-  <li><a href="#">Must Read</a></li>
+  <li><a href="/items/must_read">Must Read</a></li>
   <li><a href="#">Events</a></li>
 <!--   <li><a href="#">Link 5</a></li>
  --></ul>
