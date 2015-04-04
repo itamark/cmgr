@@ -24,10 +24,10 @@ if ($this->User->hasAny($conditions)){
 //debug($this->data);
 	//log them in
 	$user = $this->User->find('first', array('conditions' => array('User.username' => $this->data['auth']['uid'])));
-	$id = $user['User']['id'];
-			if(isset($this->data['auth']['info']['image'])){
-			copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
-			}
+        $id = $user['User']['id'];
+                        if(isset($this->data['auth']['info']['image'])){
+                        copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
+                        }
         $this->request->data['User'] = array_merge(
             $user['User'],
             array('id' => $id)
