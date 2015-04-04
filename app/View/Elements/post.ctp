@@ -1,5 +1,4 @@
-
-  <div class="row listing">
+<div class="row listing">
         <?php $comments = count(h($item['Comment'])); ?>
         <div class="large-1 columns"> 
 <div class="upvote pull-left">
@@ -33,9 +32,22 @@
            
 
           </div>
+          
           <div class="large-12 columns">
             <?php echo h($item['Item']['post_comment']); ?>
           </div>
+           <?php if(!empty($item['Item']['preview_img'])): ?>
+          <a class="large-12 columns preview_link" href="<?php echo $item['Item']['preview_link']; ?>" style="border: 1px solid grey;">
+           
+            <div href="#" class="large-4 columns">
+ <img src="<?php echo $item['Item']['preview_img']; ?>">
+            </div>
+            <div href="#" class="large-8 columns">
+           <h6><?php echo $item['Item']['preview_title']; ?></h6>
+           <small><?php echo $item['Item']['preview_txt']; ?></small>
+            </div>
+          </a>
+            <?php endif; ?>
           <hr>
 <div class="large-12 columns">
 <span class="count-icon">
