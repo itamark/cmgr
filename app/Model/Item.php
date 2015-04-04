@@ -21,6 +21,22 @@ class Item extends AppModel {
   		$this->data['Item']['type'] = 'question';
   	}
   	if($this->data['Item']['type'] == 'article' && mb_substr($this->data['Item']['url'], 0, 4) !== 'http') $this->data['Item']['url'] = 'http://' . $this->data['Item']['url'];
+  
+
+// this adds a preview image - if it exists
+$regex = '/https?\:\/\/[^\" ]+/i';
+$string = $this->data['Item']['post_comment'];
+preg_match($regex, $string, $matches);
+if(isset($matches[0])){
+	//die(print_r($this->setPreview($matches[0])));
+	$preview = $this->setPreview($matches[0]);
+	$this->data['Item']['preview_link'] = $matches[0];
+	$this->data['Item']['preview_title'] = $preview['title'];
+	$this->data['Item']['preview_txt'] = $preview['description'];
+	$this->data['Item']['preview_img'] = $preview['image'];
+}
+
+
   }
 
     public $virtualFields = array(
@@ -72,6 +88,21 @@ class Item extends AppModel {
     $seconds = $date - 1134028003;
 
     return round($sign * $order + $seconds / 45000, 7);
+  }
+
+   public function setPreview($url)
+  {
+App::import('Vendor', 'OpenGraph', array('file' => 'OpenGraph.php'));
+$ograph = new OpenGraph();
+$graph = $ograph->fetch($url);
+
+$returned = [
+    "image" => $graph->image,
+    "title" => $graph->title,
+    "description" => str_split($graph->description, 100)[0],
+];
+
+return $returned;
   }
 
 

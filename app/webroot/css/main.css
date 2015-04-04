@@ -57,6 +57,15 @@ ul.list {
 .listing.row .upvote {
   text-align: center;
 }
+.listing.row .preview_link:after {
+  content: ' ';
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 .reveal-modal {
   width: 60%;
   max-width: 62.5em;
