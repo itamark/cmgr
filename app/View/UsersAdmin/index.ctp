@@ -33,17 +33,8 @@
           <td width="150px">
             <?php echo $this->Html->link(__('View'),'/users/view/'.$user['User']['username']) ?> |
             <?php echo $this->Html->link(__('Edit'),'/users/edit/'.$user['User']['id']) ?> |
-            <?php echo $this->Html->link(
-              __('Delete'),
-              '#UsersModal',
-              array(
-                'class' => 'btn-remove-modal',
-                'data-toggle' => 'modal',
-                'role'  => 'button',
-                'data-uid' => $user['User']['id'],
-                'data-uname' => $user['User']['username']
-              ));
-            ?>
+            <?php echo $this->Html->link(__('Delete'),'/users/delete/'.$user['User']['id']) ?> |
+
           </td>
         </tr>
         <?php } ?>
@@ -53,21 +44,5 @@
 </div>
 
 
-<div class="modal fade" id="UsersModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 id="myModalLabel"><?php echo __('Remove user') ?></h4>
-      </div>
-      <div class="modal-body">
-        <p><?php echo __('Are you sure you want to delete the user ') ?><span class="label-uname strong"></span> ?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Cancel') ?></button>
-        <?php echo $this->Html->link(__('Delete'),'/users/delete/#{uid}',array('class' => 'btn btn-danger delete-user-link')) ?>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+
 

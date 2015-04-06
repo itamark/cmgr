@@ -107,6 +107,19 @@ class User extends AppModel
       'finderQuery' => '',
       'counterQuery' => ''
     ),
+    'Invite' => array(
+      'className' => 'Invite',
+      'foreignKey' => 'referrer_id',
+      'dependent' => false,
+      'conditions' => '',
+      'fields' => '',
+      'order' => '',
+      'limit' => '',
+      'offset' => '',
+      'exclusive' => '',
+      'finderQuery' => '',
+      'counterQuery' => ''
+    ),
     'Upvote'=> array()
   );
 

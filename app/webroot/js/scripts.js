@@ -231,6 +231,55 @@ Component.Comments = function($) {
 
 }(jQuery);
 
+
+Component.Flag = function($) {
+
+    var config = {
+        page: ""
+    };
+
+    // PUBLIC..................................................................
+    var init = function(page, options) {
+        config.page = page;
+        config = App.Utils.extend(options, config);
+        
+ $(document).on("click",".flag",function(e) {
+    e.preventDefault();
+    $this = $(this);
+        console.log($this.attr('href'));
+        $.ajax({
+                    type: 'post',
+                    url: $this.attr('href'),
+                    success: function(response, textStatus, jqXHR) {
+
+                        if(response == 'flagged'){
+                            $this.html('Flagged!')
+                        } else if(response == 'unflagged'){
+                            $this.html('Unflagged');
+                        }
+                        
+                    },
+                    error: function(jqXHR, data, errorThrown) {
+                        console.log(jqXHR);
+                    }
+                });
+    });
+    };
+
+    var foobar = function() { };
+
+    // PRIVATE.................................................................
+
+    var dbug = function(enabled) {};
+
+    // PUBLIC INTERFACE........................................................
+    return {
+        init: init,
+        foobar: foobar
+    };
+
+}(jQuery);
+
 Component.Forms = function($) {
 
     var config = {
@@ -253,9 +302,12 @@ $(document).on('submit', 'form.ajaxform', function(e){
                     url: $this.attr('action'),
                     data: $this.serialize(),
                     success: function(response, textStatus, jqXHR) {
-
-                        console.log('success');
-                        switch ($this.attr('id')) {
+ // console.log(response.Comment.item_id);
+                    //    console.log('success');
+                        if($this.attr('class') == 'postForm'){
+                            postItem(response);
+                        } else {
+                            switch ($this.attr('id')) {
                             case 'ItemIndexForm':
                                 postItem(response);
                                 break;
@@ -264,10 +316,13 @@ $(document).on('submit', 'form.ajaxform', function(e){
                                 break;
                             case 'UserAddForm':
                                 userReg();
-                            case 'CommentViewForm':
+                            case 'CommentIndexForm'+response.Comment.item_id:
+                             console.log(response.Comment.item_id);
                                 postComment(response);
                                 break;
                         }
+                        }
+                        
                     },
                     error: function(jqXHR, data, errorThrown) {
                         console.log(jqXHR);
@@ -280,7 +335,7 @@ $(document).on('submit', 'form.ajaxform', function(e){
                                 break;
                             case 'UserAddForm':
                                 userReg();
-                            case 'CommentViewForm':
+                            case 'CommentIndexForm':
                                 postComment(response);
                                 break;
                         }
@@ -312,8 +367,11 @@ $(document).on('submit', 'form.ajaxform', function(e){
    }
 
     var postComment = function(response){
+        console.log(response.Comment.item_id);
         $('textarea').val('');
-        $('#commentsview').load('/items/view_comments/'+response.Comment.item_id);  
+        // $('#commentsview').load('/items/view_comments/'+response.Comment.item_id);  
+        $('.commentsview#commentsview'+response.Comment.item_id).load('/items/view_comments/'+response.Comment.item_id);  
+
     }
 
 
@@ -373,12 +431,13 @@ Component.Upvotes = function($) {
 $(document).on('click', '.upvotearrow', function(e){
      e.preventDefault();
      var $this = $(this);
+
             $.ajax({
                     type: 'post',
                     url: '/upvotes/vote',
                     data: {item_id : $this.attr('id').split('-')[1]},
                     success: function(response, textStatus, jqXHR) {
-
+console.log(response);
 $this.next().next().html(response.count);
 $this.toggleClass('upvoted');
 
@@ -396,6 +455,7 @@ $this.toggleClass('upvoted');
                         // }
                     },
                     error: function(jqXHR, data, errorThrown) {
+                        console.log(data);
                         console.log(jqXHR);
                     }
                 });
@@ -445,6 +505,27 @@ $this.toggleClass('upvoted');
 
 }(); */
 
+ Controller['usersAdmin'] = function($) {
+
+    var config = {
+        page: ""
+    };
+
+    // PUBLIC..................................................................
+    var init = function(page) {
+        config.page = page;
+    };
+
+    // PRIVATE.................................................................
+    var dbug = function(enabled) {};
+
+    // PUBLIC INTERFACE........................................................
+    return {
+        init: init
+    };
+
+}(); 
+
  Controller['users_add'] = function($) {
 
     var config = {
@@ -490,6 +571,7 @@ $(function() {
     Component.Comments.init($page, {});
    }
    Component.Upvotes.init($page, {});
+   Component.Flag.init($page, {});
 
     // Global Components Init()
      // Component.Overlay.init($page, {});

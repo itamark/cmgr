@@ -2,15 +2,79 @@
 class UsersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2');
+		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view', 'opauth_complete');
 	}
 
 	public function index() {
 		if (AuthComponent::user('role') != 'admin') {
 			throw new ForbiddenException("You're now allowed to do this.");
 		}
-		$this->User->recursive = 0;
+		$this->User->recursive = 2;
+		$this->layout = 'admin';
 		$this->set('users', $this->paginate());
+	}
+
+	public function opauth_complete(){
+		  
+		$conditions = array(
+    'User.username' => $this->data['auth']['uid']
+);
+// if the user exists by email
+if ($this->User->hasAny($conditions)){
+//debug($this->data);
+	//log them in
+	$user = $this->User->find('first', array('conditions' => array('User.username' => $this->data['auth']['uid'])));
+        $id = $user['User']['id'];
+                        if(isset($this->data['auth']['info']['image'])){
+                        copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
+                        }
+        $this->request->data['User'] = array_merge(
+            $user['User'],
+            array('id' => $id)
+        );
+        unset($this->request->data['User']['password']);
+        $this->Auth->login($this->request->data['User']);
+        return $this->redirect('/');
+    
+}
+// if the user does not exist
+else {
+	// create them
+	if ($this->request->is('post')) {	
+		$this->request->data['User']['linkedin_id'] = $this->data['auth']['uid'];
+		$this->request->data['User']['email'] = $this->data['auth']['info']['email'];
+		if(isset($this->data['auth']['info']['image'])){
+					$this->request->data['User']['image'] = $this->data['auth']['info']['image'];
+		}
+		$this->request->data['User']['username'] = $this->data['auth']['uid'];
+		$this->request->data['User']['first_name'] = $this->data['auth']['info']['first_name'];
+		$this->request->data['User']['last_name'] = $this->data['auth']['info']['last_name'];
+		$this->request->data['User']['headline'] = $this->data['auth']['info']['headline'];
+
+		$this->User->create();
+
+		if ($this->User->save($this->request->data)) {
+		$id = $this->User->id;
+		if(isset($this->data['auth']['info']['image'])){
+			copy($this->data['auth']['info']['image'], '../webroot/img/users/'.$id.'.jpg');
+		}
+		
+
+        $this->request->data['User'] = array_merge(
+            $this->request->data['User'],
+            array('id' => $id)
+        );
+        unset($this->request->data['User']['password']);
+        $this->Auth->login($this->request->data['User']);
+        return $this->redirect('/');
+			} else {
+				# Create a loop with validation errors
+				$this->Error->set($this->User->invalidFields());
+			}
+		}
+}
+
+		
 	}
 
 	public function login() {
@@ -55,10 +119,10 @@ class UsersController extends AppController {
 
 
 	public function view($username = null) {
-		if (AuthComponent::user('role') != 'admin') {
-			throw new ForbiddenException("You're now allowed to do this.");
-		}
-
+		// if (AuthComponent::user('role') != 'admin') {
+		// 	throw new ForbiddenException("You're now allowed to do this.");
+		// }
+$this->User->recursive = 2;
 		$user = $this->User->findByUsername($username);
 		$user = Hash::extract($user,'User');
 		$this->User->id = $user['id'];
@@ -66,7 +130,23 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		$this->set('user', $user);
+				$itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
+            'Item.created' => 'desc'
+        ));
+				$commentoptions = array('conditions' => array('Comment.user_id' => $user['id']),'order' => array(
+            'Comment.created' => 'desc'
+        ));
+
+				$upvoteoptions = array('conditions' => array('Upvote.user_id' => $user['id']), 'order' => array(
+            'Upvote.id' => 'desc'
+        ));
+
+				$this->set('user', $this->User->findByUsername($user['username']));
+				$this->set('items', $this->User->Item->find('all', $itemoptions));
+				$this->set('comments', $this->User->Comment->find('all', $commentoptions));
+				$this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));
+				$this->layout = 'fullwidth';
+
 	}
 
 
@@ -144,7 +224,7 @@ class UsersController extends AppController {
 			CakeLog::info('The user '.AuthComponent::user('username').' (ID: '.AuthComponent::user('id').') deleted user (ID: '.$this->User->id.')','users');
 
 			$this->Session->setFlash(__('User deleted'), 'flash_success');
-			$this->redirect(array('action' => 'index'));
+			$this->redirect(array('controller'=>'usersadmin', 'action' => 'index'));
 		}
 
 		$this->Session->setFlash(__('User was not deleted'), 'flash_fail');

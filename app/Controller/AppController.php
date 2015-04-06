@@ -69,7 +69,7 @@ class AppController extends Controller
       );
 
       # Manually login the user
-      if( $this->Auth->login($user['User']) ){
+      if( $this->Auth->login($user) ){
         $this->redirect('/home');
       }
 
@@ -86,7 +86,7 @@ class AppController extends Controller
 	  if( $this->params->params['controller'] == 'users' && $this->params->params['action'] == 'login'){
 		  $this->dbIsConnected();
 	  }
-
+// debug(AuthComponent::user());
     # To enable portuguese language as main
     # Configure::write('Config.language', 'por');
 
@@ -109,38 +109,38 @@ class AppController extends Controller
   /**
   * Verifica se a requisição é mobile, caso seja verifica se de celular ou tablet
   */
-    if ($this->request->is('mobile')) {
-        if (!$this->_isTablet()) {
-            $this->isMobile = true;
-        }
-    }
+    // if ($this->request->is('mobile')) {
+    //     if (!$this->_isTablet()) {
+    //         $this->isMobile = true;
+    //     }
+    // }
 
   /**
    *  Se a requisição for mobile ou tablet e existir o(s) arquivo(s)
    *  da view e/ou layout para serem redenrizados
    */
-    if (isset($this->isMobile) && $this->isMobile) {
-      if (is_file(APP . 'View' . DS . 'Layouts' . DS . 'mobile' . DS . $this->layout . '.ctp')) {
-        $this->layout = 'mobile/'. $this->layout;
-      }
-      if (is_file(APP . 'View' . DS . $this->name . DS . 'mobile' . DS . $this->action . '.ctp')) {
-          $this->render('mobile/' . $this->action);
-      } 
-    }
-    if (isset($this->isTablet) && $this->isTablet) {
-      if (is_file(APP . 'View' . DS . 'Layouts' . DS . 'tablet' . DS . $this->layout . '.ctp')) {
-          $this->layout = 'tablet/'. $this->layout;
-      }
-      if (is_file(APP . 'View' . DS . $this->name . DS . 'tablet' . DS . $this->action . '.ctp')) {
-          $this->render('tablet/' . $this->action);
-      } 
-    }
+    // if (isset($this->isMobile) && $this->isMobile) {
+    //   if (is_file(APP . 'View' . DS . 'Layouts' . DS . 'mobile' . DS . $this->layout . '.ctp')) {
+    //     $this->layout = 'mobile/'. $this->layout;
+    //   }
+    //   if (is_file(APP . 'View' . DS . $this->name . DS . 'mobile' . DS . $this->action . '.ctp')) {
+    //       $this->render('mobile/' . $this->action);
+    //   } 
+    // }
+    // if (isset($this->isTablet) && $this->isTablet) {
+    //   if (is_file(APP . 'View' . DS . 'Layouts' . DS . 'tablet' . DS . $this->layout . '.ctp')) {
+    //       $this->layout = 'tablet/'. $this->layout;
+    //   }
+    //   if (is_file(APP . 'View' . DS . $this->name . DS . 'tablet' . DS . $this->action . '.ctp')) {
+    //       $this->render('tablet/' . $this->action);
+    //   } 
+    // }
     
     // Seta as variaveis para serem usadas na view
-    $this->set(array(
-      'base_url'  => Router::url('/',true),
-      'is_tablet' => $this->isTablet,
-      'is_mobile' => $this->isMobile));
+    // $this->set(array(
+    //   'base_url'  => Router::url('/',true),
+    //   'is_tablet' => $this->isTablet,
+    //   'is_mobile' => $this->isMobile));
 
     parent::beforeRender();
 
