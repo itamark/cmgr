@@ -19,7 +19,7 @@ public function beforeSave($options = array())
 
 public function undo($item_id, $user_id){
     // I assume that each user can subscribe only one time the same course. This calls the ids inputted in the unsubscribe link.
-    return $this->deleteAll(array('Upvote.item_id' => $item_id, 'Upvote.user_id' => $user_id));
+    return $this->deleteAll(array('Upvote.item_id' => $item_id, 'Upvote.user_id' => $user_id), false);
 }
 
 

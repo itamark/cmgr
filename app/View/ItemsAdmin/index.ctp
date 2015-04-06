@@ -2,7 +2,7 @@
 <!--  <pre>
 <?php print_r($items); ?>
 </pre>  --> 
-
+<h2>Manage Posts</h2>
 <table>
   <thead>
     <tr>
@@ -11,6 +11,7 @@
       <th>Title</th>
       <th>Posted</th>
       <th>Status</th>
+      <th>Action</th>
       <!-- <th>Resolved</th>
       <th>Live?</th> -->
     </tr>
@@ -23,12 +24,29 @@
     <tr>
       <td><?php echo $item['Item']['id'] ?></td>
       <td><?php echo $item['Item']['upvotes'] ?> / <?php echo count(h($item['Comment'])); ?></td>
-      <td><?php echo $item['Item']['title']; ?></td>
+      <td>
+        <?php echo $this->Html->link($item['Item']['title'],'/items/view/'.$item['Item']['id'], array(
+                'target' => 'blank'
+              )) ?>
+</td>
       <td><?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?></td>
       <td>
         <?php echo $item['Item']['live'] ? '<span class="label success">Live</span>' : ''; ?>
-        <?php echo $item['Item']['flagged'] ? '<span class="label alert">Flagged</span>' : ''; ?>
-        <?php echo $item['Item']['resolved'] ? '<span class="label default">Resolved</span>' : ''; ?>
+        <?php echo $item['Item']['flagged'] ? '<span class="alerty label">Flagged</span>' : ''; ?>
+        <?php echo $item['Item']['removed'] ? '<span class="alerty label default">Removed</span>' : ''; ?>
+      </td>
+      <td>
+        <?php if($item['Item']['flagged'] && !$item['Item']['removed']): ?>
+        
+ <a class="" data-dropdown="autoCloseExample" aria-controls="autoCloseExample" aria-expanded="false">Action &raquo;</a>
+  <ul id="autoCloseExample" class="f-dropdown" data-dropdown-content tabindex="-1" aria-hidden="true" aria-autoclose="false" tabindex="-1">
+    <li><?php echo $this->Html->link('Unflag', array('controller' => 'items', 'action' => 'unflag', $item['Item']['id']), array('class'=> 'flag')); ?></li>
+    <li><?php echo $this->Html->link('Remove', array('controller' => 'items', 'action' => 'remove', $item['Item']['id'])); ?></li>
+    <li><a href="#">Yet another</a></li>
+  </ul>
+
+
+      <?php endif; ?>
       </td>
       <!-- <td><?php echo $item['Item']['flagged']; ?></td>
       <td><?php echo $item['Item']['resolved']; ?></td>
@@ -60,7 +78,7 @@
 
           hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
   <?php else: ?>
-      <span href="#" data-reveal-id="myModal">&#9650;</span>
+      <span href="#" data-reveal-id="mustBeModal">&#9650;</span>
 
   <?php endif; ?>
 
