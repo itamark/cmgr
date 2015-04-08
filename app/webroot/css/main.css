@@ -39,6 +39,11 @@ ul.list {
 .img-circle {
   border-radius: 50%;
 }
+.listing {
+  padding: 10px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
 .listing.row {
   margin-bottom: 1em;
   padding: 10px;
@@ -56,15 +61,6 @@ ul.list {
 }
 .listing.row .upvote {
   text-align: center;
-}
-.listing.row .preview_link:after {
-  content: ' ';
-  position: absolute;
-  background: rgba(0, 0, 0, 0.3);
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
 }
 .reveal-modal {
   width: 60%;
