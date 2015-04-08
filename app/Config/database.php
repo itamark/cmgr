@@ -71,12 +71,12 @@ class DATABASE_CONFIG {
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => 'root',
+		'host' => 'mysql.cmgr.org',
+		'login' => 'itamarkestenbaum',
+		'password' => 'chloe1985',
 		'database' => 'harpoon',
 		'prefix' => '',
-		'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
+		//'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
 		//'encoding' => 'utf8',
 	);
 

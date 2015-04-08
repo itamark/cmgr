@@ -1,9 +1,14 @@
 # User specific & automatically generated files #
 #################################################
 /app/tmp
+<<<<<<< HEAD
 /app/Config/core.php
 /app/Config/database.php
 /app/webroot/img/users/
+=======
+/app/Config/database.php
+/app/Config/core.php
+>>>>>>> 90ca45efca016b1f8ff3c71d9069712291eb2c2c
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /vendors
