@@ -1,13 +1,10 @@
-<div class="row">
-<?php foreach ($comments as $comment): ?>
+<div>
 <?php 
 echo '<a href="/users/view/'.$comment['User']['username'].'">';
-echo '<img src="/img/users/'.$comment['Comment']['user_id'].'.jpg" style="width:30px; border-radius:50%;" title="'.$comment['User']['first_name'].' '.$comment['User']['last_name'].'">';
+echo '<img src="/img/users/'.$comment['user_id'].'.jpg" style="width:30px; border-radius:50%;" title="'.$comment['User']['first_name'].' '.$comment['User']['last_name'].'">';
 echo '</a>';   
  ?>
- <?php echo $comment['Comment']['comment_txt'].'<br>'; ?>
-  <?php endforeach; ?>
-
+ <?php echo $comment['comment_txt'].'<br>'; ?>
 </div>
 
 
