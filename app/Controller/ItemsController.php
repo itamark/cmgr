@@ -42,7 +42,8 @@ public function index() {
  		$this->Item->recursive = 2;
 $this->paginate = array(
 	'conditions' => array(
-         'Item.removed' => false
+         'Item.removed' => false,
+         'Item.meta' => false
     ),
     'limit' => 10,
     'order' => array( // sets a default order to sort by
@@ -52,6 +53,25 @@ $this->paginate = array(
   $items = $this->paginate('Item');
   $this->set(compact('items'));
 	}
+
+public function meta(){
+	if (!AuthComponent::user('has_meta')) {
+			throw new NotFoundException(__('You don\'t have access'));
+		} else {
+			$this->paginate = array(
+				'conditions' => array(
+			         'Item.removed' => false,
+			         'Item.meta' => true
+			    ),
+			    'limit' => 10,
+			    'order' => array( // sets a default order to sort by
+			      'Item.score' => 'desc'	
+			    )
+			  );
+			  $items = $this->paginate('Item');
+ 			 $this->set(compact('items'));
+		}
+}
 
 	/**
  * index metfhknmnmmn/;//mnhod
@@ -164,6 +184,8 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 			$this->Item->set(array(
   				  'score' => $this->hot(1, date("Y-m-d H:i:s"))
 				));
+
+
 			if ($this->Item->save($this->request->data)) {
 				$this->request->data['Upvote']['user_id'] = AuthComponent::user('id');
 				$this->request->data['Upvote']['item_id'] = $this->Item->id;
@@ -180,6 +202,7 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		}
 		$users = $this->Item->User->find('list');
 		$this->set(compact('users'));
+		//debug($this->Item); exit;
 					$this->redirect(array('action' => 'index'));
 
 		// $this->layout = false;

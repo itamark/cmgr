@@ -66,9 +66,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <div id="slideout">
     </div> -->
 	<div id="container">
-    
-
-
       <div class="large-3 medium-3 columns">
 <ul class="side-nav">
 <!-- <li>
@@ -202,6 +199,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<div class="container large-9 medium-9 small-12 columns">
 
 			<?php echo $this->Session->flash(); ?>
+      <?php if(AuthComponent::user('has_meta')): ?>
+      <div data-alert class="alert-box info radius">
+  Hey! You are part of the initial Alpha members. You can access the <?php echo $this->Html->link('meta discussions!', '/meta'); ?>
+  <a href="#" class="close">&times;</a>
+</div>
+    <?php endif; ?>
 
 			<?php echo $this->fetch('content'); ?>
 		</div>

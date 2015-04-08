@@ -38,15 +38,20 @@
           </div>
           <hr>
 <div class="large-12 columns">
-<span class="count-icon">
-    <i class="fa fa-2x fa-comment"></i>
-    <span class="count"><?php echo $comments; ?></span>
-</span>
+<!-- <span class="count-icon">
+ -->    <!-- <i class="fa fa-2x fa-comment"></i> -->
 
+    <span class="count"><?php echo $comments; ?> comments</span>
+<!-- </span>
+ -->
 
           <?php 
 $commentors = array();
           foreach($item['Comment'] as $comment){
+
+
+
+
 if ( in_array($comment['user_id'], $commentors) ) {
         continue;
     }
@@ -58,7 +63,7 @@ echo '</a>';
           
 
   <?php if (AuthComponent::user('id')): ?>
-  
+
 	<?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'), 'class' => 'ajaxform', 'id' => 'CommentIndexForm'.$item['Item']['id'])); ?>
 	<?php
 		echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
@@ -68,12 +73,12 @@ echo '</a>';
 <?php echo $this->Form->end(__('Submit')); ?>
 <?php endif; ?>
 
-<div class="commentsview" id="commentsview<?php echo $item['Item']['id']; ?>">
-<div>
-	<?php foreach($item['Comment'] as $comment): ?>
-	<?php echo $comment['comment_txt'].'<br>'; ?>
+<div class="commentsview large-12" id="commentsview<?php echo $item['Item']['id']; ?>">
+ <?php foreach($item['Comment'] as $comment): ?>
+      <?php  echo $this->element('comment', array(
+    "comment" => $comment
+)) ?>
 <?php endforeach; ?>
-</div>
   </div>
 </div>
 
