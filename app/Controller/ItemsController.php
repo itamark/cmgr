@@ -186,11 +186,6 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 				));
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 90ca45efca016b1f8ff3c71d9069712291eb2c2c
 			if ($this->Item->save($this->request->data)) {
 				$this->request->data['Upvote']['user_id'] = AuthComponent::user('id');
 				$this->request->data['Upvote']['item_id'] = $this->Item->id;
@@ -205,16 +200,9 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 				$this->Session->setFlash(__('The item could not be saved. Please, try again.'));
 			}
 		}
-<<<<<<< HEAD
 		$users = $this->Item->User->find('list');
 		$this->set(compact('users'));
 		//debug($this->Item); exit;
-=======
-
-		// $users = $this->Item->User->find('list');
-		// $this->set(compact('users'));
-
->>>>>>> 90ca45efca016b1f8ff3c71d9069712291eb2c2c
 					$this->redirect(array('action' => 'index'));
 
 		// $this->layout = false;
@@ -284,6 +272,7 @@ if($this->request->is('post')){
  * @param string $id
  * @return void
  */
+
 	public function edit($id = null) {
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));
