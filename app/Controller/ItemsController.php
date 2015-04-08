@@ -203,7 +203,12 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		$users = $this->Item->User->find('list');
 		$this->set(compact('users'));
 		//debug($this->Item); exit;
-					$this->redirect(array('action' => 'index'));
+					if(isset($this->request->data['Item']['meta'])){
+						$this->redirect('/meta');
+					} else {
+						$this->redirect(array('action' => 'index'));
+					}
+					
 
 		// $this->layout = false;
 	}
@@ -272,7 +277,7 @@ if($this->request->is('post')){
  * @param string $id
  * @return void
  */
-
+	
 	public function edit($id = null) {
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));

@@ -37,7 +37,7 @@
             <?php echo h($item['Item']['post_comment']); ?>
           </div>
            <?php if(!empty($item['Item']['preview_img'])): ?>
-          <a class="large-12 columns preview_link" href="<?php echo $item['Item']['preview_link']; ?>" style="border: 1px solid grey;">
+          <a class="large-12 columns listing" href="<?php echo $item['Item']['preview_link']; ?>">
            
             <div href="#" class="large-4 columns">
  <img src="<?php echo $item['Item']['preview_img']; ?>">
