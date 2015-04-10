@@ -34,7 +34,7 @@
           </div>
           
           <div class="large-12 columns">
-            <?php echo h($item['Item']['post_comment']); ?>
+            <?php echo $this->Text->autoLinkUrls(h($item['Item']['post_comment'])); ?>
           </div>
            <?php if(!empty($item['Item']['preview_img'])): ?>
           <a class="large-12 columns listing" href="<?php echo $item['Item']['preview_link']; ?>">
@@ -87,9 +87,12 @@ echo '</a>';
 
 <div class="commentsview large-12" id="commentsview<?php echo $item['Item']['id']; ?>">
  <?php foreach($item['Comment'] as $comment): ?>
-      <?php  echo $this->element('comment', array(
+ <div class="listing">
+ <?php  echo $this->element('comment', array(
     "comment" => $comment
 )) ?>
+ </div>
+     
 <?php endforeach; ?>
   </div>
 </div>
