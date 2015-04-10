@@ -31,7 +31,22 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+
+if(isset($_SERVER['SERVER_NAME'])){
+            switch($_SERVER['SERVER_NAME']){
+                case 'cmgr':
+                    $debugit = 2;
+                    break;
+                case 'stage.cmgr.org':
+                   $debugit =  1
+                    break;
+            }
+        }
+        else // we are likely baking, use our local db
+        {
+            $debugit = 0;
+        }
+	Configure::write('debug', $debugit);
 
 /**
  * Configure the Error handler used to handle errors for your application. By default
