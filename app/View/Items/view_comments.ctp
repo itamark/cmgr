@@ -1,14 +1,14 @@
-<div class="row">
 <?php foreach ($comments as $comment): ?>
+	<div class="listing">
 <?php 
 echo '<a href="/users/view/'.$comment['User']['username'].'">';
 echo '<img src="/img/users/'.$comment['Comment']['user_id'].'.jpg" style="width:30px; border-radius:50%;" title="'.$comment['User']['first_name'].' '.$comment['User']['last_name'].'">';
 echo '</a>';   
  ?>
- <?php echo $comment['Comment']['comment_txt'].'<br>'; ?>
+ <?php echo $comment['Comment']['comment_txt']; ?>
+ </div>
   <?php endforeach; ?>
 
-</div>
 
 
 
