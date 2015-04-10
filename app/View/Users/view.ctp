@@ -103,7 +103,12 @@
       <div class="row listing">
 
 <?php echo $this->Html->link($comment['User']['first_name'], array('controller' => 'users', 'action' => 'view', $comment['User']['username'])); ?> commented on 
-<a href="/items/view/<?php echo $comment['Item']['id']; ?>"><?php echo $comment['Item']['title']; ?></a> <small><?php echo $this->Time->timeAgoInWords($comment['Comment']['created']); ?></small>
+<a href="/items/view/<?php echo $comment['Item']['id']; ?>"><?php echo $this->Text->truncate($comment['Item']['post_comment'],
+    75,
+    array(
+        'ellipsis' => '...',
+        'exact' => false
+    )); ?></a> <small><?php echo $this->Time->timeAgoInWords($comment['Comment']['created']); ?></small>
   <br>
 <p> <?php echo $comment['Comment']['comment_txt']; ?></p>
 
