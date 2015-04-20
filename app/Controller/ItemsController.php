@@ -7,141 +7,134 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class ItemsController extends AppController {
-public $uses = array('Item', 'Upvote');
+	public $uses = array('Item', 'Upvote');
 
-public function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag');
 	}
 
-
-
-
-
 // public $paginate = array(
-//     // 'Item' => array(
-//     //     'limit' => 20,
-//     //     'order' => array('score' => 'desc')
-//     // )
-// );
-/**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator'); 
-
-
+	//     // 'Item' => array(
+	//     //     'limit' => 20,
+	//     //     'order' => array('score' => 'desc')
+	//     // )
+	// );
+	/**
+	 * Components
+	 *
+	 * @var array
+	 */
+	public $components = array('Paginator');
 
 /**
  * index metfhknmnmmn/;//mnhod
  *
  * @return void
  */
-public function index() {
- 		$this->Item->recursive = 2;
-$this->paginate = array(
-	'conditions' => array(
-         'Item.removed' => false,
-         'Item.meta' => false
-    ),
-    'limit' => 10,
-    'order' => array( // sets a default order to sort by
-      'Item.score' => 'desc'	
-    )
-  );
-  $items = $this->paginate('Item');
-  $this->set(compact('items'));
+	public function index() {
+		$this->Item->recursive = 2;
+		$this->paginate = array(
+			'conditions' => array(
+				'Item.removed' => false,
+				'Item.meta' => false,
+			),
+			'limit' => 10,
+			'order' => array( // sets a default order to sort by
+				'Item.score' => 'desc',
+			),
+		);
+		$items = $this->paginate('Item');
+		$this->set(compact('items'));
 	}
 
-public function meta(){
-	if (!AuthComponent::user('has_meta')) {
+	public function meta() {
+		if (!AuthComponent::user('has_meta')) {
 			throw new NotFoundException(__('You don\'t have access'));
 		} else {
+			$this->Item->recursive = 2;
 			$this->paginate = array(
 				'conditions' => array(
-			         'Item.removed' => false,
-			         'Item.meta' => true
-			    ),
-			    'limit' => 10,
-			    'order' => array( // sets a default order to sort by
-			      'Item.score' => 'desc'	
-			    )
-			  );
-			  $items = $this->paginate('Item');
- 			 $this->set(compact('items'));
+					'Item.removed' => false,
+					'Item.meta' => TRUE,
+				),
+				'limit' => 10,
+				'order' => array( // sets a default order to sort by
+					'Item.score' => 'desc',
+				),
+			);
+			$items = $this->paginate('Item');
+			$this->set(compact('items'));
 		}
-}
+	}
 
 	/**
- * index metfhknmnmmn/;//mnhod
- *
- * @return void
- */
-public function must_read() {
- 		$this->Item->recursive = 2;
-$this->paginate = array(
-	'conditions' => array(
-         'Item.removed' => false,
-         'Item.must_read' => true
-    ),
-    'limit' => 10,
-    'order' => array( // sets a default order to sort by
-      'Item.score' => 'desc'	
-    )
-  );
-  $items = $this->paginate('Item');
-  $this->set(compact('items'));
-   $this->layout = 'fullwidth';
+	 * index metfhknmnmmn/;//mnhod
+	 *
+	 * @return void
+	 */
+	public function must_read() {
+		$this->Item->recursive = 2;
+		$this->paginate = array(
+			'conditions' => array(
+				'Item.removed' => false,
+				'Item.must_read' => true,
+			),
+			'limit' => 10,
+			'order' => array( // sets a default order to sort by
+				'Item.score' => 'desc',
+			),
+		);
+		$items = $this->paginate('Item');
+		$this->set(compact('items'));
+		$this->layout = 'fullwidth';
 	}
 
 	public function questions() {
-		$this->Item->recursive = 2;	
+		$this->Item->recursive = 2;
 		$options = array('conditions' => array('Item.type' => 'question'));
 		$items = $this->Item->find('all', $options);
-$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$sorted = Set::sort($items, '{n}.Item.created', 'desc');
 		$this->set('items', $sorted);
 	}
 
 	public function articles() {
-		$this->Item->recursive = 2;	
+		$this->Item->recursive = 2;
 		$options = array('conditions' => array('Item.type' => 'article'));
 		$items = $this->Item->find('all', $options);
-$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$sorted = Set::sort($items, '{n}.Item.created', 'desc');
 		$this->set('items', $sorted);
 	}
 
-
 	public function recent() {
-		$this->Item->recursive = 2;	
+		$this->Item->recursive = 2;
 		$items = $this->Item->find('all');
-$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$sorted = Set::sort($items, '{n}.Item.created', 'desc');
 		$this->set('items', $sorted);
 	}
 
 	public function top() {
 		$this->Item->recursive = 2;
 		$items = $this->Item->find('all');
-$sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
+		$sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		$this->set('items', $sorted);
 	}
 
+	public function hot($upvotes, $date) {
+		$s = $upvotes;
+		$order = log10(max(abs($s), 1));
 
-	public function hot($upvotes, $date){
-	$s = $upvotes;
-    $order = log10(max(abs($s), 1));
+		if ($s > 0) {
+			$sign = 1;
+		} else if ($s < 0) {
+			$sign = -1;
+		} else {
+			$sign = 0;
+		}
 
-    if ($s > 0) {
-        $sign = 1;
-    } else if ($s < 0) {
-        $sign = -1;
-    } else {
-        $sign = 0;
-    }
+		$seconds = $date - 1134028003;
 
-    $seconds = $date - 1134028003;
-
-    return round($sign * $order + $seconds / 45000, 7);
+		return round($sign * $order + $seconds / 45000, 7);
 	}
 
 /**
@@ -162,8 +155,7 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		// $this->layout = false;
 	}
 
-
-	public function view_comments($id = null){
+	public function view_comments($id = null) {
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));
 		}
@@ -182,9 +174,8 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 
 			$this->Item->create();
 			$this->Item->set(array(
-  				  'score' => $this->hot(1, date("Y-m-d H:i:s"))
-				));
-
+				'score' => $this->hot(1, date("Y-m-d H:i:s")),
+			));
 
 			if ($this->Item->save($this->request->data)) {
 				$this->request->data['Upvote']['user_id'] = AuthComponent::user('id');
@@ -192,7 +183,7 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 				// $this->updateScore($this->Item->id);
 				$this->Item->Upvote->save($this->request->data);
 				$this->request->data['new_id'] = $this->Item->id;
-								$this->Session->setFlash(__('Saved!'));
+				$this->Session->setFlash(__('Saved!'));
 
 				// @header('Content-type: application/json');
 				//die(json_encode($this->request->data));
@@ -203,72 +194,69 @@ $sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
 		$users = $this->Item->User->find('list');
 		$this->set(compact('users'));
 		//debug($this->Item); exit;
-					if(isset($this->request->data['Item']['meta'])){
-						$this->redirect('/meta');
-					} else {
-						$this->redirect(array('action' => 'index'));
-					}
-					
+		if (isset($this->request->data['Item']['meta'])) {
+			$this->redirect('/meta');
+		} else {
+			$this->redirect(array('action' => 'index'));
+		}
 
 		// $this->layout = false;
 	}
 
-	public function updateScore($id){
-				$this->Item->read(null, $this->Item->id);
-				$this->Item->set(array(
-  				  'score' => 1
-				));
-				$this->Item->save();
-	}
-
-	public function flag($item_id = null){
-if($this->request->is('post')){
-	$this->layout = false;
-
-		$this->Item->read(null, $item_id);
+	public function updateScore($id) {
+		$this->Item->read(null, $this->Item->id);
 		$this->Item->set(array(
-			'flagged' => true
+			'score' => 1,
+		));
+		$this->Item->save();
+	}
+
+	public function flag($item_id = null) {
+		if ($this->request->is('post')) {
+			$this->layout = false;
+
+			$this->Item->read(null, $item_id);
+			$this->Item->set(array(
+				'flagged' => true,
 			));
-		debug($this->Item->save());
-		if($this->Item->save()){
-			die('flagged');
-		} 
-}
-		
+			debug($this->Item->save());
+			if ($this->Item->save()) {
+				die('flagged');
+			}
+		}
+
 	}
 
-		public function unflag($item_id = null){
+	public function unflag($item_id = null) {
 
-if($this->request->is('post')){
-	die('ohi');
-	// $this->layout = false;
+		if ($this->request->is('post')) {
+			die('ohi');
+			// $this->layout = false;
 
-	// 	$this->Item->read(null, $item_id);
-	// 	$this->Item->set(array(
-	// 		'flagged' => false
-	// 		));
-	// 	if($this->Item->save()){
-	// 		die('unflagged');
-	// 	} 
-}
-		
+			// 	$this->Item->read(null, $item_id);
+			// 	$this->Item->set(array(
+			// 		'flagged' => false
+			// 		));
+			// 	if($this->Item->save()){
+			// 		die('unflagged');
+			// 	}
+		}
+
 	}
 
-	public function remove($item_id = null){
+	public function remove($item_id = null) {
 		$this->Item->read(null, $item_id);
 		$this->Item->set(array(
 			'removed' => true,
-			'live' => false
-			));
-		if($this->Item->save()){
+			'live' => false,
+		));
+		if ($this->Item->save()) {
 			$this->redirect(array('action' => 'index'));
 		} else {
 
 		}
-		
+
 	}
-
-
 
 /**
  * edit method
@@ -277,7 +265,7 @@ if($this->request->is('post')){
  * @param string $id
  * @return void
  */
-	
+
 	public function edit($id = null) {
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));

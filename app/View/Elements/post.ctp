@@ -60,14 +60,11 @@
           <?php 
 $commentors = array();
           foreach($item['Comment'] as $comment){
-
-
-
-
 if ( in_array($comment['user_id'], $commentors) ) {
         continue;
     }
     $commentors[] = $comment['user_id'];
+
 echo '<a href="/users/view/'.$comment['User']['username'].'">';
 echo '<img src="/img/users/'.$comment['user_id'].'.jpg" style="width:30px; border-radius:50%;" title="'.$comment['User']['first_name'].' '.$comment['User']['last_name'].'">';
 echo '</a>';

@@ -1,4 +1,5 @@
 <div>
+
 <?php 
 echo '<a href="/users/view/'.$comment['User']['username'].'">';
 echo '<img src="/img/users/'.$comment['user_id'].'.jpg" style="width:30px; border-radius:50%;" title="'.$comment['User']['first_name'].' '.$comment['User']['last_name'].'">';

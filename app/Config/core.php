@@ -38,7 +38,7 @@ if(isset($_SERVER['SERVER_NAME'])){
                     $debugit = 2;
                     break;
                 case 'stage.cmgr.org':
-                   $debugit =  1
+                   $debugit =  1;
                     break;
             }
         }
