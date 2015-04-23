@@ -11,7 +11,7 @@
     
 
   <?php if (AuthComponent::user('id')): ?>
-<div class="row listing">
+<!-- <div class="row listing">
   
  <?php echo $this->Form->create('Item', array(
         'url' => array(
@@ -27,14 +27,31 @@
     // echo $this->Form->input('url');
   ?>
 <?php echo $this->Form->end(__('Post')); ?>
+</div> -->
+<div class="row">
+<div class="twelve columns">
+ <?php echo $this->Form->create('Item', array(
+        'url' => array(
+            'controller'=>'items',
+            'action'=>'add'
+        ), 'class' => 'postForm'
+    )); ?>
+  <?php
+    // echo $this->Form->input('user_id');
+    // echo $this->Form->input('type', array('default' => 'question', 'type' => 'hidden'));
+    // echo $this->Form->input('title', array('label' => false, 'placeholder' => 'Question'));
+    echo $this->Form->textarea('post_comment', array('label' => false, 'placeholder' => 'Ask a question', 'rows' => '3', 'class'=> 'u-full-width'));
+    // echo $this->Form->input('url');
+  ?>
+<?php echo $this->Form->end(__('Post'), array('class'=>'u-pull-right')); ?>
+</div>
 </div>
 <?php else: ?>
-<div class="row listing">
+<!-- <div class="row listing">
 <span href="#" data-reveal-id="mustBeModal" style="cursor:pointer;">Login with LinkedIn to post.</span>
-</div>
-
+<input class="button-primary" type="submit" value="submit input">
+</div> -->
   <?php endif; ?>
-   
 </div>
 </div>
 
@@ -44,8 +61,5 @@
       <?php echo $this->element('post', array(
     "item" => $item
 )) ?>
-
-
-
     <?php endforeach; ?>
     <?php echo $this->Paginator->numbers(); ?>

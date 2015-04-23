@@ -1,21 +1,74 @@
-<?php if(!Configure::read('Application.maintenance')){?>
-<nav class="top-bar" data-topbar role="navigation"  data-options="sticky_on: large">
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="/">CMGR <small>alpha</small></a></h1>
-    </li>
-     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
+<div class="navbar-spacer"></div>
+    <nav class="navbar">
+      <div class="container">
+      <div class="row">
+        <div class="eight columns">
+<ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link brand" href="/">CMGR</a></li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="#" data-popover="#codeNavPopover">Sort</a>
+            <div id="codeNavPopover" class="popover">
+              <ul class="popover-list">
+                <li class="popover-item">
+                 <?php echo $this->Paginator->sort('score', 'Trending', array('direction' => 'desc', 'class'=> 'popover-link')); ?>
+                </li>
+                <li class="popover-item">
+                  <?php echo $this->Paginator->sort('created', 'Latest', array('direction' => 'desc', 'class'=> 'popover-link')); ?>
+                </li>
+                <li class="popover-item">
+                  <a class="popover-link" href="/must-read">Must Read</a>
+                </li>
+                <li class="popover-item">
+                  <a class="popover-link" href="#forms">Meta</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          
+                    <li class="navbar-item"><a class="navbar-link" href="/meta">Meta</a></li>
+                   <li class="navbar-item"><a class="navbar-link" href="/must-read">Must Read</a></li>
 
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-<!--       <li class="active"><a href="#">Right Button Active</a></li>
- -->     
-<?php if (AuthComponent::user('id')): ?>
-	<?php if (AuthComponent::user('role') == 'admin'): ?>
-	<li class="has-dropdown">
+
+        </ul>
+        </div>
+        <div class="four columns">
+        <ul class="navbar-list  u-pull-right">
+        <?php if (!AuthComponent::user('id')): ?>
+          <li class="navbar-item"><a class="navbar-link needslogin" href="#">Login</a></li>
+        <?php else: ?>
+
+<li class="navbar-item">
+            <a class="navbar-link" href="#" data-popover="#userPopover">                  
+ <?php echo AuthComponent::user('first_name'); ?></a>
+            <div id="userPopover" class="popover">
+              <ul class="popover-list">
+                <li class="popover-item">
+                  <a class="popover-link" href="/users/view/<?php echo AuthComponent::user('id'); ?>">Profile</a>
+                </li>
+                <li class="popover-item">
+                  <a class="popover-link" href="/logout">Logout</a>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+
+
+
+
+
+        <?php endif; ?>
+                 
+
+        </ul>
+
+        </div>
+      </div>
+        
+      </div>
+    </nav>
+  <?php if (AuthComponent::user('role') == 'admin'): ?>
+  <li class="has-dropdown">
         <a href="#">Admin</a>
         <ul class="dropdown">
           <li><a href="/itemsAdmin/index">Posts</a></li>
@@ -25,23 +78,3 @@
  -->        </ul>
       </li>
             <?php endif; ?>
-
-  <li class="has-dropdown">
-        <a href="#"><?php echo AuthComponent::user('first_name').' '.AuthComponent::user('last_name'); ?></a>
-        <ul class="dropdown">
-          <li><a href="/logout">Logout</a></li>
-<!--           <li class="active"><a href="#">Active link in dropdown</a></li>
- -->        </ul>
-      </li>
-      <?php else: ?>
-        <li><a href="#" data-reveal-id="loginModal">Login</a></li>
-      <?php endif; ?>
-    </ul>
-
-    <!-- Left Nav Section -->
-<!--     <ul class="left">
-      <li><a href="#">Left Nav Button</a></li>
-    </ul> -->
-  </section>
-</nav>
-<?php } ?>
