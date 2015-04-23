@@ -87,7 +87,7 @@ class ItemsController extends AppController {
 		);
 		$items = $this->paginate('Item');
 		$this->set(compact('items'));
-		$this->layout = 'fullwidth';
+		// $this->layout = 'fullwidth';
 	}
 
 	public function questions() {

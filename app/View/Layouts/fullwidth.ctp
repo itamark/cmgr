@@ -20,24 +20,26 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <!DOCTYPE html>
 <html class="<?php if($this->params['controller'] == 'users' && $this->params['action'] == 'login'){ echo 'login-page'; } ?>">
 <head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<style>
+#needslogin { display: none }
+</style>
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo 'CMGR' ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('foundation');
     echo $this->Html->css('normalize');
         echo $this->Html->css('main');
 
         // echo $this->Html->css('main');
 
 		echo $this->Html->script('jquery.min');
-		echo $this->Html->script('foundation.min');
         echo $this->Html->script('modernizr');
         echo $this->Html->script('placeholder');
                 echo $this->Html->script('fastclick');
@@ -49,6 +51,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+
 </head>
 <body data-controller="<?php echo @$dataController; ?>">
 
