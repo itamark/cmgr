@@ -1,4 +1,4 @@
-<div style="border:1px black solid; margin-bottom:20px;">
+<div class="listing" style="margin-bottom:20px;">
 <?php $comments = count(h($item['Comment'])); ?>
 
 <div class="row">

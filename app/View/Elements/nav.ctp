@@ -15,17 +15,13 @@
                 <li class="popover-item">
                   <?php echo $this->Paginator->sort('created', 'Latest', array('direction' => 'desc', 'class'=> 'popover-link')); ?>
                 </li>
-                <li class="popover-item">
-                  <a class="popover-link" href="/must-read">Must Read</a>
-                </li>
-                <li class="popover-item">
-                  <a class="popover-link" href="#forms">Meta</a>
-                </li>
+                
               </ul>
             </div>
           </li>
-          
+           <?php if (AuthComponent::user('has_meta')): ?>
                     <li class="navbar-item"><a class="navbar-link" href="/meta">Meta</a></li>
+          <?php endif; ?>
                    <li class="navbar-item"><a class="navbar-link" href="/must-read">Must Read</a></li>
 
 

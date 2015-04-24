@@ -63,7 +63,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       <?php echo $this->fetch('content'); ?>
 </div>
 <div id="needslogin">
-  <h2>Please log in</h2>
   <p><a href="/auth/linkedin"><img src="/img/Sign-in-Large---Default.png"></a></p>
 </div>
 <!--   <div class="contain-to-grid">
@@ -81,7 +80,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
   <script>
   $('.needslogin').click(function(){
   $.tinyModal({
-    title: '',
+    title: 'Please Log In',
     html: '#needslogin',
     buttons: [],
   });
