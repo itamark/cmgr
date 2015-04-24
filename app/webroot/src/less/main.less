@@ -1,3 +1,12 @@
+.listing{
+    margin-bottom: 20px;
+  padding: 20px;
+  /* border-color: #e5e6e9 #dfe0e4 #d0d1d5; */
+  /* border: 1px solid; */
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+
 /*
 * Skeleton V2.0.4
 * Copyright 2014, Dave Gamache
@@ -159,9 +168,10 @@ p {
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: #1EAEDB; }
+  color: #183078;
+  text-decoration: none; }
 a:hover {
-  color: #0FA0CE; }
+  color: #3060A8; }
 
 
 /* Buttons
@@ -543,7 +553,7 @@ there.
     display: block;
     width: 100%;
     height: 6.5rem;
-    background: #fff;
+    background: #181830;
     z-index: 99;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee; }
@@ -555,10 +565,13 @@ there.
     list-style: none;
     margin-bottom: 0; }
   .navbar-item {
+
     position: relative;
     float: left;
     margin-bottom: 0; }
   .navbar-link {
+
+    color:#FAF8F8;
     text-transform: uppercase;
     font-size: 11px;
     font-weight: 600;
@@ -566,7 +579,10 @@ there.
     margin-right: 35px;
     text-decoration: none;
     line-height: 6.5rem;
-    color: #222; }
+    }
+    .navbar-link:hover{
+      color:#FAF8F8;
+    }
   .navbar-link.active {
     color: #33C3F0; }
   .has-docked-nav .navbar {
@@ -696,6 +712,7 @@ there.
 .tinymodal-content {
     padding: 25px;
     background: #fff;
+      text-align: center;
 }
 .tinymodal-content {
     max-height: 300px;
