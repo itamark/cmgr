@@ -1,11 +1,14 @@
-<div>
-
-<?php 
-echo '<a href="/users/view/'.$comment['User']['username'].'">';
-echo '<img src="/img/users/'.$comment['user_id'].'.jpg" style="width:30px; border-radius:50%;" title="'.$comment['User']['first_name'].' '.$comment['User']['last_name'].'">';
-echo '</a>';   
- ?>
- <?php echo $comment['comment_txt'].'<br>'; ?>
+<div class="row">
+	<div class="one columns">
+		<a href="/users/view/<?php echo $comment['User']['username'] ?>">
+			<img src="<?php echo $comment['User']['image']; ?>"  
+			style="width:30px; border-radius:50%;"
+			 title="<?php echo $comment['User']['first_name']; ?> <?php echo $comment['User']['last_name']; ?>">
+		</a>
+	</div>
+	<div class="eleven columns">
+		 <p><?php echo $comment['comment_txt']; ?></p>
+	</div>
 </div>
 
 

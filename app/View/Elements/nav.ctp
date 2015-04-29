@@ -23,7 +23,23 @@
                     <li class="navbar-item"><a class="navbar-link" href="/meta">Meta</a></li>
           <?php endif; ?>
                    <li class="navbar-item"><a class="navbar-link" href="/must-read">Must Read</a></li>
-
+<?php if(AuthComponent::user('role') == 'admin'): ?>
+  <li class="navbar-item">
+            <a class="navbar-link" href="#" data-popover="#adminPop">Admin</a>
+            <div id="adminPop" class="popover">
+              <ul class="popover-list">
+                <li class="popover-item">
+                 <a href="/itemsAdmin/index" class="popover-link">Posts</a>
+          
+                </li>
+                <li class="popover-item">
+                  <a href="/usersAdmin/index" class="popover-link">Users</a>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+        <?php endif; ?>
 
         </ul>
         </div>
@@ -63,14 +79,3 @@
         
       </div>
     </nav>
-  <?php if (AuthComponent::user('role') == 'admin'): ?>
-  <li class="has-dropdown">
-        <a href="#">Admin</a>
-        <ul class="dropdown">
-          <li><a href="/itemsAdmin/index">Posts</a></li>
-          <li><a href="/usersAdmin/index">Users</a></li>
-
-<!--           <li class="active"><a href="#">Active link in dropdown</a></li>
- -->        </ul>
-      </li>
-            <?php endif; ?>

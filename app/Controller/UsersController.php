@@ -15,7 +15,6 @@ class UsersController extends AppController {
 	}
 
 	public function opauth_complete() {
-
 		$conditions = array(
 			'User.username' => $this->data['auth']['uid'],
 		);
@@ -50,6 +49,7 @@ class UsersController extends AppController {
 				$this->request->data['User']['first_name'] = $this->data['auth']['info']['first_name'];
 				$this->request->data['User']['last_name'] = $this->data['auth']['info']['last_name'];
 				$this->request->data['User']['headline'] = $this->data['auth']['info']['headline'];
+				$this->request->data['User']['linkedin_url'] = $this->data['auth']['info']['urls']['linkedin'];
 
 				$this->User->create();
 
@@ -142,7 +142,7 @@ class UsersController extends AppController {
 		$this->set('items', $this->User->Item->find('all', $itemoptions));
 		$this->set('comments', $this->User->Comment->find('all', $commentoptions));
 		// $this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));
-		$this->layout = 'fullwidth';
+		// $this->layout = 'fullwidth';
 
 	}
 

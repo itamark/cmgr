@@ -19,15 +19,17 @@
                     <?php echo $item['Item']['upvotes'] ?>
                   </span>
 </div>
-<div class="eleven columns" style="line-height:6.5rem;">
+<div class="eleven columns">
+  <a href="/users/view/<?php echo $item['User']['username']; ?>">
 <img src="<?php echo h($item['User']['image']); ?>" style="width:30px; position:relative; top:9px;">  
-<?php echo h($item['User']['first_name']); ?> <?php echo h($item['User']['last_name']); ?> <small><?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?></small>
+<?php echo h($item['User']['first_name']); ?> <?php echo h($item['User']['last_name']); ?></a> <small><?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?></small>
 </div>
 </div>
 <div class="row">
 <div class="one columns">&nbsp;</div>
 <div class="eleven columns" style="overflow-wrap: break-word;">
-            <?php echo $this->Text->autoLinkUrls(h($item['Item']['post_comment'])); ?>
+  <p><?php echo $this->Text->autoLinkUrls(h($item['Item']['post_comment'])); ?></p>
+            
              <?php if(!empty($item['Item']['preview_img'])): ?>
             <hr>
             <div class="row">
