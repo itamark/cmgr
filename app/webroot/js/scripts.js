@@ -212,7 +212,33 @@ Component.Comments = function($) {
         // }
         // });
 
+// show only first and last comment of multi-comment threads
+$('.commentsview').each(function(){
+    var comments = $(this).find('.row').length;
 
+    if(comments > 2){
+        var morecomments = comments-2;
+        $(this).find('.row').hide();
+        $(this).find('.row:first-child, .row:last-child').show();
+        $(this).find('.row:first-child').append('<div class="morecomments">show '+morecomments+' more comments</div>');
+    }
+});
+
+$(document).on('click', '.morecomments', function(e){
+    console.log($(e.target));
+    $(e.target).closest('.row').show();
+});
+    // if($('.commentsview .row').length > 2){
+    //     console.log('hi');
+    //     $('.commentsview .row').hide();
+    //     $('.commentsview .row:first-child, .commentsview .row:last-child').show();
+    //     $('.commentsview').each(){
+    //         var morecomments = 
+    //     }
+    //     $('.commentsview .row').append('<div class="showmore">'++'<div>');
+
+    // }
+    
 
     };
 
@@ -583,6 +609,34 @@ $(document).ready(function() {
   };
 
 }(jQuery));
+
+/**
+ *Tabs from Skeleton
+ */
+ 
+(function ($) {
+  // hash change handler
+  function hashchange () {
+setTimeout(function() {
+
+    window.scrollTo(0, 0);
+  }, 1);
+    var hash = window.location.hash
+      , el = $('ul.tabs [href*="' + hash + '"]')
+      , content = $(hash)
+ 
+    if (el.length && !el.hasClass('active') && content.length) {
+      el.closest('.tabs').find('.active').removeClass('active');
+      el.addClass('active');
+      content.show().addClass('active').siblings().hide().removeClass('active');
+    }
+  }
+ 
+  // listen on event and fire right away
+  $(window).on('hashchange.skeleton', hashchange);
+  hashchange();
+  $(hashchange);
+})(jQuery);
 Component.Upvotes = function($) {
 
     var config = {
@@ -733,7 +787,7 @@ $(function() {
     toast($page.find('.alert').text(), 4000);
    }
 
-   if($page.find('a.comments').length > 0){
+   if($page.find('.commentsview').length > 0){
     Component.Comments.init($page, {});
    }
    Component.Upvotes.init($page, {});

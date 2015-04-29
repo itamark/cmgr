@@ -2,28 +2,40 @@
 <!--  <pre>
 <?php print_r($comments); ?>
 </pre>  -->
+
+
+
+
 <div class="row listing">
-  <div class="large-2 columns">
+  <div class="two columns">
        <img class="media-object" src="<?php echo $user['User']['image']; ?>" style="width:100%; border-radius:50%;">
   </div>
-  <div class="large-10 columns">
+  <div class="ten columns">
 <h3><?php echo $user['User']['first_name'].' '.$user['User']['last_name']; ?></h3>
-<h5><?php echo $user['User']['headline']; ?></h5>
+<h5><?php echo $user['User']['headline']; ?></h5><br>
+ <a href="<?php echo $user['User']['linkedin_link']; ?>">View LinkedIn Profile</a>
   </div>
-<!--   <div class="large-12 columns">
-  	
-    <div class="large-10 pull-right">
-      Headline: 
-
-
-    </div>
- <div class="large-10">
-
- </div>
-  	
-  </div> -->
 </div>
-<hr>
+
+<div class="row">
+  <div class="twelve columns">
+
+<ul class="tabs">
+<li><a href="#hello" class="active">Hello</a></li>
+<li><a href="#goodbye">Goodbye</a></li>
+</ul>
+<div id="hello">
+  sdfadsf
+</div>
+<div id="goodbye">
+  goodbye
+</div>
+
+
+
+
+  </div>
+</div>
 
 
 <div class="row">

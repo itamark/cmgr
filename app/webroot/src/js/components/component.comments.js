@@ -25,7 +25,33 @@ Component.Comments = function($) {
         // }
         // });
 
+// show only first and last comment of multi-comment threads
+$('.commentsview').each(function(){
+    var comments = $(this).find('.row').length;
 
+    if(comments > 2){
+        var morecomments = comments-2;
+        $(this).find('.row').hide();
+        $(this).find('.row:first-child, .row:last-child').show();
+        $(this).find('.row:first-child').append('<div class="morecomments">show '+morecomments+' more comments</div>');
+    }
+});
+
+$(document).on('click', '.morecomments', function(e){
+    console.log($(e.target));
+    $(e.target).closest('.row').show();
+});
+    // if($('.commentsview .row').length > 2){
+    //     console.log('hi');
+    //     $('.commentsview .row').hide();
+    //     $('.commentsview .row:first-child, .commentsview .row:last-child').show();
+    //     $('.commentsview').each(){
+    //         var morecomments = 
+    //     }
+    //     $('.commentsview .row').append('<div class="showmore">'++'<div>');
+
+    // }
+    
 
     };
 
