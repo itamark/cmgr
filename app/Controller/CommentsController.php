@@ -9,11 +9,11 @@ App::uses('AppController', 'Controller');
 class CommentsController extends AppController {
 
 	public $paginate = array(
-        'limit' => 25,
-        'order' => array(
-            'Item.created' => 'desc'
-        )
-    );
+		'limit' => 25,
+		'order' => array(
+			'Item.created' => 'desc',
+		),
+	);
 
 /**
  * Components

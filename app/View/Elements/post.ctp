@@ -19,15 +19,17 @@
                     <?php echo $item['Item']['upvotes'] ?>
                   </span>
 </div>
-<div class="eleven columns" style="line-height:6.5rem;">
+<div class="eleven columns">
+  <a href="/users/view/<?php echo $item['User']['username']; ?>">
 <img src="<?php echo h($item['User']['image']); ?>" style="width:30px; position:relative; top:9px;">  
-<?php echo h($item['User']['first_name']); ?> <?php echo h($item['User']['last_name']); ?> <small><?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?></small>
+<?php echo h($item['User']['first_name']); ?> <?php echo h($item['User']['last_name']); ?></a> <small><?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?></small>
 </div>
 </div>
 <div class="row">
 <div class="one columns">&nbsp;</div>
 <div class="eleven columns" style="overflow-wrap: break-word;">
-            <?php echo $this->Text->autoLinkUrls(h($item['Item']['post_comment'])); ?>
+  <p><?php echo $this->Text->autoLinkUrls(h($item['Item']['post_comment'])); ?></p>
+            
              <?php if(!empty($item['Item']['preview_img'])): ?>
             <hr>
             <div class="row">
@@ -46,25 +48,7 @@
             <?php endif; ?>
 </div>
 </div>
-<div class="row">
-<div class="one columns">&nbsp;</div>
-<div class="eight columns">
- <?php if (AuthComponent::user('id')): ?>
 
-  <?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'), 'class' => 'ajaxform', 'id' => 'CommentIndexForm'.$item['Item']['id'])); ?>
-  <?php
-    echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
-    echo $this->Form->input('user_id', array('default' => h($item['User']['id']), 'type' => 'hidden'));
-    echo $this->Form->textarea('comment_txt', array('label' => false, 'placeholder' => 'What do you think?', 'rows' => '1', 'class'=> 'u-full-width'));
-  ?>
-<?php endif; ?>
-</div>
-<div class="three columns" style="text-align:center;"> <?php if (AuthComponent::user('id')): ?>
-<?php echo $this->Form->end(__('Submit')); ?>
-
-<?php endif; ?>
-</div>
-</div>
 
 
  
@@ -76,6 +60,40 @@
     "comment" => $comment
 )) ?>
 <?php endforeach; ?>
+
 </div>
+</div>
+<div class="row">
+<div class="one columns">&nbsp;</div>
+<div class="nine columns">
+  <div class="row commentform">
+  <div class="one columns">
+    <a href="/users/view/<?php echo $comment['User']['username'] ?>">
+      <img src="<?php echo $comment['User']['image']; ?>"  
+      style="width:30px; border-radius:50%;"
+       title="<?php echo $comment['User']['first_name']; ?> <?php echo $comment['User']['last_name']; ?>">
+    </a>
+  </div>
+  <div class="eight columns">
+    <?php if (AuthComponent::user('id')): ?>
+
+  <?php echo $this->Form->create('Comment', array('url' => array('controller'=>'comments', 'action'=>'add'), 'class' => 'ajaxform', 'id' => 'CommentIndexForm'.$item['Item']['id'])); ?>
+  <?php
+    echo $this->Form->input('item_id', array('default' => h($item['Item']['id']), 'type' => 'hidden'));
+    echo $this->Form->input('user_id', array('default' => h($item['User']['id']), 'type' => 'hidden'));
+    echo $this->Form->textarea('comment_txt', array('label' => false, 'placeholder' => 'What do you think?', 'rows' => '1', 'class'=> 'u-full-width'));
+  ?>
+<?php endif; ?>
+  </div>
+  <div class="two columns">
+<?php if (AuthComponent::user('id')): ?>
+<?php echo $this->Form->end(__('Comment')); ?>
+
+<?php endif; ?>
+  </div>
+</div>
+
+</div>
+
 </div>
 </div>

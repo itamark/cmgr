@@ -1,12 +1,11 @@
 <?php
-class DATABASE_CONFIG
-{
-    //initalize variable as null
-    var $default=null;
+class DATABASE_CONFIG {
+	//initalize variable as null
+	var $default = null;
 
-    //set up connection details to use in Live production server
-    var $stage = 
-        array(
+	//set up connection details to use in Live production server
+	var $stage =
+	array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'mysql.cmgr.org',
@@ -15,9 +14,9 @@ class DATABASE_CONFIG
 		'database' => 'harpoon',
 	);
 
-    // and details to use on your local machine for testing and development
-    var $dev = 
-        array(
+	// and details to use on your local machine for testing and development
+	var $dev =
+	array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
@@ -26,26 +25,25 @@ class DATABASE_CONFIG
 		'database' => 'harpoon',
 	);
 
-    function __construct ()
-    {       
-        if(isset($_SERVER['SERVER_NAME'])){
-            switch($_SERVER['SERVER_NAME']){
-                case 'cmgr':
-                    $this->default = $this->dev;
-                    break;
-                case 'dev.cmgr.org':
-                    $this->default = $this->stage;
-                    break;
-            }
-        }
-        else // we are likely baking, use our local db
-        {
-            $this->default = $this->dev;
-        }
-    }
+	function __construct() {
+		if (isset($_SERVER['SERVER_NAME'])) {
+			switch ($_SERVER['SERVER_NAME']) {
+				case 'cmgr':
+					$this->default = $this->dev;
+					break;
+				case 'dev.cmgr.org':
+					$this->default = $this->stage;
+					break;
+				case 'stage.cmgr.org':
+					$this->default = $this->stage;
+					break;
+			}
+		} else // we are likely baking, use our local db
+		{
+			$this->default = $this->dev;
+		}
+	}
 }
-
-
 
 // class DATABASE_CONFIG {
 
@@ -66,4 +64,3 @@ class DATABASE_CONFIG
 // 		'database' => 'test_database_name',
 // 	);
 // }
-

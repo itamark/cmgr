@@ -11,7 +11,7 @@ class ItemsController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag');
+		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag', 'must_read');
 	}
 
 // public $paginate = array(

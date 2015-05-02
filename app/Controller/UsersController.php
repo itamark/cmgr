@@ -15,7 +15,6 @@ class UsersController extends AppController {
 	}
 
 	public function opauth_complete() {
-
 		$conditions = array(
 			'User.username' => $this->data['auth']['uid'],
 		);
@@ -50,6 +49,7 @@ class UsersController extends AppController {
 				$this->request->data['User']['first_name'] = $this->data['auth']['info']['first_name'];
 				$this->request->data['User']['last_name'] = $this->data['auth']['info']['last_name'];
 				$this->request->data['User']['headline'] = $this->data['auth']['info']['headline'];
+				$this->request->data['User']['linkedin_url'] = $this->data['auth']['info']['urls']['linkedin'];
 
 				$this->User->create();
 
@@ -127,12 +127,12 @@ class UsersController extends AppController {
 		// if (!$this->User->exists()) {
 		// 	throw new NotFoundException(__('Invalid user'));
 		// }
-		// $itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
-		// 	'Item.created' => 'desc',
-		// ));
-		// $commentoptions = array('conditions' => array('Comment.user_id' => $user['id']), 'order' => array(
-		// 	'Comment.created' => 'desc',
-		// ));
+		$itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
+			'Item.created' => 'desc',
+		));
+		$commentoptions = array('conditions' => array('Comment.user_id' => $user['id']), 'order' => array(
+			'Comment.created' => 'desc',
+		));
 
 		// $upvoteoptions = array('conditions' => array('Upvote.user_id' => $user['id']), 'order' => array(
 		// 	'Upvote.id' => 'desc',
@@ -142,7 +142,7 @@ class UsersController extends AppController {
 		$this->set('items', $this->User->Item->find('all', $itemoptions));
 		$this->set('comments', $this->User->Comment->find('all', $commentoptions));
 		// $this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));
-		$this->layout = 'fullwidth';
+		// $this->layout = 'fullwidth';
 
 	}
 
