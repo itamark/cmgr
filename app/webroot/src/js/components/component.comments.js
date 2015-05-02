@@ -33,13 +33,14 @@ $('.commentsview').each(function(){
         var morecomments = comments-2;
         $(this).find('.row').hide();
         $(this).find('.row:first-child, .row:last-child').show();
-        $(this).find('.row:first-child').append('<div class="morecomments">show '+morecomments+' more comments</div>');
+        $(this).find('.row:first-child').after('<div class="morecomments row">show '+morecomments+' more comments</div>');
     }
 });
 
 $(document).on('click', '.morecomments', function(e){
     console.log($(e.target));
-    $(e.target).closest('.row').show();
+    $(e.target).siblings().show();
+    $(e.target).hide();
 });
     // if($('.commentsview .row').length > 2){
     //     console.log('hi');

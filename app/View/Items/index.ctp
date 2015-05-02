@@ -28,7 +28,7 @@
   ?>
 <?php echo $this->Form->end(__('Post')); ?>
 </div> -->
-<div class="row">
+<div class="row listing">
 <div class="twelve columns">
  <?php echo $this->Form->create('Item', array(
         'url' => array(
@@ -43,7 +43,7 @@
     echo $this->Form->textarea('post_comment', array('label' => false, 'placeholder' => 'Ask a question', 'rows' => '3', 'class'=> 'u-full-width'));
     // echo $this->Form->input('url');
   ?>
-<?php echo $this->Form->end(__('Post'), array('class'=>'u-pull-right')); ?>
+<?php echo $this->Form->end(__('Post'), array('class'=>'u-pull-right button-primary')); ?>
 </div>
 </div>
 <?php else: ?>

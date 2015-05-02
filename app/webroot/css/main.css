@@ -1,9 +1,38 @@
 .listing {
   margin-bottom: 20px;
   padding: 20px;
+  background: #ffffff;
   /* border-color: #e5e6e9 #dfe0e4 #d0d1d5; */
   /* border: 1px solid; */
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+.comment,
+.morecomments {
+  border-bottom: 1px solid #E1E1E1;
+}
+.morecomments:hover {
+  cursor: pointer;
+}
+.morecomments {
+  -moz-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
+  -webkit-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
+  box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
+  padding: 5px 0px;
+  text-align: center;
+  background: white;
+}
+.comment,
+.commentform {
+  padding: 10px;
+}
+.comment p {
+  margin-bottom: 0px;
+}
+.commentsview {
+  border-top: 1px solid #E1E1E1;
+}
+span.upvoted {
+  color: #3060A8;
 }
 /*
 * Skeleton V2.0.4
@@ -179,6 +208,7 @@ html {
   font-size: 62.5%;
 }
 body {
+  background: #e7e9ec;
   font-size: 1.5em;
   /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
@@ -310,8 +340,8 @@ input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
   color: #FFF;
-  background-color: #33C3F0;
-  border-color: #33C3F0;
+  background-color: #3060A8;
+  border-color: #3060A8;
 }
 .button.button-primary:hover,
 button.button-primary:hover,
@@ -324,8 +354,8 @@ input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
   color: #FFF;
-  background-color: #1EAEDB;
-  border-color: #1EAEDB;
+  background-color: #183078;
+  border-color: #183078;
 }
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -374,7 +404,7 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid #33C3F0;
+  border: 1px solid #3060A8;
   outline: 0;
 }
 label,
@@ -702,7 +732,7 @@ there.
     color: #FAF8F8;
   }
   .navbar-link.active {
-    color: #33C3F0;
+    color: #3060A8;
   }
   .has-docked-nav .navbar {
     position: fixed;
@@ -789,11 +819,11 @@ there.
   }
   .popover-link:hover {
     color: #fff;
-    background: #33C3F0;
+    background: #3060A8;
   }
   .popover-link:hover,
   .popover-item:first-child .popover-link:hover:after {
-    border-bottom-color: #33C3F0;
+    border-bottom-color: #3060A8;
   }
 }
 * {
@@ -953,6 +983,9 @@ ul.tabs:after {
 }
 ul.tabs {
   zoom: 1;
+}
+.upvotearrow:hover {
+  cursor: pointer;
 }
 @font-face {
   font-family: 'questaregular';
