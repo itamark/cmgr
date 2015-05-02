@@ -127,12 +127,12 @@ class UsersController extends AppController {
 		// if (!$this->User->exists()) {
 		// 	throw new NotFoundException(__('Invalid user'));
 		// }
-		// $itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
-		// 	'Item.created' => 'desc',
-		// ));
-		// $commentoptions = array('conditions' => array('Comment.user_id' => $user['id']), 'order' => array(
-		// 	'Comment.created' => 'desc',
-		// ));
+		$itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
+			'Item.created' => 'desc',
+		));
+		$commentoptions = array('conditions' => array('Comment.user_id' => $user['id']), 'order' => array(
+			'Comment.created' => 'desc',
+		));
 
 		// $upvoteoptions = array('conditions' => array('Upvote.user_id' => $user['id']), 'order' => array(
 		// 	'Upvote.id' => 'desc',

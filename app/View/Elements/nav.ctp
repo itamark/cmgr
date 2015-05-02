@@ -5,6 +5,7 @@
         <div class="eight columns">
 <ul class="navbar-list">
           <li class="navbar-item"><a class="navbar-link brand" href="/">CMGR</a></li>
+          <?php if($this->params['controller'] == 'items'): ?>
           <li class="navbar-item">
             <a class="navbar-link" href="#" data-popover="#codeNavPopover">Sort</a>
             <div id="codeNavPopover" class="popover">
@@ -19,6 +20,7 @@
               </ul>
             </div>
           </li>
+        <?php endif; ?>
            <?php if (AuthComponent::user('has_meta')): ?>
                     <li class="navbar-item"><a class="navbar-link" href="/meta">Meta</a></li>
           <?php endif; ?>
@@ -55,7 +57,7 @@
             <div id="userPopover" class="popover">
               <ul class="popover-list">
                 <li class="popover-item">
-                  <a class="popover-link" href="/users/view/<?php echo AuthComponent::user('id'); ?>">Profile</a>
+                  <a class="popover-link" href="/users/view/<?php echo AuthComponent::user('username'); ?>">Profile</a>
                 </li>
                 <li class="popover-item">
                   <a class="popover-link" href="/logout">Logout</a>

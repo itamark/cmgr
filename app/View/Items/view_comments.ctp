@@ -1,5 +1,5 @@
 <?php foreach ($comments as $comment): ?>
-<div class="row">
+<div class="row comment">
 	<div class="one columns">
 		<a href="/users/view/<?php echo $comment['User']['username'] ?>">
 			<img src="<?php echo $comment['User']['image']; ?>"  
