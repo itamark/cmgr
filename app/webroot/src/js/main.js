@@ -22,6 +22,7 @@ $(function() {
     Component.Comments.init($page, {});
    }
    Component.Upvotes.init($page, {});
+   Component.Flag.init($page, {});
 
     // Global Components Init()
      // Component.Overlay.init($page, {});

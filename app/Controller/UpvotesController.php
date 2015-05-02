@@ -27,7 +27,7 @@ class UpvotesController extends AppController {
             // die(json_encode($something));
 $callback = array();
     if($myvotes === 0){
-        if ($this->Upvote->saveAssociated($this->request->data)) {
+        if ($this->Upvote->save($this->request->data)) {
             $callback['action'] = 'upvoted';
             $callback['count'] = $this->Upvote->find('count', array(
        'conditions' => array('Upvote.item_id ' => $this->request->data['item_id'])

@@ -1,7 +1,17 @@
 # User specific & automatically generated files #
 #################################################
 /app/tmp
-/app/Config
+<<<<<<< HEAD
+<<<<<<< HEAD
+/app/Config/core.php
+/app/Config/database.php
+=======
+>>>>>>> 592a7cf94d016c839b60d678427a6b6cec0c16fd
+/app/webroot/img/users/
+=======
+/app/Config/database.php
+/app/Config/core.php
+>>>>>>> origin/stage
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /vendors

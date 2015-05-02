@@ -27,34 +27,47 @@
 
  */
 
-	if (Configure::read('Application.status')) {
-	   Router::connect('/', array('controller' => 'users', 'action' => 'login'));
-	}
+if (Configure::read('Application.status')) {
+	Router::connect('/', array('controller' => 'users', 'action' => 'login'));
+}
 
-	// Router::connect('/home', array('controller' => 'items', 'action' => 'index'));
+// Router::connect('/home', array('controller' => 'items', 'action' => 'index'));
 
-	/* Profile page */
-	Router::connect('/me', array('controller' => 'users', 'action' => 'profile'));
-	/* Edit profile page */
-	Router::connect('/me/edit', array('controller' => 'users', 'action' => 'edit'));
+/* Profile page */
+Router::connect('/me', array('controller' => 'users', 'action' => 'profile'));
+/* Edit profile page */
+Router::connect('/me/edit', array('controller' => 'users', 'action' => 'edit'));
 
-	Router::connect('/sign-up', array('controller' => 'users', 'action' => 'add'));
+Router::connect('/sign-up', array('controller' => 'users', 'action' => 'add'));
 
-	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
-	Router::connect('/', array('controller' => 'items', 'action' => 'index', 'home'));
+Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+Router::connect('/', array('controller' => 'items', 'action' => 'index'));
+Router::connect('/recent', array('controller' => 'items', 'action' => 'recent'));
+Router::connect('/meta', array('controller' => 'items', 'action' => 'meta'));
+Router::connect('/must-read', array('controller' => 'items', 'action' => 'must_read'));
+
+Router::connect('/questions', array('controller' => 'items', 'action' => 'questions'));
+Router::connect('/articles', array('controller' => 'items', 'action' => 'articles'));
+Router::connect('/admin/users', array('controller' => 'usersadmin', 'action' => 'index'));
+Router::connect('/admin/items', array('controller' => 'itemsadmin', 'action' => 'index'));
+
+Router::connect(
+	'/opauth-complete/*',
+	array('controller' => 'users', 'action' => 'opauth_complete')
+);
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-	// Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+// Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */
-	CakePlugin::routes();
+CakePlugin::routes();
 
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
  * the built-in default routes.
  */
-	require CAKE . 'Config' . DS . 'routes.php';
+require CAKE . 'Config' . DS . 'routes.php';

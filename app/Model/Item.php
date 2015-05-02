@@ -15,12 +15,62 @@ class Item extends AppModel {
   {
   	$this->data['Item']['user_id'] = AuthComponent::user('id');
   	// if the article url doesn't have a host - give it one.
+  	if(isset($this->data['Item']['url'])){
+  		$this->data['Item']['type'] = 'article';
+  	} else {
+  		$this->data['Item']['type'] = 'question';
+  	}
   	if($this->data['Item']['type'] == 'article' && mb_substr($this->data['Item']['url'], 0, 4) !== 'http') $this->data['Item']['url'] = 'http://' . $this->data['Item']['url'];
+  
+
+// this adds a preview image - if it exists
+$regex = '/https?\:\/\/[^\" ]+/i';
+$string = $this->data['Item']['post_comment'];
+preg_match($regex, $string, $matches);
+if(isset($matches[0])){
+	//die(print_r($this->setPreview($matches[0])));
+	$preview = $this->setPreview($matches[0]);
+	$this->data['Item']['preview_link'] = $matches[0];
+	$this->data['Item']['preview_title'] = $preview['title'];
+	$this->data['Item']['preview_txt'] = $preview['description'];
+	$this->data['Item']['preview_img'] = $preview['image'];
+}
+
+
   }
 
-//   public $virtualFields = array(
-//     'score' => 'CONCAT(User.first_name, " ", User.last_name)'
-// );
+    public $virtualFields = array(
+    'score' => 'Item.created',
+    'upvoted' => 'Item.created'
+);
+
+ public function afterFind($results, $primary = false){
+
+	parent::afterFind($results, $primary);
+
+
+
+	foreach ($results as $key => $val) {
+        $results[$key]['Item']['upvotes'] = $this->Upvote->find('count', array(
+        'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'])
+    ));
+        $results[$key]['Item']['upvoted'] = $this->Upvote->find('count', array(
+        'conditions' => array('Upvote.item_id' => $results[$key]['Item']['id'], 'Upvote.user_id' => AuthComponent::user('id'))
+    ));
+		$results[$key]['Item']['score'] = $this->hot($results[$key]['Item']['upvotes'], strtotime($val['Item']['created']));		
+    
+// $results[$key]['Comments']
+
+
+    }
+
+    
+    // $results = Set::sort($results, '{n}.Item.score', 'desc');
+
+    return $results;
+}
+
+
 
   public function hot($upvotes, $date)
   {
@@ -40,8 +90,23 @@ class Item extends AppModel {
     return round($sign * $order + $seconds / 45000, 7);
   }
 
+   public function setPreview($url)
+  {
+App::import('Vendor', 'OpenGraph', array('file' => 'OpenGraph.php'));
+$ograph = new OpenGraph();
+$graph = $ograph->fetch($url);
 
-  
+$returned = [
+    "image" => $graph->image,
+    "title" => $graph->title,
+    "description" => str_split($graph->description, 100)[0],
+];
+
+return $returned;
+  }
+
+
+
 
 /**
  * Validation rules

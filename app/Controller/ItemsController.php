@@ -7,68 +7,134 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class ItemsController extends AppController {
+	public $uses = array('Item', 'Upvote');
 
-public function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'view');
+		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag');
 	}
 
-
-public $uses = array('Item', 'Upvote');
-
-public $paginate = array(
-        'limit' => 25,
-        'order' => array(
-            'Item.user_id' => 'desc'
-        )
-    );
-/**
- * Components
- *
- * @var array
- */
+// public $paginate = array(
+	//     // 'Item' => array(
+	//     //     'limit' => 20,
+	//     //     'order' => array('score' => 'desc')
+	//     // )
+	// );
+	/**
+	 * Components
+	 *
+	 * @var array
+	 */
 	public $components = array('Paginator');
 
-
-
 /**
- * index method
+ * index metfhknmnmmn/;//mnhod
  *
  * @return void
  */
 	public function index() {
-		$newitems = [];
 		$this->Item->recursive = 2;
-
-		$items = $this->Item->find('all');
-
-		foreach($items as $key=>$item){
-			// $upvotes = $this->Upvote->find('count', array('conditions' => array('Upvote.item_id' => $item['Item']['id'])));
-			// $upvotes = $item['Item']['upvote_count'];
-			// $item['Item']['upvote_count'] = $upvotes;
-			$item['Item']['score'] = $this->hot($upvotes, strtotime($item['Item']['created']));
-			array_push($newitems, $item);
-		}
-		$sorteditems = Set::sort($newitems, '{n}.Item.score', 'asc');
-		$this->set('items', $this->paginate());
-		
+		$this->paginate = array(
+			'conditions' => array(
+				'Item.removed' => false,
+				'Item.meta' => false,
+			),
+			'limit' => 10,
+			'order' => array( // sets a default order to sort by
+				'Item.score' => 'desc',
+			),
+		);
+		$items = $this->paginate('Item');
+		$this->set(compact('items'));
 	}
 
-	public function hot($upvotes, $date){
-	$s = $upvotes;
-    $order = log10(max(abs($s), 1));
+	public function meta() {
+		if (!AuthComponent::user('has_meta')) {
+			throw new NotFoundException(__('You don\'t have access'));
+		} else {
+			$this->Item->recursive = 2;
+			$this->paginate = array(
+				'conditions' => array(
+					'Item.removed' => false,
+					'Item.meta' => TRUE,
+				),
+				'limit' => 10,
+				'order' => array( // sets a default order to sort by
+					'Item.score' => 'desc',
+				),
+			);
+			$items = $this->paginate('Item');
+			$this->set(compact('items'));
+		}
+	}
 
-    if ($s > 0) {
-        $sign = 1;
-    } else if ($s < 0) {
-        $sign = -1;
-    } else {
-        $sign = 0;
-    }
+	/**
+	 * index metfhknmnmmn/;//mnhod
+	 *
+	 * @return void
+	 */
+	public function must_read() {
+		$this->Item->recursive = 2;
+		$this->paginate = array(
+			'conditions' => array(
+				'Item.removed' => false,
+				'Item.must_read' => true,
+			),
+			'limit' => 10,
+			'order' => array( // sets a default order to sort by
+				'Item.score' => 'desc',
+			),
+		);
+		$items = $this->paginate('Item');
+		$this->set(compact('items'));
+		// $this->layout = 'fullwidth';
+	}
 
-    $seconds = $date - 1134028003;
+	public function questions() {
+		$this->Item->recursive = 2;
+		$options = array('conditions' => array('Item.type' => 'question'));
+		$items = $this->Item->find('all', $options);
+		$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$this->set('items', $sorted);
+	}
 
-    return round($sign * $order + $seconds / 45000, 7);
+	public function articles() {
+		$this->Item->recursive = 2;
+		$options = array('conditions' => array('Item.type' => 'article'));
+		$items = $this->Item->find('all', $options);
+		$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$this->set('items', $sorted);
+	}
+
+	public function recent() {
+		$this->Item->recursive = 2;
+		$items = $this->Item->find('all');
+		$sorted = Set::sort($items, '{n}.Item.created', 'desc');
+		$this->set('items', $sorted);
+	}
+
+	public function top() {
+		$this->Item->recursive = 2;
+		$items = $this->Item->find('all');
+		$sorted = Set::sort($items, '{n}.Item.upvotes', 'desc');
+		$this->set('items', $sorted);
+	}
+
+	public function hot($upvotes, $date) {
+		$s = $upvotes;
+		$order = log10(max(abs($s), 1));
+
+		if ($s > 0) {
+			$sign = 1;
+		} else if ($s < 0) {
+			$sign = -1;
+		} else {
+			$sign = 0;
+		}
+
+		$seconds = $date - 1134028003;
+
+		return round($sign * $order + $seconds / 45000, 7);
 	}
 
 /**
@@ -89,8 +155,7 @@ public $paginate = array(
 		// $this->layout = false;
 	}
 
-
-	public function view_comments($id = null){
+	public function view_comments($id = null) {
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));
 		}
@@ -108,18 +173,89 @@ public $paginate = array(
 		if ($this->request->is('post')) {
 
 			$this->Item->create();
+			$this->Item->set(array(
+				'score' => $this->hot(1, date("Y-m-d H:i:s")),
+			));
+
 			if ($this->Item->save($this->request->data)) {
+				$this->request->data['Upvote']['user_id'] = AuthComponent::user('id');
+				$this->request->data['Upvote']['item_id'] = $this->Item->id;
+				// $this->updateScore($this->Item->id);
+				$this->Item->Upvote->save($this->request->data);
 				$this->request->data['new_id'] = $this->Item->id;
-				$this->Upvote->vote();
-				header('Content-type: application/json');
-				die(json_encode($this->request->data));
+				$this->Session->setFlash(__('Saved!'));
+
+				// @header('Content-type: application/json');
+				//die(json_encode($this->request->data));
 			} else {
 				$this->Session->setFlash(__('The item could not be saved. Please, try again.'));
 			}
 		}
 		$users = $this->Item->User->find('list');
 		$this->set(compact('users'));
-		$this->layout = false;
+		//debug($this->Item); exit;
+		if (isset($this->request->data['Item']['meta'])) {
+			$this->redirect('/meta');
+		} else {
+			$this->redirect(array('action' => 'index'));
+		}
+
+		// $this->layout = false;
+	}
+
+	public function updateScore($id) {
+		$this->Item->read(null, $this->Item->id);
+		$this->Item->set(array(
+			'score' => 1,
+		));
+		$this->Item->save();
+	}
+
+	public function flag($item_id = null) {
+		if ($this->request->is('post')) {
+			$this->layout = false;
+
+			$this->Item->read(null, $item_id);
+			$this->Item->set(array(
+				'flagged' => true,
+			));
+			debug($this->Item->save());
+			if ($this->Item->save()) {
+				die('flagged');
+			}
+		}
+
+	}
+
+	public function unflag($item_id = null) {
+
+		if ($this->request->is('post')) {
+			die('ohi');
+			// $this->layout = false;
+
+			// 	$this->Item->read(null, $item_id);
+			// 	$this->Item->set(array(
+			// 		'flagged' => false
+			// 		));
+			// 	if($this->Item->save()){
+			// 		die('unflagged');
+			// 	}
+		}
+
+	}
+
+	public function remove($item_id = null) {
+		$this->Item->read(null, $item_id);
+		$this->Item->set(array(
+			'removed' => true,
+			'live' => false,
+		));
+		if ($this->Item->save()) {
+			$this->redirect(array('action' => 'index'));
+		} else {
+
+		}
+
 	}
 
 /**
@@ -129,6 +265,7 @@ public $paginate = array(
  * @param string $id
  * @return void
  */
+
 	public function edit($id = null) {
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));

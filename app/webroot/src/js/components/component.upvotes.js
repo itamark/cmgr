@@ -12,12 +12,13 @@ Component.Upvotes = function($) {
 $(document).on('click', '.upvotearrow', function(e){
      e.preventDefault();
      var $this = $(this);
+
             $.ajax({
                     type: 'post',
                     url: '/upvotes/vote',
                     data: {item_id : $this.attr('id').split('-')[1]},
                     success: function(response, textStatus, jqXHR) {
-
+console.log(response);
 $this.next().next().html(response.count);
 $this.toggleClass('upvoted');
 
@@ -35,6 +36,7 @@ $this.toggleClass('upvoted');
                         // }
                     },
                     error: function(jqXHR, data, errorThrown) {
+                        console.log(data);
                         console.log(jqXHR);
                     }
                 });
