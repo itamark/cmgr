@@ -11,7 +11,7 @@ class ItemsController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag');
+		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag', 'must_read');
 	}
 
 // public $paginate = array(
@@ -145,7 +145,7 @@ class ItemsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-
+		$this->Item->recursive = 2;
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));
 		}

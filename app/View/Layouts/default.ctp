@@ -26,7 +26,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </style>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo 'CMGR' ?>:
+		<?php echo 'CMGR'; ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />

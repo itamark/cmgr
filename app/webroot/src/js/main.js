@@ -18,7 +18,7 @@ $(function() {
     toast($page.find('.alert').text(), 4000);
    }
 
-   if($page.find('a.comments').length > 0){
+   if($page.find('.commentsview').length > 0){
     Component.Comments.init($page, {});
    }
    Component.Upvotes.init($page, {});
