@@ -120,6 +120,7 @@ class UsersController extends AppController {
 		// 	throw new ForbiddenException("You're now allowed to do this.");
 		// }
 		$this->User->recursive = 2;
+		$this->User->Item->recursive = 2;
 		$user = $this->User->findByUsername($username);
 		$user = Hash::extract($user, 'User');
 		$this->User->id = $user['id'];
