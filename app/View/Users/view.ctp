@@ -21,68 +21,9 @@
   <li class="active" id="poststab">
     <?php foreach ($items as $item): ?>
 
-
-
-
-
-
-
-
-          <?php $cmts = count(h($item['Comment'])); ?>
-    <div class="row listing">
-      <div class="large-1 columns">
-<div class="upvote pull-left">
-  <?php if (AuthComponent::user('id')): ?>
-    <span class="glyphicon glyphicon-arrow-up pull-left upvotearrow 
-        <?php foreach ($item['Upvote'] as $upvote){
-            if($upvote['item_id'] == $item['Item']['id'] && $upvote['user_id'] == AuthComponent::user('id')){
-              echo 'upvoted';
-            }
-          } ?>" 
-
-          hidden-aria="true" id="item-<?php echo h($item['Item']['id']); ?>">&#9650;</span>
-  <?php else: ?>
-      <span href="#" data-reveal-id="mustBeModal">&#9650;</span>
-
-
-
-
-      
-
-  <?php endif ?>
-
-        
-
-
-          <br>
-        <span class="votecount">
-          <?php echo $item['Item']['upvotes'] ?>
-      </span>
-      </div>
-
-      </div>
-      <div class="large-10 columns">
-<div class="clearfix">
-
-  <?php if($item['Item']['type'] == 'article'): ?>
-  <a href="<?php echo h($item['Item']['url']); ?>"><?php echo h($item['Item']['post_comment']); ?>
-  <small>(<?php echo parse_url(h($item['Item']['url']))['host']; ?>)</small></a>
- <?php elseif($item['Item']['type'] == 'question'): ?>
-  <a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo h($item['Item']['post_comment']); ?></a>
- <?php endif; ?>
-</div>
-
-
-<small><a class="comments" href="/items/view/<?php echo h($item['Item']['id']); ?>"><?php echo count(h($item['Comment'])); ?> Comment<?php if($cmts != 1){echo 's';} ?> 
-  <?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?>
-  </a></small>
-
-      </div>
-      <div class="large-1 columns">
- <div class="pull-right"><img class="media-object img-circle" src="/img/users/<?php echo $item['User']['id']; ?>.jpg"></div>
-      </div>
-
-    </div>
+<?php echo $this->element('post', array(
+    "item" => $item
+)) ?>
 
     <?php endforeach ?>
   </li>
