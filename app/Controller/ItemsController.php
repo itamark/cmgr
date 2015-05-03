@@ -145,7 +145,7 @@ class ItemsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-
+		$this->Item->recursive = 2;
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));
 		}
