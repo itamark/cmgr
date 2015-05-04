@@ -96,12 +96,12 @@ App::import('Vendor', 'OpenGraph', array('file' => 'OpenGraph.php'));
 $ograph = new OpenGraph();
 $graph = $ograph->fetch($url);
 
-$returned = [
-    "image" => $graph->image,
-    "title" => $graph->title,
-    "description" => str_split($graph->description, 100)[0],
-];
-
+$graphdescription = str_split($graph->description, 100);
+$returned = array(
+"image" => $graph->image,
+                        "title" => $graph->title,
+                        "description" => $graphdescription[0],
+                );
 return $returned;
   }
 
