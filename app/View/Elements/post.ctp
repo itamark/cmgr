@@ -66,6 +66,8 @@
 <div class="row">
 <div class="one columns">&nbsp;</div>
 <div class="nine columns">
+      <?php if (AuthComponent::user('id')): ?>
+
   <div class="row commentform">
   <div class="one columns">
     <a href="/users/view/<?php echo $comment['User']['username'] ?>">
@@ -92,7 +94,7 @@
 <?php endif; ?>
   </div>
 </div>
-
+<?php endif; ?>
 </div>
 
 </div>
