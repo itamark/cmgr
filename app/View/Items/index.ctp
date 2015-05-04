@@ -23,7 +23,7 @@
     // echo $this->Form->input('user_id');
     // echo $this->Form->input('type', array('default' => 'question', 'type' => 'hidden'));
     // echo $this->Form->input('title', array('label' => false, 'placeholder' => 'Question'));
-    echo $this->Form->input('post_comment', array('label' => false, 'placeholder' => 'Ask a question', 'rows' => '3'));
+    echo $this->Form->input('post_comment', array('label' => false, 'placeholder' => 'Ask a question or post a link', 'rows' => '3'));
     // echo $this->Form->input('url');
   ?>
 <?php echo $this->Form->end(__('Post')); ?>
@@ -40,7 +40,7 @@
     // echo $this->Form->input('user_id');
     // echo $this->Form->input('type', array('default' => 'question', 'type' => 'hidden'));
     // echo $this->Form->input('title', array('label' => false, 'placeholder' => 'Question'));
-    echo $this->Form->textarea('post_comment', array('label' => false, 'placeholder' => 'Ask a question', 'rows' => '3', 'class'=> 'u-full-width'));
+    echo $this->Form->textarea('post_comment', array('label' => false, 'placeholder' => 'Ask a question or post a link', 'rows' => '3', 'class'=> 'u-full-width'));
     // echo $this->Form->input('url');
   ?>
 <?php echo $this->Form->end(__('Post'), array('class'=>'u-pull-right button-primary')); ?>
