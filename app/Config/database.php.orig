@@ -48,8 +48,14 @@ class DATABASE_CONFIG {
 				case 'stage.cmgr.org':
 					$this->default = $this->stage;
 					break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4896554ff92d467f2fe79c20396011bd7e07783f
 				case 'www.cmgr.org':
+					$this->default = $this->prod;
+					break;
+				case 'cmgr.org':
 					$this->default = $this->prod;
 					break;
 			}
