@@ -43,6 +43,12 @@ if (isset($_SERVER['SERVER_NAME'])) {
 		case 'stage.cmgr.org':
 			$debugit = 0;
 			break;
+		case 'www.cmgr.org':
+			$debugit = 0;
+			break;
+		case 'cmgr.org':
+			$debugit = 0;
+			break;
 	}
 } else // we are likely baking, use our local db
 {
