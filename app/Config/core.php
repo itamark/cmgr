@@ -43,14 +43,8 @@ if (isset($_SERVER['SERVER_NAME'])) {
 		case 'stage.cmgr.org':
 			$debugit = 0;
 			break;
-<<<<<<< HEAD
-
-		case 'www.cmgr.org':
-			$debugit = 1;
-=======
 		case 'www.cmgr.org':
 			$debugit = 0;
->>>>>>> 4896554ff92d467f2fe79c20396011bd7e07783f
 			break;
 		case 'cmgr.org':
 			$debugit = 0;
