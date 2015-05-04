@@ -25,6 +25,17 @@ class DATABASE_CONFIG {
 		'database' => 'harpoon',
 	);
 
+	// and details to use on your local machine for testing and development
+	var $prod =
+	array(
+		'datasource' => 'Database/Mysql',
+		'persistent' => false,
+		'host' => 'mysql.cmgr.org',
+		'login' => 'itamarkestenbaum',
+		'password' => 'chloe1985',
+		'database' => 'harpoon_production',
+	);
+
 	function __construct() {
 		if (isset($_SERVER['SERVER_NAME'])) {
 			switch ($_SERVER['SERVER_NAME']) {
@@ -36,6 +47,12 @@ class DATABASE_CONFIG {
 					break;
 				case 'stage.cmgr.org':
 					$this->default = $this->stage;
+					break;
+				case 'www.cmgr.org':
+					$this->default = $this->prod;
+					break;
+				case 'cmgr.org':
+					$this->default = $this->prod;
 					break;
 			}
 		} else // we are likely baking, use our local db
