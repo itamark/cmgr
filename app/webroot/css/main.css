@@ -6,6 +6,9 @@
   /* border: 1px solid; */
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
+.listing p {
+  white-space: pre-wrap;
+}
 .comment,
 .morecomments {
   border-bottom: 1px solid #E1E1E1;
@@ -27,6 +30,7 @@
 }
 .comment p {
   margin-bottom: 0px;
+  white-space: pre-wrap;
 }
 .commentsview {
   border-top: 1px solid #E1E1E1;

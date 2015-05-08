@@ -28,7 +28,7 @@
 <div class="row">
 <div class="one columns">&nbsp;</div>
 <div class="eleven columns" style="overflow-wrap: break-word;">
-  <p><?php echo $this->Text->autoLinkUrls(h($item['Item']['post_comment'])); ?></p>
+  <p><?php echo $this->Text->autoLinkUrls(h($item['Item']['post_comment']), array('escape' => false)); ?></p>
             
              <?php if(!empty($item['Item']['preview_img'])): ?>
             <hr>
