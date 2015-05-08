@@ -96,16 +96,15 @@ CakePlugin::load('Opauth', array('routes' => true, 'bootstrap' => true));
  */
 Configure::write('Dispatcher.filters', array(
 	'AssetDispatcher',
-	'CacheDispatcher'
+	'CacheDispatcher',
 ));
 
 Configure::write('Opauth.Strategy.LinkedIn', array(
-   'api_key' => '777e88m15vltcr',
-   'secret_key' => 'em5BATHfg0Zv5uwO'
+	'api_key' => '777e88m15vltcr',
+	'secret_key' => 'em5BATHfg0Zv5uwO',
 ));
 
 App::uses('CakeEmail', 'Network/Email');
-
 
 /**
  * Configures default file logging options
@@ -129,5 +128,5 @@ CakeLog::config('users', array(
 	'engine' => 'FileLog',
 	'types' => array('info', 'errors', 'warning'),
 	'scopes' => array('users'),
-	'file' => 'users.log'
+	'file' => 'users.log',
 ));
