@@ -70,10 +70,10 @@
 
   <div class="row commentform">
   <div class="one columns">
-    <a href="/users/view/<?php echo $comment['User']['username'] ?>">
-      <img src="<?php echo $comment['User']['image']; ?>"  
+    <a href="/users/view/<?php echo AuthComponent::user('username'); ?>">
+      <img src="<?php echo AuthComponent::user('image'); ?>"  
       style="width:30px; border-radius:50%;"
-       title="<?php echo $comment['User']['first_name']; ?> <?php echo $comment['User']['last_name']; ?>">
+       title="<?php echo AuthComponent::user('first_name'); ?> <?php echo AuthComponent::user('last_name'); ?>">
     </a>
   </div>
   <div class="eight columns">
