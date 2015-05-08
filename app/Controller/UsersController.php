@@ -24,9 +24,9 @@ class UsersController extends AppController {
 			//log them in
 			$user = $this->User->find('first', array('conditions' => array('User.username' => $this->data['auth']['uid'])));
 			$id = $user['User']['id'];
-			if (isset($this->data['auth']['info']['image'])) {
-				copy($this->data['auth']['info']['image'], '../webroot/img/users/' . $id . '.jpg');
-			}
+			// if (isset($this->data['auth']['info']['image'])) {
+			// 	copy($this->data['auth']['info']['image'], '../webroot/img/users/' . $id . '.jpg');
+			// }
 			$this->request->data['User'] = array_merge(
 				$user['User'],
 				array('id' => $id)
@@ -49,15 +49,15 @@ class UsersController extends AppController {
 				$this->request->data['User']['first_name'] = $this->data['auth']['info']['first_name'];
 				$this->request->data['User']['last_name'] = $this->data['auth']['info']['last_name'];
 				$this->request->data['User']['headline'] = $this->data['auth']['info']['headline'];
-				$this->request->data['User']['linkedin_url'] = $this->data['auth']['info']['urls']['linkedin'];
+				$this->request->data['User']['linkedin_link'] = $this->data['auth']['info']['urls']['linkedin'];
 
 				$this->User->create();
 
 				if ($this->User->save($this->request->data)) {
 					$id = $this->User->id;
-					if (isset($this->data['auth']['info']['image'])) {
-						copy($this->data['auth']['info']['image'], '../webroot/img/users/' . $id . '.jpg');
-					}
+					// if (isset($this->data['auth']['info']['image'])) {
+					// 	copy($this->data['auth']['info']['image'], '../webroot/img/users/' . $id . '.jpg');
+					// }
 
 					$this->request->data['User'] = array_merge(
 						$this->request->data['User'],
@@ -120,7 +120,6 @@ class UsersController extends AppController {
 		// 	throw new ForbiddenException("You're now allowed to do this.");
 		// }
 		$this->User->recursive = 2;
-		$this->User->Item->recursive = 2;
 		$user = $this->User->findByUsername($username);
 		$user = Hash::extract($user, 'User');
 		$this->User->id = $user['id'];
@@ -128,12 +127,12 @@ class UsersController extends AppController {
 		// if (!$this->User->exists()) {
 		// 	throw new NotFoundException(__('Invalid user'));
 		// }
-		$itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
-			'Item.created' => 'desc',
-		));
-		$commentoptions = array('conditions' => array('Comment.user_id' => $user['id']), 'order' => array(
-			'Comment.created' => 'desc',
-		));
+		// $itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
+		// 	'Item.created' => 'desc',
+		// ));
+		// $commentoptions = array('conditions' => array('Comment.user_id' => $user['id']), 'order' => array(
+		// 	'Comment.created' => 'desc',
+		// ));
 
 		// $upvoteoptions = array('conditions' => array('Upvote.user_id' => $user['id']), 'order' => array(
 		// 	'Upvote.id' => 'desc',
@@ -143,7 +142,7 @@ class UsersController extends AppController {
 		$this->set('items', $this->User->Item->find('all', $itemoptions));
 		$this->set('comments', $this->User->Comment->find('all', $commentoptions));
 		// $this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));
-		// $this->layout = 'fullwidth';
+		$this->layout = 'fullwidth';
 
 	}
 
