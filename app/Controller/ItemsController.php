@@ -11,7 +11,12 @@ class ItemsController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag', 'must_read');
+		$this->Auth->allow('index', 'view', 'recent', 'flag', 'unflag', 'must_read', 'thanks');
+		if (AuthComponent::user('id') && !AuthComponent::user('has_access') && ($this->params['controller'] == 'items')) {
+			return $this->redirect('/thanks');
+		} elseif (!AuthComponent::user('id')) {
+			return $this->redirect('/welcome');
+		}
 	}
 
 // public $paginate = array(

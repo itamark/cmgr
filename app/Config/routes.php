@@ -55,6 +55,11 @@ Router::connect(
 	'/opauth-complete/*',
 	array('controller' => 'users', 'action' => 'opauth_complete')
 );
+
+// if they don't have access yet - send them back to the thanks page
+Router::connect('/thanks', array('controller' => 'users', 'action' => 'thanks'));
+Router::connect('/welcome', array('controller' => 'pages', 'action' => 'welcome'));
+
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
