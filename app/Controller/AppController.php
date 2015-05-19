@@ -70,9 +70,9 @@ class AppController extends Controller {
 			}
 
 			# Redirect to home if is logged in
-			if ($this->Auth->loggedIn() && $this->params->controller == 'users' && $this->params->action == 'login') {
-				$this->redirect('/  ');
-			}
+			// if ($this->Auth->loggedIn() && $this->params->controller == 'users' && $this->params->action == 'login') {
+			// 	$this->redirect('/  ');
+			// }
 
 		}
 

@@ -52,17 +52,21 @@ class PagesController extends AppController {
  */
 	public $uses = array();
 
-	public function beforeFilter()
-	{
+	public function beforeFilter() {
 		parent::beforeFilter();
 
-		$this->Auth->allow('home', 'maintenance');
+		$this->Auth->allow('home', 'maintenance', 'welcome');
 	}
 
-	public function index()
-	{
+	public function index() {
 		$this->set('users_count', $this->User->find('count'));
 	}
 
-	public function maintenance(){}
+	public function welcome() {
+		// $this->set('users_count', $this->User->find('count'));
+
+		$this->layout = 'welcome';
+	}
+
+	public function maintenance() {}
 }
