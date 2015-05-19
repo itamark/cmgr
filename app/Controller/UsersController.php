@@ -2,7 +2,8 @@
 class UsersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view', 'opauth_complete');
+		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view', 'opauth_complete', 'thanks');
+
 	}
 
 	public function index() {
@@ -12,6 +13,31 @@ class UsersController extends AppController {
 		$this->User->recursive = 2;
 		$this->layout = 'admin';
 		$this->set('users', $this->paginate());
+	}
+
+	public function thanks() {
+		if ($this->request->is('post')) {
+			if ($this->request->data['User']['secret_code'] == 'CMX1515') {
+				$this->User->id = AuthComponent::user('id');
+				if ($this->User->saveField('has_access', true)) {
+					$this->Session->write('Auth', $this->User->read(null, $this->Auth->User('id')));
+					$this->Session->setFlash(__('Welcome!'), 'flash_success');
+					return $this->redirect('/');
+				}
+			} else {
+				$this->Session->setFlash(__('Thanks for signing up - the code was incorrect. We will be releasing CMGR to the public soon!'), 'flash_fail');
+				return $this->redirect('/thanks');
+			}
+		}
+
+		$this->layout = 'welcome';
+
+		// if (AuthComponent::user('role') != 'admin') {
+		// 	throw new ForbiddenException("You're now allowed to do this.");
+		// }
+		// $this->User->recursive = 2;
+		// $this->layout = 'admin';
+		// $this->set('users', $this->paginate());
 	}
 
 	public function opauth_complete() {
@@ -32,8 +58,12 @@ class UsersController extends AppController {
 				array('id' => $id)
 			);
 			unset($this->request->data['User']['password']);
-			$this->Auth->login($this->request->data['User']);
-			return $this->redirect('/');
+			if ($user['User']['has_access']) {
+				$this->Auth->login($this->request->data['User']);
+				return $this->redirect('/');
+			} else {
+				return $this->redirect('/thanks');
+			}
 
 		}
 // if the user does not exist
@@ -65,7 +95,7 @@ class UsersController extends AppController {
 					);
 					unset($this->request->data['User']['password']);
 					$this->Auth->login($this->request->data['User']);
-					return $this->redirect('/');
+					return $this->redirect('/thanks');
 				} else {
 					# Create a loop with validation errors
 					$this->Error->set($this->User->invalidFields());
@@ -142,7 +172,7 @@ class UsersController extends AppController {
 		$this->set('items', $this->User->Item->find('all', $itemoptions));
 		$this->set('comments', $this->User->Comment->find('all', $commentoptions));
 		// $this->set('upvotes', $this->User->Item->Upvote->find('all', $upvoteoptions));
-		$this->layout = 'fullwidth';
+		$this->layout = 'default';
 
 	}
 
