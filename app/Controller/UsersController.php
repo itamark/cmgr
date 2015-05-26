@@ -17,10 +17,15 @@ class UsersController extends AppController {
 
 	public function thanks() {
 		if ($this->request->is('post')) {
+
 			if ($this->request->data['User']['secret_code'] == 'CMX1515') {
-				$this->User->id = AuthComponent::user('id');
-				if ($this->User->saveField('has_access', true)) {
-					$this->Session->write('Auth', $this->User->read(null, $this->Auth->User('id')));
+				unset($this->request->data['User']['secret_code']);
+				$this->request->data['User']['has_access'] = true;
+				$user = $this->User->read(null, AuthComponent::user('id'));
+
+				$this->set('user', $user);
+				if ($this->User->save($this->request->data)) {
+					$this->Session->write('Auth', $this->User->read(null, AuthComponent::user('id')));
 					$this->Session->setFlash(__('Welcome!'), 'flash_success');
 					return $this->redirect('/');
 				}
@@ -62,6 +67,8 @@ class UsersController extends AppController {
 				$this->Auth->login($this->request->data['User']);
 				return $this->redirect('/');
 			} else {
+				$this->Auth->login($this->request->data['User']);
+
 				return $this->redirect('/thanks');
 			}
 
@@ -157,12 +164,12 @@ class UsersController extends AppController {
 		// if (!$this->User->exists()) {
 		// 	throw new NotFoundException(__('Invalid user'));
 		// }
-		// $itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
-		// 	'Item.created' => 'desc',
-		// ));
-		// $commentoptions = array('conditions' => array('Comment.user_id' => $user['id']), 'order' => array(
-		// 	'Comment.created' => 'desc',
-		// ));
+		$itemoptions = array('conditions' => array('Item.user_id' => $user['id']), 'order' => array(
+			'Item.created' => 'desc',
+		));
+		$commentoptions = array('conditions' => array('Comment.user_id' => $user['id']), 'order' => array(
+			'Comment.created' => 'desc',
+		));
 
 		// $upvoteoptions = array('conditions' => array('Upvote.user_id' => $user['id']), 'order' => array(
 		// 	'Upvote.id' => 'desc',
