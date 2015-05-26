@@ -1,0 +1,33 @@
+
+*** These modified files were found in JOE when it aborted on Fri May  8 01:03:51 2015
+*** JOE was aborted by UNIX signal 1
+
+*** File '.git/COMMIT_EDITMSG'
+fixing comment issue
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Explicit paths specified without -i nor -o; assuming --only paths...
+#
+# Committer: Itamar Kestenbaum <itamarkestenbaum@pivot.dreamhost.com>
+#
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   post.ctp
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   ../../Config/core.php
+#	modified:   ../Items/meta.ctp
+#
+
+*** File '(Unnamed)'
+:wq
+w
+
+*** File '(Unnamed)'
+.git/COMMIT_EDITMSG
+.git/COMMIT_EDITMSG
