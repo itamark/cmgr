@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view', 'opauth_complete', 'thanks');
+		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view', 'opauth_complete', 'thanks', 'invite');
 
 	}
 
@@ -15,16 +15,37 @@ class UsersController extends AppController {
 		$this->set('users', $this->paginate());
 	}
 
+	public function invite($inviter = null) {
+		$this->User->recursive = 0;
+		$conditions = array(
+			'User.username' => $inviter,
+		);
+// if the user exists by email
+		if ($this->User->hasAny($conditions)) {
+
+			$user = $this->User->find('first', array('conditions' => array('User.username' => $inviter), 'fields' => array('id', 'image', 'first_name', 'last_name')));
+
+			$id = $user['User']['id'];
+		} else {
+			return $this->redirect('/');
+		}
+
+		$this->set(compact('user'));
+		$this->layout = 'welcome';
+	}
+
 	public function thanks() {
 		if ($this->request->is('post')) {
 
 			if ($this->request->data['User']['secret_code'] == 'CMX1515') {
+
 				unset($this->request->data['User']['secret_code']);
 				$this->request->data['User']['has_access'] = true;
 				$user = $this->User->read(null, AuthComponent::user('id'));
 
 				$this->set('user', $user);
-				if ($this->User->save($this->request->data)) {
+
+				if ($this->User->saveField('has_access', true)) {
 					$this->Session->write('Auth', $this->User->read(null, AuthComponent::user('id')));
 					$this->Session->setFlash(__('Welcome!'), 'flash_success');
 					return $this->redirect('/');

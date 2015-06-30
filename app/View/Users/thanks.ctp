@@ -1,6 +1,6 @@
   <h1>Thanks for signing up!</h1>
                         <h3>We are currently letting select people into CMGR.<br>
-                        	If you have a code - please enter it below. If not - ask us for one!
+                        	If you have a code - please enter it below. If not - <a href="https://twitter.com/itamarok">ask us for one!</a>
                         </h3>
                         <hr class="intro-divider">
                        
