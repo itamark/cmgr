@@ -1,8 +1,10 @@
 <?php
+App::uses('Sanitize', 'Utility');
 class UsersController extends AppController {
+	public $components = array('Cookie');
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view', 'opauth_complete', 'thanks');
+		$this->Auth->allow('add', 'logout', 'change_password', 'remember_password', 'remember_password_step_2', 'view', 'opauth_complete', 'thanks', 'invite');
 
 	}
 
@@ -15,16 +17,37 @@ class UsersController extends AppController {
 		$this->set('users', $this->paginate());
 	}
 
+	public function invite($inviter = null) {
+		$this->User->recursive = 0;
+		$conditions = array(
+			'User.username' => $inviter,
+		);
+// if the user exists by email
+		if ($this->User->hasAny($conditions)) {
+			$this->Cookie->write('invited', 'true');
+			$user = $this->User->find('first', array('conditions' => array('User.username' => $inviter), 'fields' => array('id', 'image', 'first_name', 'last_name')));
+
+			$id = $user['User']['id'];
+		} else {
+			return $this->redirect('/');
+		}
+
+		$this->set(compact('user'));
+		$this->layout = 'welcome';
+	}
+
 	public function thanks() {
 		if ($this->request->is('post')) {
 
 			if ($this->request->data['User']['secret_code'] == 'CMX1515') {
+
 				unset($this->request->data['User']['secret_code']);
 				$this->request->data['User']['has_access'] = true;
 				$user = $this->User->read(null, AuthComponent::user('id'));
 
 				$this->set('user', $user);
-				if ($this->User->save($this->request->data)) {
+
+				if ($this->User->saveField('has_access', true)) {
 					$this->Session->write('Auth', $this->User->read(null, AuthComponent::user('id')));
 					$this->Session->setFlash(__('Welcome!'), 'flash_success');
 					return $this->redirect('/');
@@ -63,8 +86,20 @@ class UsersController extends AppController {
 				array('id' => $id)
 			);
 			unset($this->request->data['User']['password']);
+			if ($this->Cookie->read('invited')) {
+				$user['User']['has_access'] = true;
+				// $this->User->saveField('has_access', true);
+				$this->User->updateAll(
+					array('has_access' => true)
+				);
+			}
+
 			if ($user['User']['has_access']) {
 				$this->Auth->login($this->request->data['User']);
+				// $this->User->saveField('last_login', date(DATE_ATOM));
+				$this->User->id = $user['User']['id'];
+				$now = date('Y-m-d H:i:s');
+				$this->User->saveField('last_login', $now);
 				return $this->redirect('/');
 			} else {
 				$this->Auth->login($this->request->data['User']);
@@ -95,6 +130,9 @@ class UsersController extends AppController {
 					// if (isset($this->data['auth']['info']['image'])) {
 					// 	copy($this->data['auth']['info']['image'], '../webroot/img/users/' . $id . '.jpg');
 					// }
+					$this->User->id = $id;
+				$now = date('Y-m-d H:i:s');
+				$this->User->saveField('last_login', $now);
 
 					$this->request->data['User'] = array_merge(
 						$this->request->data['User'],
@@ -238,6 +276,34 @@ class UsersController extends AppController {
 		}
 		$this->set('label', 'Edit user');
 		$this->render('_form');
+	}
+
+	public function grant($id = null) {
+		if (AuthComponent::user('role') != 'admin') {
+			throw new ForbiddenException("You're not allowed to do this.");
+		}
+		$this->User->id = $id;
+
+		if ($this->User->saveField('has_access', true)) {
+			return $this->redirect('/usersAdmin/index');
+		} else {
+			return $this->redirect('/');
+		}
+
+	}
+
+	public function revoke($id = null) {
+		if (AuthComponent::user('role') != 'admin') {
+			throw new ForbiddenException("You're not allowed to do this.");
+		}
+		$this->User->id = $id;
+
+		if ($this->User->saveField('has_access', false)) {
+			return $this->redirect('/usersAdmin/index');
+		} else {
+			return $this->redirect('/');
+		}
+
 	}
 
 	public function delete($id = null) {
