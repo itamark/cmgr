@@ -9,7 +9,6 @@ class UsersAdminController extends AppController {
 public $uses = array('User');
 
 public function index() {
-	$this->layout = 'admin';
 		if (AuthComponent::user('role') != 'admin') {
 			throw new ForbiddenException("You're now allowed to do this.");
 		}
