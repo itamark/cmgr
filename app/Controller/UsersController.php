@@ -38,9 +38,8 @@ class UsersController extends AppController {
 
 	public function thanks() {
 		if ($this->request->is('post')) {
-$codes = array("CMX1515", "ILoveCMGR");
-$code = $this->request->data['User']['secret_code'];
-			if ($code == "ILoveCMGR") {
+
+			if ($this->request->data['User']['secret_code'] == 'ILoveCMGR') {
 
 				unset($this->request->data['User']['secret_code']);
 				$this->request->data['User']['has_access'] = true;
