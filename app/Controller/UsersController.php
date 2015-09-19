@@ -52,7 +52,7 @@ class UsersController extends AppController {
 				if ($this->User->saveField('has_access', true)) {
 					$this->Session->write('Auth', $this->User->read(null, AuthComponent::user('id')));
 					$this->Session->setFlash(__('Welcome!'), 'flash_success');
-					return $this->redirect('/');
+					return $this->redirect('/?code='.$code);
 				}
 			} else {
 				$this->Session->setFlash(__('Thanks for signing up - the code was incorrect. We will be releasing CMGR to the public soon!'), 'flash_fail');
