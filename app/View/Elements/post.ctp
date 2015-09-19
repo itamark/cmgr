@@ -22,7 +22,8 @@
 <div class="eleven columns">
   <a href="/users/view/<?php echo $item['User']['username']; ?>">
 <img src="<?php echo h($item['User']['image']); ?>" style="width:30px; position:relative; top:9px;">  
-<?php echo h($item['User']['first_name']); ?> <?php echo h($item['User']['last_name']); ?></a> <small><?php echo $this->Time->timeAgoInWords($item['Item']['created']); ?></small>
+<?php echo h($item['User']['first_name']); ?> <?php echo h($item['User']['last_name']); ?></a> <small><?php // echo $this->Time->timeAgoInWords($item['Item']['created']); ?>
+</small>
 </div>
 </div>
 <div class="row">
